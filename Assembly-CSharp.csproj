@@ -63,6 +63,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Monobehaviours\LerpMovement.cs" />
     <Compile Include="Assets\Scripts\Monobehaviours\SceneLoader.cs" />
+    <Compile Include="Assets\CarController.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Scripts\Monobehaviours\CameraController.cs" />
     <Compile Include="Assets\Scripts\Monobehaviours\LerpPath.cs" />
