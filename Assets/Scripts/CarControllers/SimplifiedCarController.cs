@@ -3,9 +3,14 @@ using UnityEngine.InputSystem;
 using TMPro;
 using UnityEngine.UI;
 using Ezereal;
+using UnityEngine.Events;
 
 public class SimplifiedCarController : MonoBehaviour // This is the main system resposible for car control.
 {
+    [SerializeField] public UnityEvent<float> onThrottle;
+    [SerializeField] public UnityEvent<float> onHandBrake;
+    [SerializeField] public UnityEvent<float> onSteer;
+
     [Header("Ezereal References")]
 
     [SerializeField] EzerealLightController ezerealLightController;
@@ -40,7 +45,7 @@ public class SimplifiedCarController : MonoBehaviour // This is the main system 
     public float horsePower = 1000f; // 100f0 default
     public float brakePower = 2000f; // 2000f default
     public float handbrakeForce = 3000f; // 3000f default
-    public float maxSteerAngle = 30f; // 30f default
+    public float maxSteerAngle = 35f; // 30f default
     public float steeringSpeed = 5f; // 0.5f default
     public float stopThreshold = 1f; // 1f default. At what speed car will make a full stop
     public float decelerationSpeed = 0.5f; // 0.5f default
@@ -157,6 +162,8 @@ public class SimplifiedCarController : MonoBehaviour // This is the main system 
     void OnThrottle(InputValue throttleValue)
     {
         currentThrottleInput = throttleValue.Get<float>();
+        
+        onThrottle?.Invoke(currentThrottleInput);
         //Debug.Log("Acceleration: " + currentAccelerationValue.ToString());
 
         if (isStarted && ezerealLightController != null)
@@ -246,6 +253,8 @@ public class SimplifiedCarController : MonoBehaviour // This is the main system 
     {
         currentHandbrakeValue = handbrakeValue.Get<float>();
 
+        onHandBrake?.Invoke(currentHandbrakeValue);
+
         if (isStarted)
         {
             if (currentHandbrakeValue > 0)
@@ -296,6 +305,8 @@ public class SimplifiedCarController : MonoBehaviour // This is the main system 
     void OnSteer(InputValue turnValue)
     {
         targetSteerAngle = turnValue.Get<float>() * maxSteerAngle;
+
+        onSteer?.Invoke(targetSteerAngle);
     }
 
     void Steering()
@@ -420,4 +431,5 @@ public class SimplifiedCarController : MonoBehaviour // This is the main system 
         }
         return true;
     }
+
 }
