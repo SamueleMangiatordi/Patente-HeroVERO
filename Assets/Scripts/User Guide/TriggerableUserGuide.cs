@@ -34,8 +34,6 @@ public class TriggerableUserGuide : MonoBehaviour, IPointerDownHandler
     private SimplifiedCarController carController; // Reference to the car controller, if needed for further interactions
 
     private bool waitingForAnyInput = false;
-    // NEW: InputAction to detect any button press regardless of timeScale
-    private InputAction anyInputDetectionAction;
 
     private bool isPressed = false; //used for checking if the button is currently pressed
     private float timePressed = 0;  //used for checking how long the button is pressed
@@ -58,37 +56,8 @@ public class TriggerableUserGuide : MonoBehaviour, IPointerDownHandler
         if (resumeCarSpeed == 0f)
             resumeCarSpeed = 1f;
 
-        // NEW: Initialize the anyInputDetectionAction
-        anyInputDetectionAction = new InputAction("AnyInput", type: InputActionType.Button);
-
-        anyInputDetectionAction.updateMode = InputActionUpdateMode.UnscaledGameTime;
-
-        // Add bindings for common 'any' input sources
-        anyInputDetectionAction.AddBinding("<Keyboard>/*"); // Any keyboard key
-        anyInputDetectionAction.AddBinding("<Mouse>/leftButton"); // Left mouse click
-        anyInputDetectionAction.AddBinding("<Mouse>/rightButton"); // Right mouse click
-        anyInputDetectionAction.AddBinding("<Gamepad>/*Button"); // Any gamepad button (e.g., A, B, X, Y, shoulder buttons)
-                                                                 // You can add more specific bindings like <Gamepad>/leftStick/x or <Gamepad>/rightTrigger if you want axis movement to count
-
-        // Set the update mode to ignore Time.timeScale
-        anyInputDetectionAction.ApplyBindingOverrides(new InputBinding { updateMode = InputActionUpdateMode.UnscaledGameTime });
-
-        // Subscribe to the performed event
-        anyInputDetectionAction.performed += OnAnyInputDetected;
-
-        // Start disabled, only enable when we specifically want to detect "any input"
-        anyInputDetectionAction.Disable();
     }
 
-    void OnDestroy()
-    {
-        // NEW: Unsubscribe and dispose of the InputAction to prevent memory leaks
-        if (anyInputDetectionAction != null)
-        {
-            anyInputDetectionAction.performed -= OnAnyInputDetected;
-            anyInputDetectionAction.Dispose();
-        }
-    }
 
     // NEW: Callback for when any input is detected by anyInputDetectionAction
     private void OnAnyInputDetected(InputAction.CallbackContext context)
@@ -103,8 +72,6 @@ public class TriggerableUserGuide : MonoBehaviour, IPointerDownHandler
             isPressed = false;
             timePressed = 0;
 
-            // Disable the specific action once input is detected
-            anyInputDetectionAction.Disable();
         }
     }
 
@@ -113,8 +80,24 @@ public class TriggerableUserGuide : MonoBehaviour, IPointerDownHandler
         if (!isActive)
             return;
 
-        if (!waitingForAnyInput)
-            return;
+        if (waitingForAnyInput)
+        {
+            // Detects any keyboard key press or any mouse button click
+            if (UnityEngine.Input.anyKeyDown)
+            {
+                Debug.Log("Any keyboard/mouse button detected while waiting, proceeding with normal guide.");
+                waitingForAnyInput = false; // Stop waiting
+                userGuide.NextMessage();    // Display the *next* message (your first normal instruction)
+                userGuide.ShowAllComplementaryUI(false); // Show the first complementary UI element
+                                                         // Reset long press state to allow normal interaction to start fresh
+                isPressed = false;
+                timePressed = 0;
+
+                GameManager.Instance.PauseGame(); // Resume the game if it was paused
+
+                return; // Consume this input for the guide, do not proceed with other Update logic if any
+            }
+        }
 
         // If the button is currently considered pressed (and in the correct direction)
         if (!isPressed)
@@ -135,7 +118,6 @@ public class TriggerableUserGuide : MonoBehaviour, IPointerDownHandler
     public void StartInteraction(bool stopGame = true)
     {
         waitingForAnyInput = false;
-        anyInputDetectionAction.Disable(); // Ensure this is disabled on normal start
 
         isActive = true;
         Debug.Log("Start Interaction");
@@ -154,7 +136,6 @@ public class TriggerableUserGuide : MonoBehaviour, IPointerDownHandler
     public void EndInteraction(bool resumeGame = true)
     {
         waitingForAnyInput = false;
-        anyInputDetectionAction.Disable(); // Ensure this is disabled on normal start
 
         isActive = false;
         Debug.Log("End Interaction");
@@ -190,12 +171,13 @@ public class TriggerableUserGuide : MonoBehaviour, IPointerDownHandler
 
         userGuide.ShowAllComplementaryUI(true); // Hide the first complementary UI element if it was shown
 
+        GameManager.Instance.ResumeGame();
+
         waitingForAnyInput = true;
 
         isPressed = false; // Reset isPressed to ensure the interaction can start fresh
         timePressed = 0; // Reset the timer as well
 
-        anyInputDetectionAction.Enable(); // NEW: Enable the "any input" action here!
     }
 
     public void ExitBoundedAred()
@@ -212,7 +194,6 @@ public class TriggerableUserGuide : MonoBehaviour, IPointerDownHandler
         timePressed = 0; // Reset the timer as well
         isActive = false;
         waitingForAnyInput = false; // Ensure this is false after a correct interaction
-        anyInputDetectionAction.Disable(); // Ensure this is disabled after correct interaction
 
         userGuide.ShowInstruction(false);
         GameManager.Instance.ResumeGame();
