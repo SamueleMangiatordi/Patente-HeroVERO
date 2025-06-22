@@ -7,9 +7,9 @@ using UnityEngine.Events;
 
 public class SimplifiedCarController : MonoBehaviour // This is the main system resposible for car control.
 {
-    [SerializeField] public UnityEvent<float> onThrottle;
-    [SerializeField] public UnityEvent<float> onHandBrake;
-    [SerializeField] public UnityEvent<float> onSteer;
+    public UnityEvent<float> onThrottle;
+    public UnityEvent<float> onHandBrake;
+    public UnityEvent<float> onSteer;
 
     [Header("Ezereal References")]
 
@@ -162,7 +162,7 @@ public class SimplifiedCarController : MonoBehaviour // This is the main system 
     void OnThrottle(InputValue throttleValue)
     {
         currentThrottleInput = throttleValue.Get<float>();
-        
+        Debug.Log("Current Throttle Input: " + currentThrottleInput);
         onThrottle?.Invoke(currentThrottleInput);
         //Debug.Log("Acceleration: " + currentAccelerationValue.ToString());
 
