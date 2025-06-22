@@ -162,7 +162,6 @@ public class SimplifiedCarController : MonoBehaviour // This is the main system 
     void OnThrottle(InputValue throttleValue)
     {
         currentThrottleInput = throttleValue.Get<float>();
-        Debug.Log("Current Throttle Input: " + currentThrottleInput);
         onThrottle?.Invoke(currentThrottleInput);
         //Debug.Log("Acceleration: " + currentAccelerationValue.ToString());
 
@@ -432,4 +431,153 @@ public class SimplifiedCarController : MonoBehaviour // This is the main system 
         return true;
     }
 
+
+
+    /// <summary>
+    /// Sets the car's linear velocity to a specific speed and direction,
+    /// overriding any previous motion. This is useful for tutorial scenarios
+    /// where you want to reset the car's speed.
+    /// </summary>
+    /// <param name="desiredSpeedKmh">The desired absolute speed in kilometers per hour (km/h).</param>
+    /// <param name="forward">If true, the car will move in its forward direction. If false, it will move in its backward direction.</param>
+    public void SetCarSpeed(float desiredSpeedKmh, bool forward)
+    {
+        if (vehicleRB == null)
+        {
+            Debug.LogError("Vehicle Rigidbody is not assigned for SetCarSpeed! Cannot set velocity.");
+            return;
+        }
+
+        // Convert desired speed from km/h to meters per second (m/s) for Rigidbody.velocity
+        float speedMs = desiredSpeedKmh / 3.6f;
+
+        // Determine the direction vector based on the 'forward' parameter
+        Vector3 direction = forward ? vehicleRB.transform.forward : -vehicleRB.transform.forward;
+
+        // Apply the velocity to the Rigidbody
+#if UNITY_6000_0_OR_NEWER
+        vehicleRB.linearVelocity = direction * speedMs;
+#else
+        vehicleRB.velocity = direction * speedMs;
+#endif
+
+        // Stop all wheel torques and brakes to ensure a clean state and prevent
+        // any lingering forces from previous input from affecting the new velocity.
+        frontLeftWheelCollider.motorTorque = 0;
+        frontRightWheelCollider.motorTorque = 0;
+        rearLeftWheelCollider.motorTorque = 0;
+        rearRightWheelCollider.motorTorque = 0;
+
+        frontLeftWheelCollider.brakeTorque = 0;
+        frontRightWheelCollider.brakeTorque = 0;
+        rearLeftWheelCollider.brakeTorque = 0;
+        rearRightWheelCollider.brakeTorque = 0;
+
+        // Reset current input states to prevent the car from immediately accelerating/braking
+        // based on previous user input after resuming.
+        currentThrottleInput = 0f;
+        currentHandbrakeValue = 0f;
+        targetSteerAngle = 0f; // Reset steering target
+        currentSteerAngle = 0f; // Reset current steering angle to neutral
+
+        // Update the 'isStarted' state based on whether a non-zero speed is desired.
+        // If speed is set to 0, consider the car "not started" in terms of continuous movement.
+        isStarted = (desiredSpeedKmh > 0.01f); // Use a small threshold to account for floating point inaccuracies
+
+        // If the desired speed is very close to zero, ensure the car is truly stopped
+        if (desiredSpeedKmh <= 0.1f) // Small threshold for "zero speed"
+        {
+            vehicleRB.angularVelocity = Vector3.zero; // Stop any rotational movement
+#if UNITY_6000_0_OR_NEWER
+            vehicleRB.linearVelocity = Vector3.zero; // Explicitly set linear velocity to zero
+#else
+            vehicleRB.velocity = Vector3.zero; // Explicitly set linear velocity to zero
+#endif
+            // Optionally, turn off lights and engine sounds if the car is fully stopped
+            if (ezerealLightController != null) ezerealLightController.AllLightsOff();
+            if (simplifiedSoundController != null) simplifiedSoundController.TurnOffEngineSound();
+        }
+        else // If setting a positive speed, ensure car sounds and lights are on
+        {
+            if (ezerealLightController != null) ezerealLightController.MiscLightsOn();
+            if (simplifiedSoundController != null) simplifiedSoundController.TurnOnEngineSound();
+        }
+
+        // Update the internal 'currentSpeed' variable and UI immediately for consistency.
+        currentSpeed = desiredSpeedKmh;
+        UpdateSpeedText(currentSpeed);
+    }
+
+    /// <summary>
+    /// Teleports the car's Rigidbody to a new position and rotation,
+    /// stopping all current velocity to ensure a clean placement.
+    /// This is useful for resetting the car's position in tutorials or when exiting bounded areas.
+    /// </summary>
+    /// <param name="targetTransform">The Transform representing the desired position and rotation for the car.</param>
+    public void TeleportCar(Transform targetTransform)
+    {
+        if (vehicleRB == null)
+        {
+            Debug.LogError("Vehicle Rigidbody is not assigned for TeleportCar! Cannot teleport.");
+            return;
+        }
+
+        if (targetTransform == null)
+        {
+            Debug.LogError("Target Transform for TeleportCar is null! Cannot teleport.");
+            return;
+        }
+
+        // Stop all motion before teleporting to prevent physics glitches
+#if UNITY_6000_0_OR_NEWER
+        vehicleRB.linearVelocity = Vector3.zero;
+#else
+        vehicleRB.velocity = Vector3.zero;
+#endif
+        vehicleRB.angularVelocity = Vector3.zero;
+
+        // Instantly move the Rigidbody to the new position and rotation
+        vehicleRB.position = targetTransform.position;
+        vehicleRB.rotation = targetTransform.rotation;
+
+        // Also update the meshes to match the new position immediately
+        UpdateWheel(frontLeftWheelCollider, frontLeftWheelMesh);
+        UpdateWheel(frontRightWheelCollider, frontRightWheelMesh);
+        UpdateWheel(rearLeftWheelCollider, rearLeftWheelMesh);
+        UpdateWheel(rearRightWheelCollider, rearRightWheelMesh);
+
+        // Reset wheel torques and brakes to ensure a clean state after teleport
+        frontLeftWheelCollider.motorTorque = 0;
+        frontRightWheelCollider.motorTorque = 0;
+        rearLeftWheelCollider.motorTorque = 0;
+        rearRightWheelCollider.motorTorque = 0;
+
+        frontLeftWheelCollider.brakeTorque = 0;
+        frontRightWheelCollider.brakeTorque = 0;
+        rearLeftWheelCollider.brakeTorque = 0;
+        rearRightWheelCollider.brakeTorque = 0;
+
+        // Reset current input states to prevent the car from immediately accelerating/braking
+        // based on previous user input after resuming.
+        currentThrottleInput = 0f;
+        currentHandbrakeValue = 0f;
+        targetSteerAngle = 0f; // Reset steering target
+        currentSteerAngle = 0f; // Reset current steering angle to neutral
+
+        // Optionally, ensure the car is considered "stopped" and turn off lights/sounds after teleport
+        isStarted = false;
+        if (ezerealLightController != null) ezerealLightController.AllLightsOff();
+        if (simplifiedSoundController != null) simplifiedSoundController.TurnOffEngineSound();
+
+        // Update UI to reflect zero speed
+        currentSpeed = 0f;
+        UpdateSpeedText(currentSpeed);
+
+    }
+
+    public void SimulateThrottleInput(float value)
+    {
+        currentThrottleInput = Mathf.Clamp(value, -1, 1);
+
+    }
 }
