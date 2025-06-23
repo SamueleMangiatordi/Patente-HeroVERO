@@ -71,6 +71,18 @@ public class SimplifiedCarController : MonoBehaviour // This is the main system 
     [SerializeField] float speedFactor = 0f; // Leave at zero. Responsible for smooth acceleration and near-top-speed slowdown.
 
 
+    // Add these public getters and setters to access private fields
+    public float GetCurrentSpeed() { return currentSpeed; }
+    public float GetCurrentThrottleInput() { return currentThrottleInput; }
+    public float GetCurrentHandbrakeValue() { return currentHandbrakeValue; }
+    public float GetTargetSteerAngle() { return targetSteerAngle; }
+    public float GetCurrentSteerAngle() { return currentSteerAngle; } // New getter for currentSteerAngle
+
+    public void SetIsStarted(bool value) { isStarted = value; } // New setter for isStarted
+    public void SetTargetSteerAngle(float angle) { targetSteerAngle = angle; } // New setter for targetSteerAngle
+    public void SetCurrentSteerAngle(float angle) { currentSteerAngle = angle; } // New setter for currentSteerAngle
+
+
     private float currentThrottleInput = 0f; // Current throttle input value
 
     private void Awake()
@@ -394,6 +406,15 @@ public class SimplifiedCarController : MonoBehaviour // This is the main system 
         mesh.SetPositionAndRotation(position, rotation);
     }
 
+    // New public helper method to update all wheel meshes
+    public void UpdateWheelMeshes()
+    {
+        UpdateWheel(frontLeftWheelCollider, frontLeftWheelMesh);
+        UpdateWheel(frontRightWheelCollider, frontRightWheelMesh);
+        UpdateWheel(rearLeftWheelCollider, rearLeftWheelMesh);
+        UpdateWheel(rearRightWheelCollider, rearRightWheelMesh);
+    }
+
 
     void RotateSteeringWheel()
     {
@@ -407,7 +428,7 @@ public class SimplifiedCarController : MonoBehaviour // This is the main system 
         steeringWheel.localRotation = Quaternion.Euler(currentXAngle, 0, rotation);
     }
 
-    void UpdateSpeedText(float speed)
+    public void UpdateSpeedText(float speed)
     {
         speed = Mathf.Abs(speed);
 
@@ -585,6 +606,15 @@ public class SimplifiedCarController : MonoBehaviour // This is the main system 
     public void SimulateThrottleInput(float value)
     {
         currentThrottleInput = Mathf.Clamp(value, -1, 1);
+    }
 
+    public void SimulateSteerInput(float value)
+    {
+        targetSteerAngle = Mathf.Clamp(value, -1, 1);
+    }
+
+    public void SimulateHandBrake(float value)
+    {
+        currentHandbrakeValue = Mathf.Clamp(value, 0, 1);
     }
 }

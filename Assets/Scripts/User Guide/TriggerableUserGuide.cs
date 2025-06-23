@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -17,8 +18,9 @@ public class TriggerableUserGuide : MonoBehaviour
 
     [Tooltip("The car prefab with all gameObjects (Simplified Electric Truck - Ready) , not only the electric truck prefab")]
     [SerializeField] private GameObject mainCarObject;
+    [Tooltip("The speed to set the car when ending the interaction. If setted to 0, the car mantains the speed had before starting the interaction.")]
     [SerializeField] private float resumeCarSpeed = 0f; //the speed to set the car when starting the interaction, usually 0
-
+    [SerializeField] private float resumeTimeDelay = 0.15f; //the time to wait before resuming the game after the interaction ends
     [Tooltip("Since when pausing the game with a button pressed and resuming it with the same button still pressed lose the input and the button is considered not pressed anymore, this event is used to simulate the user elevate the button and pressing it again")]
     public UnityEvent<float> onResumePressedButton; // UnityEvent to simulate the button press
 
@@ -32,12 +34,12 @@ public class TriggerableUserGuide : MonoBehaviour
     [SerializeField] private Collider[] boundedAreaColliders; // Array of colliders defining the bounded area for interaction
 
     private SimplifiedCarController carController; // Reference to the car controller, if needed for further interactions
+    private CarStateParameters storedCarState; // New field to store the car's state
 
     private bool waitingForAnyInput = false;
 
     private bool isPressed = false; //used for checking if the button is currently pressed
     private float timePressed = 0;  //used for checking how long the button is pressed
-
 
 
 #if UNITY_EDITOR
@@ -52,9 +54,6 @@ public class TriggerableUserGuide : MonoBehaviour
     public void Awake()
     {
         carController = mainCarObject.GetComponentInChildren<SimplifiedCarController>();
-
-        if (resumeCarSpeed == 0f)
-            resumeCarSpeed = 1f;
 
     }
 
@@ -76,7 +75,7 @@ public class TriggerableUserGuide : MonoBehaviour
                 timePressed = 0;
 
                 GameManager.Instance.ResumeGame();
-
+                StartCoroutine(GameManager.Instance.WaitToPause(resumeTimeDelay)); // Wait a bit before pausing to ensure the car is telported and ready
                 waitingForAnyInput = false; // Stop waiting
 
                 return; // Consume this input for the guide, do not proceed with other Update logic if any
@@ -106,6 +105,7 @@ public class TriggerableUserGuide : MonoBehaviour
 
         isInteractionEnabled = true;
         Debug.Log("Start Interaction");
+
         if (stopGame)
             GameManager.Instance.PauseGame();
 
@@ -115,6 +115,8 @@ public class TriggerableUserGuide : MonoBehaviour
         // Always reset state when interaction starts
         isPressed = false;
         timePressed = 0;
+
+        storedCarState = new CarStateParameters(carController);
 
     }
 
@@ -149,19 +151,33 @@ public class TriggerableUserGuide : MonoBehaviour
 
         GameManager.Instance.PauseGame();
 
-        carController.TeleportCar(resetPos, 0, true);
-        userGuide.ResetUserGuide();
+        // --- NEW: Restore car state using the stored parameters ---
+        if (storedCarState != null && resumeCarSpeed == 0)
+        {
 
+            storedCarState.ApplyToCarController(carController);
+            Debug.Log("Car state restored for RestartInteraction.");
+        }
+        else
+        {
+            // Fallback if state wasn't stored (e.g., direct call to RestartInteraction without StartInteraction)
+            // Teleport to resetPos with resumeCarSpeed (or 0 if resumeCarSpeed is 0)
+            
+            carController.TeleportCar(resetPos, resumeCarSpeed, true);
+            Debug.LogWarning("No stored car state found for RestartInteraction. Using resetPos and configured resumeCarSpeed as fallback.");
+        }
+        // ----------------------------------------------------------
+
+
+        userGuide.ResetUserGuide();
         userGuide.ShowInstruction(true);
         userGuide.NextMessage();
         userGuide.NextMessage();
-
         userGuide.ShowAllComplementaryUI(true); // Hide the first complementary UI element if it was shown
 
 
         isInteractionEnabled = true;
         waitingForAnyInput = true;
-
         isPressed = false; // Reset isPressed to ensure the interaction can start fresh
         timePressed = 0; // Reset the timer as well
 
@@ -174,7 +190,9 @@ public class TriggerableUserGuide : MonoBehaviour
 
     public void CorrectInteraction()
     {
-        carController.SetCarSpeed(resumeCarSpeed, true); // Reset car speed to 0 when starting interaction
+        if (resumeCarSpeed != 0f)
+            carController.SetCarSpeed(resumeCarSpeed, true); // Reset car speed to 0 when starting interaction
+
         onResumePressedButton?.Invoke(validAxisDir); // Reset throttle input to 0
 
         isPressed = false; // Reset isPressed after handling the interaction

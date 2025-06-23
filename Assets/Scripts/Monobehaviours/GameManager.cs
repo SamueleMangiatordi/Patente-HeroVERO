@@ -1,4 +1,5 @@
 // GameManager.cs
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -47,4 +48,17 @@ public class GameManager : MonoBehaviour
         Debug.Log("Game Resumed");
         // Optionally, hide the pause UI or tutorial prompt
     }
+
+    public IEnumerator WaitToPause(float delaySeconds)
+    {
+        yield return new WaitForSeconds(delaySeconds);
+        PauseGame();
+    }
+
+    public IEnumerator WaitToResume(float delaySeconds)
+    {
+        yield return new WaitForSeconds(delaySeconds);
+        ResumeGame();
+    }
+
 }
