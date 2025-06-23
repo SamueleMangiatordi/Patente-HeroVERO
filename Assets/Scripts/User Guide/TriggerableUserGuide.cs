@@ -6,9 +6,9 @@ using UnityEngine.InputSystem; // Make sure this namespace is present
 /**
  * Classe per controllare il flusso di informazioni da fornire all'utente durante uno stato
  */
-public class TriggerableUserGuide : MonoBehaviour, IPointerDownHandler
+public class TriggerableUserGuide : MonoBehaviour
 {
-    [SerializeField] public bool isActive = false;  //used to check if the user guide is currently active and not execute the update method if not
+    [SerializeField] public bool isInteractionEnabled = false;  //used to check if the interaction is enabled, if not prevent any interaction/trigger/update method to execute
 
     [SerializeField] private float longPressTreshold = 0.5f;    //for how long the button must be pressed before considering it a valid press
 
@@ -58,26 +58,9 @@ public class TriggerableUserGuide : MonoBehaviour, IPointerDownHandler
 
     }
 
-
-    // NEW: Callback for when any input is detected by anyInputDetectionAction
-    private void OnAnyInputDetected(InputAction.CallbackContext context)
-    {
-        if (isActive && waitingForAnyInput)
-        {
-            Debug.Log("Any input detected via New Input System, proceeding with normal guide.");
-            waitingForAnyInput = false; // Stop waiting
-            userGuide.NextMessage();    // Display the *next* message (your first normal instruction)
-
-            // Reset long press state to allow normal interaction to start fresh
-            isPressed = false;
-            timePressed = 0;
-
-        }
-    }
-
     public void Update()
     {
-        if (!isActive)
+        if (!isInteractionEnabled)
             return;
 
         if (waitingForAnyInput)
@@ -86,17 +69,19 @@ public class TriggerableUserGuide : MonoBehaviour, IPointerDownHandler
             if (UnityEngine.Input.anyKeyDown)
             {
                 Debug.Log("Any keyboard/mouse button detected while waiting, proceeding with normal guide.");
-                waitingForAnyInput = false; // Stop waiting
                 userGuide.NextMessage();    // Display the *next* message (your first normal instruction)
                 userGuide.ShowAllComplementaryUI(false); // Show the first complementary UI element
                                                          // Reset long press state to allow normal interaction to start fresh
                 isPressed = false;
                 timePressed = 0;
 
-                GameManager.Instance.PauseGame(); // Resume the game if it was paused
+                GameManager.Instance.ResumeGame();
+
+                waitingForAnyInput = false; // Stop waiting
 
                 return; // Consume this input for the guide, do not proceed with other Update logic if any
             }
+
         }
 
         // If the button is currently considered pressed (and in the correct direction)
@@ -119,7 +104,7 @@ public class TriggerableUserGuide : MonoBehaviour, IPointerDownHandler
     {
         waitingForAnyInput = false;
 
-        isActive = true;
+        isInteractionEnabled = true;
         Debug.Log("Start Interaction");
         if (stopGame)
             GameManager.Instance.PauseGame();
@@ -137,7 +122,7 @@ public class TriggerableUserGuide : MonoBehaviour, IPointerDownHandler
     {
         waitingForAnyInput = false;
 
-        isActive = false;
+        isInteractionEnabled = false;
         Debug.Log("End Interaction");
 
         userGuide.ShowInstruction(false);
@@ -160,9 +145,11 @@ public class TriggerableUserGuide : MonoBehaviour, IPointerDownHandler
 
     public void RestartInteraction()
     {
-        enterCollider.enabled = false; // Re-enable the enter collider to allow re-entry
+        enterCollider.enabled = false;
 
-        carController.TeleportCar(resetPos);
+        GameManager.Instance.PauseGame();
+
+        carController.TeleportCar(resetPos, 0, true);
         userGuide.ResetUserGuide();
 
         userGuide.ShowInstruction(true);
@@ -171,8 +158,8 @@ public class TriggerableUserGuide : MonoBehaviour, IPointerDownHandler
 
         userGuide.ShowAllComplementaryUI(true); // Hide the first complementary UI element if it was shown
 
-        GameManager.Instance.ResumeGame();
 
+        isInteractionEnabled = true;
         waitingForAnyInput = true;
 
         isPressed = false; // Reset isPressed to ensure the interaction can start fresh
@@ -192,7 +179,7 @@ public class TriggerableUserGuide : MonoBehaviour, IPointerDownHandler
 
         isPressed = false; // Reset isPressed after handling the interaction
         timePressed = 0; // Reset the timer as well
-        isActive = false;
+        isInteractionEnabled = false;
         waitingForAnyInput = false; // Ensure this is false after a correct interaction
 
         userGuide.ShowInstruction(false);
@@ -203,7 +190,7 @@ public class TriggerableUserGuide : MonoBehaviour, IPointerDownHandler
     // This method will be called by a UnityEvent<float> from your input source (e.g., SimplifiedCarController.onThrottleCar)
     public void HandleInteraction(float value)
     {
-        if (!isActive)
+        if (!isInteractionEnabled)
             return;
 
         if (value == 0)
@@ -239,19 +226,4 @@ public class TriggerableUserGuide : MonoBehaviour, IPointerDownHandler
 
     }
 
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        if (!waitingForAnyInput)
-            return;
-
-        Debug.Log("Any keyboard/mouse button detected while waiting, proceeding with normal guide.");
-        waitingForAnyInput = false; // Stop waiting
-        userGuide.NextMessage();    // Display the *next* message (your first normal instruction)
-        userGuide.ShowAllComplementaryUI(false); // Show the first complementary UI element
-                                                 // Reset long press state to allow normal interaction to start fresh
-        isPressed = false;
-        timePressed = 0;
-
-
-    }
 }

@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine.UI;
 using Ezereal;
 using UnityEngine.Events;
+using System.Collections;
 
 public class SimplifiedCarController : MonoBehaviour // This is the main system resposible for car control.
 {
@@ -68,6 +69,7 @@ public class SimplifiedCarController : MonoBehaviour // This is the main system 
     [SerializeField] float RearRightWheelRPM = 0f;
 
     [SerializeField] float speedFactor = 0f; // Leave at zero. Responsible for smooth acceleration and near-top-speed slowdown.
+
 
     private float currentThrottleInput = 0f; // Current throttle input value
 
@@ -514,7 +516,9 @@ public class SimplifiedCarController : MonoBehaviour // This is the main system 
     /// This is useful for resetting the car's position in tutorials or when exiting bounded areas.
     /// </summary>
     /// <param name="targetTransform">The Transform representing the desired position and rotation for the car.</param>
-    public void TeleportCar(Transform targetTransform)
+    /// <param name="desiredSpeed">The desired speed in km/h for the car *after* teleporting. Use 0 for a complete stop.</param>
+    /// <param name="forward">If true, the desired speed is applied in the car's forward direction; otherwise, backward.</param>
+    public void TeleportCar(Transform targetTransform, float desiredSpeed, bool forward)
     {
         if (vehicleRB == null)
         {
@@ -573,7 +577,10 @@ public class SimplifiedCarController : MonoBehaviour // This is the main system 
         currentSpeed = 0f;
         UpdateSpeedText(currentSpeed);
 
+        SetCarSpeed(desiredSpeed, forward); // Set the car speed after teleporting
+
     }
+
 
     public void SimulateThrottleInput(float value)
     {
