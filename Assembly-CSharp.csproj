@@ -70,11 +70,11 @@
     <Compile Include="Assets\Ezereal Assets\Ezereal Car Controller\Scripts\EzerealWheelFrictionController.cs" />
     <Compile Include="Assets\Scripts\Monobehaviours\LerpMovement.cs" />
     <Compile Include="Assets\Ezereal Assets\Ezereal Car Controller\Scripts\Demo\Restart.cs" />
-    <Compile Include="Assets\Scripts\Core\CarStateParameters.cs" />
     <Compile Include="Assets\Ezereal Assets\Ezereal Car Controller\Scripts\EzerealCameraController.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
     <Compile Include="Assets\Ezereal Assets\Ezereal Car Controller\Scripts\Demo\HideCursor.cs" />
     <Compile Include="Assets\Loading Games\Toon City Pack\Demo\Scripts\Helicopter.cs" />
+    <Compile Include="Assets\Scripts\CarControllers\CarStateParameters.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_ExampleScript_01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMPro_InstructionOverlay.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />
@@ -89,6 +89,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ShaderPropAnimator.cs" />
     <Compile Include="Assets\Ezereal Assets\Ezereal Car Controller\Scripts\Enums\LightBeam.cs" />
     <Compile Include="Assets\Scripts\Monobehaviours\SceneLoader.cs" />
+    <Compile Include="Assets\Scripts\CarControllers\CarAdapter.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
     <Compile Include="Assets\Loading Games\Toon City Pack\Demo\Scripts\TrafficLights.cs" />

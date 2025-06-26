@@ -75,6 +75,22 @@ public class TriggerableUserGuide : MonoBehaviour
                 timePressed = 0;
 
                 GameManager.Instance.ResumeGame();
+                // --- NEW: Restore car state using the stored parameters ---
+                if (storedCarState != null && resumeCarSpeed == 0)
+                {
+
+                    storedCarState.ApplyToCarController(carController);
+                    Debug.Log("Car state restored for RestartInteraction.");
+                }
+                else
+                {
+                    // Fallback if state wasn't stored (e.g., direct call to RestartInteraction without StartInteraction)
+                    // Teleport to resetPos with resumeCarSpeed (or 0 if resumeCarSpeed is 0)
+
+                    carController.TeleportCar(resetPos, resumeCarSpeed, true);
+                    Debug.LogWarning("No stored car state found for RestartInteraction. Using resetPos and configured resumeCarSpeed as fallback.");
+                }
+                // ----------------------------------------------------------w
                 StartCoroutine(GameManager.Instance.WaitToPause(resumeTimeDelay)); // Wait a bit before pausing to ensure the car is telported and ready
                 waitingForAnyInput = false; // Stop waiting
 
@@ -151,22 +167,22 @@ public class TriggerableUserGuide : MonoBehaviour
 
         GameManager.Instance.PauseGame();
 
-        // --- NEW: Restore car state using the stored parameters ---
-        if (storedCarState != null && resumeCarSpeed == 0)
-        {
+        //// --- NEW: Restore car state using the stored parameters ---
+        //if (storedCarState != null && resumeCarSpeed == 0)
+        //{
 
-            storedCarState.ApplyToCarController(carController);
-            Debug.Log("Car state restored for RestartInteraction.");
-        }
-        else
-        {
-            // Fallback if state wasn't stored (e.g., direct call to RestartInteraction without StartInteraction)
-            // Teleport to resetPos with resumeCarSpeed (or 0 if resumeCarSpeed is 0)
+        //    storedCarState.ApplyToCarController(carController);
+        //    Debug.Log("Car state restored for RestartInteraction.");
+        //}
+        //else
+        //{
+        //    // Fallback if state wasn't stored (e.g., direct call to RestartInteraction without StartInteraction)
+        //    // Teleport to resetPos with resumeCarSpeed (or 0 if resumeCarSpeed is 0)
             
-            carController.TeleportCar(resetPos, resumeCarSpeed, true);
-            Debug.LogWarning("No stored car state found for RestartInteraction. Using resetPos and configured resumeCarSpeed as fallback.");
-        }
-        // ----------------------------------------------------------
+        //    carController.TeleportCar(resetPos, resumeCarSpeed, true);
+        //    Debug.LogWarning("No stored car state found for RestartInteraction. Using resetPos and configured resumeCarSpeed as fallback.");
+        //}
+        //// ----------------------------------------------------------
 
 
         userGuide.ResetUserGuide();

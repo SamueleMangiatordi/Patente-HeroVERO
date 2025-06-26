@@ -13,7 +13,6 @@ public class SimplifiedCarController : MonoBehaviour // This is the main system 
     public UnityEvent<float> onSteer;
 
     [Header("Ezereal References")]
-
     [SerializeField] EzerealLightController ezerealLightController;
     [SerializeField] SimplifiedSoundController simplifiedSoundController;
     [SerializeField] SimplifiedWheelFrictionController SimplifiedWheelFrictionController;
@@ -60,9 +59,13 @@ public class SimplifiedCarController : MonoBehaviour // This is the main system 
     [SerializeField] float currentSpeed = 0f;
     [SerializeField] float currentAccelerationValue = 0f;
     [SerializeField] float currentReverseValue = 0f;
-    [SerializeField] float currentHandbrakeValue = 0f;
-    [SerializeField] float currentSteerAngle = 0f;
-    [SerializeField] float targetSteerAngle = 0f;
+
+    // Made public properties so CarMovementAdapter can directly set them
+    public float CurrentHandbrakeValue { get; set; } = 0f;
+    public float CurrentSteerAngle { get; set; } = 0f; // Actual angle applied
+    public float TargetSteerAngle { get; set; } = 0f; // Target angle from input
+
+
     [SerializeField] float FrontLeftWheelRPM = 0f;
     [SerializeField] float FrontRightWheelRPM = 0f;
     [SerializeField] float RearLeftWheelRPM = 0f;
@@ -73,17 +76,10 @@ public class SimplifiedCarController : MonoBehaviour // This is the main system 
 
     // Add these public getters and setters to access private fields
     public float GetCurrentSpeed() { return currentSpeed; }
-    public float GetCurrentThrottleInput() { return currentThrottleInput; }
-    public float GetCurrentHandbrakeValue() { return currentHandbrakeValue; }
-    public float GetTargetSteerAngle() { return targetSteerAngle; }
-    public float GetCurrentSteerAngle() { return currentSteerAngle; } // New getter for currentSteerAngle
-
     public void SetIsStarted(bool value) { isStarted = value; } // New setter for isStarted
-    public void SetTargetSteerAngle(float angle) { targetSteerAngle = angle; } // New setter for targetSteerAngle
-    public void SetCurrentSteerAngle(float angle) { currentSteerAngle = angle; } // New setter for currentSteerAngle
 
-
-    private float currentThrottleInput = 0f; // Current throttle input value
+    // Made public property so CarMovementAdapter can directly set it
+    public float CurrentThrottleInput { get; set; } = 0f;
 
     private void Awake()
     {
@@ -175,13 +171,13 @@ public class SimplifiedCarController : MonoBehaviour // This is the main system 
 
     void OnThrottle(InputValue throttleValue)
     {
-        currentThrottleInput = throttleValue.Get<float>();
-        onThrottle?.Invoke(currentThrottleInput);
+        CurrentThrottleInput = throttleValue.Get<float>();
+        onThrottle?.Invoke(CurrentThrottleInput);
         //Debug.Log("Acceleration: " + currentAccelerationValue.ToString());
 
         if (isStarted && ezerealLightController != null)
         {
-            if (currentThrottleInput < 0)
+            if (CurrentThrottleInput < 0)
             {
                 ezerealLightController.BrakeLightsOn();
             }
@@ -206,29 +202,29 @@ public class SimplifiedCarController : MonoBehaviour // This is the main system 
             // (zero torque at top speed)
             float currentMotorTorque = Mathf.Lerp(horsePower, 0, speedFactor);
             // Determine if we are accelerating forward or backward
-            if (currentThrottleInput > 0f) // 'W' is pressed (or positive input)
+            if (CurrentThrottleInput > 0f) // 'W' is pressed (or positive input)
             {
                 if (currentSpeed < maxForwardSpeed)
                 {
-                    motorTorque = currentThrottleInput * currentMotorTorque; // Apply forward torque
+                    motorTorque = CurrentThrottleInput * currentMotorTorque; // Apply forward torque
                 }
                 // If currentSpeed is negative (moving backward), pressing W should brake until 0, then accelerate forward
                 if (currentSpeed < 0)
                 {
-                    brakeTorque = brakePower * Mathf.Abs(currentThrottleInput); // Treat W as brake if moving backward
+                    brakeTorque = brakePower * Mathf.Abs(CurrentThrottleInput); // Treat W as brake if moving backward
                     motorTorque = 0; // No motor torque against the direction
                 }
             }
-            else if (currentThrottleInput < 0f) // 'S' is pressed (or negative input)
+            else if (CurrentThrottleInput < 0f) // 'S' is pressed (or negative input)
             {
                 if (currentSpeed > -maxReverseSpeed) // Assuming you have maxReverseSpeed defined
                 {
-                    motorTorque = currentThrottleInput * horsePower; // Apply reverse torque (will be negative)
+                    motorTorque = CurrentThrottleInput * horsePower; // Apply reverse torque (will be negative)
                 }
                 // If currentSpeed is positive (moving forward), pressing S should brake until 0, then accelerate backward
                 if (currentSpeed > 0)
                 {
-                    brakeTorque = brakePower * Mathf.Abs(currentThrottleInput); // Treat S as brake if moving forward
+                    brakeTorque = brakePower * Mathf.Abs(CurrentThrottleInput); // Treat S as brake if moving forward
                     motorTorque = 0; // No motor torque against the direction
                 }
             }
@@ -264,17 +260,17 @@ public class SimplifiedCarController : MonoBehaviour // This is the main system 
 
     void OnHandbrake(InputValue handbrakeValue)
     {
-        currentHandbrakeValue = handbrakeValue.Get<float>();
+        CurrentHandbrakeValue = handbrakeValue.Get<float>();
 
-        onHandBrake?.Invoke(currentHandbrakeValue);
+        onHandBrake?.Invoke(CurrentHandbrakeValue);
 
         if (isStarted)
         {
-            if (currentHandbrakeValue > 0)
+            if (CurrentHandbrakeValue > 0)
             {
                 if (SimplifiedWheelFrictionController != null)
                 {
-                    SimplifiedWheelFrictionController.StartDrifting(currentHandbrakeValue);
+                    SimplifiedWheelFrictionController.StartDrifting(CurrentHandbrakeValue);
                 }
 
                 if (ezerealLightController != null)
@@ -299,12 +295,12 @@ public class SimplifiedCarController : MonoBehaviour // This is the main system 
 
     void Handbraking()
     {
-        if (currentHandbrakeValue > 0f)
+        if (CurrentHandbrakeValue > 0f)
         {
             rearLeftWheelCollider.motorTorque = 0;
             rearRightWheelCollider.motorTorque = 0;
-            rearLeftWheelCollider.brakeTorque = currentHandbrakeValue * handbrakeForce;
-            rearRightWheelCollider.brakeTorque = currentHandbrakeValue * handbrakeForce;
+            rearLeftWheelCollider.brakeTorque = CurrentHandbrakeValue * handbrakeForce;
+            rearRightWheelCollider.brakeTorque = CurrentHandbrakeValue * handbrakeForce;
 
 
         }
@@ -317,19 +313,19 @@ public class SimplifiedCarController : MonoBehaviour // This is the main system 
 
     void OnSteer(InputValue turnValue)
     {
-        targetSteerAngle = turnValue.Get<float>() * maxSteerAngle;
+        TargetSteerAngle = turnValue.Get<float>() * maxSteerAngle;
 
-        onSteer?.Invoke(targetSteerAngle);
+        onSteer?.Invoke(TargetSteerAngle);
     }
 
     void Steering()
     {
         float adjustedspeedFactor = Mathf.InverseLerp(20, maxForwardSpeed, currentSpeed); //minimum speed affecting steerAngle is 20
-        float adjustedTurnAngle = targetSteerAngle * (1 - adjustedspeedFactor); //based on current speed.
-        currentSteerAngle = Mathf.Lerp(currentSteerAngle, adjustedTurnAngle, Time.deltaTime * steeringSpeed);
+        float adjustedTurnAngle = TargetSteerAngle * (1 - adjustedspeedFactor); //based on current speed.
+        CurrentSteerAngle = Mathf.Lerp(CurrentSteerAngle, adjustedTurnAngle, Time.deltaTime * steeringSpeed);
 
-        frontLeftWheelCollider.steerAngle = currentSteerAngle;
-        frontRightWheelCollider.steerAngle = currentSteerAngle;
+        frontLeftWheelCollider.steerAngle = CurrentSteerAngle;
+        frontRightWheelCollider.steerAngle = CurrentSteerAngle;
 
         UpdateWheel(frontLeftWheelCollider, frontLeftWheelMesh);
         UpdateWheel(frontRightWheelCollider, frontRightWheelMesh);
@@ -341,7 +337,7 @@ public class SimplifiedCarController : MonoBehaviour // This is the main system 
     {
         if (vehicleRB != null)
         {
-            if (currentAccelerationValue == 0 && currentReverseValue == 0 && currentHandbrakeValue == 0)
+            if (currentAccelerationValue == 0 && currentReverseValue == 0 && CurrentHandbrakeValue == 0)
             {
 #if UNITY_6000_0_OR_NEWER
                 vehicleRB.linearVelocity = Vector3.Lerp(vehicleRB.linearVelocity, Vector3.zero, Time.deltaTime * decelerationSpeed);
@@ -456,6 +452,9 @@ public class SimplifiedCarController : MonoBehaviour // This is the main system 
 
 
 
+
+
+
     /// <summary>
     /// Sets the car's linear velocity to a specific speed and direction,
     /// overriding any previous motion. This is useful for tutorial scenarios
@@ -496,12 +495,13 @@ public class SimplifiedCarController : MonoBehaviour // This is the main system 
         rearLeftWheelCollider.brakeTorque = 0;
         rearRightWheelCollider.brakeTorque = 0;
 
+
         // Reset current input states to prevent the car from immediately accelerating/braking
         // based on previous user input after resuming.
-        currentThrottleInput = 0f;
-        currentHandbrakeValue = 0f;
-        targetSteerAngle = 0f; // Reset steering target
-        currentSteerAngle = 0f; // Reset current steering angle to neutral
+        CurrentThrottleInput = 0f;
+        CurrentHandbrakeValue = 0f;
+        TargetSteerAngle = 0f; // Reset steering target
+        CurrentSteerAngle = 0f; // Reset current steering angle to neutral
 
         // Update the 'isStarted' state based on whether a non-zero speed is desired.
         // If speed is set to 0, consider the car "not started" in terms of continuous movement.
@@ -552,6 +552,18 @@ public class SimplifiedCarController : MonoBehaviour // This is the main system 
             Debug.LogError("Target Transform for TeleportCar is null! Cannot teleport.");
             return;
         }
+        // Store original kinematic state
+        bool originalIsKinematic = vehicleRB.isKinematic;
+
+        // Temporarily make the Rigidbody kinematic for a clean teleport
+        vehicleRB.isKinematic = true;
+
+        // Instantly move the Rigidbody to the new position and rotation
+        vehicleRB.position = targetTransform.position;
+        vehicleRB.rotation = targetTransform.rotation;
+
+        // Restore Rigidbody's kinematic state
+        vehicleRB.isKinematic = originalIsKinematic;
 
         // Stop all motion before teleporting to prevent physics glitches
 #if UNITY_6000_0_OR_NEWER
@@ -560,16 +572,12 @@ public class SimplifiedCarController : MonoBehaviour // This is the main system 
         vehicleRB.velocity = Vector3.zero;
 #endif
         vehicleRB.angularVelocity = Vector3.zero;
-
-        // Instantly move the Rigidbody to the new position and rotation
-        vehicleRB.position = targetTransform.position;
-        vehicleRB.rotation = targetTransform.rotation;
+        // Force the Rigidbody to sleep.
+        vehicleRB.Sleep();
+        // ---------------------------------------------------------------------
 
         // Also update the meshes to match the new position immediately
-        UpdateWheel(frontLeftWheelCollider, frontLeftWheelMesh);
-        UpdateWheel(frontRightWheelCollider, frontRightWheelMesh);
-        UpdateWheel(rearLeftWheelCollider, rearLeftWheelMesh);
-        UpdateWheel(rearRightWheelCollider, rearRightWheelMesh);
+        UpdateWheelMeshes(); // Use the new helper method
 
         // Reset wheel torques and brakes to ensure a clean state after teleport
         frontLeftWheelCollider.motorTorque = 0;
@@ -584,10 +592,10 @@ public class SimplifiedCarController : MonoBehaviour // This is the main system 
 
         // Reset current input states to prevent the car from immediately accelerating/braking
         // based on previous user input after resuming.
-        currentThrottleInput = 0f;
-        currentHandbrakeValue = 0f;
-        targetSteerAngle = 0f; // Reset steering target
-        currentSteerAngle = 0f; // Reset current steering angle to neutral
+        CurrentThrottleInput = 0f;
+        CurrentHandbrakeValue = 0f;
+        TargetSteerAngle = 0f; // Reset steering target
+        CurrentSteerAngle = 0f; // Reset current steering angle to neutral
 
         // Optionally, ensure the car is considered "stopped" and turn off lights/sounds after teleport
         isStarted = false;
@@ -602,19 +610,11 @@ public class SimplifiedCarController : MonoBehaviour // This is the main system 
 
     }
 
-
-    public void SimulateThrottleInput(float value)
+    public IEnumerator DelayedCarSpeed(float delay, float desiredSpeedKmh, bool forward)
     {
-        currentThrottleInput = Mathf.Clamp(value, -1, 1);
+        yield return new WaitForSeconds(delay);
+
+        SetCarSpeed(desiredSpeedKmh, forward);
     }
 
-    public void SimulateSteerInput(float value)
-    {
-        targetSteerAngle = Mathf.Clamp(value, -1, 1);
-    }
-
-    public void SimulateHandBrake(float value)
-    {
-        currentHandbrakeValue = Mathf.Clamp(value, 0, 1);
-    }
 }
