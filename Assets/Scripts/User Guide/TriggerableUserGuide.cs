@@ -26,12 +26,15 @@ public class TriggerableUserGuide : MonoBehaviour
 
     [SerializeField] private Transform resetPos;    //where to teleport the car if something is wrong
 
-    [SerializeField] private UserGuide userGuide;   //the userGuid that prompt the user with instructions, placed inside the ameObject that has this script
+    [SerializeField] private UserGuideController userGuideController;   //the userGuid that prompt the user with instructions, placed inside the ameObject that has this script
 
     [SerializeField] private Collider enterCollider;
     [SerializeField] private Collider exitCollider; // Colliders to detect when the user enters or exits the interaction area
 
     [SerializeField] private Collider[] boundedAreaColliders; // Array of colliders defining the bounded area for interaction
+
+    [SerializeField] private UserGuideType startInteractionGuide; // Type of user guide to show when interaction starts
+    [SerializeField] private UserGuideType outOfBoundsUserGuide; // Type of user guide to show when interaction starts
 
     private SimplifiedCarController carController; // Reference to the car controller, if needed for further interactions
     private CarStateParameters storedCarState; // New field to store the car's state
@@ -45,7 +48,7 @@ public class TriggerableUserGuide : MonoBehaviour
 #if UNITY_EDITOR
     void Reset()
     {
-        userGuide = transform.GetComponentInChildren<UserGuide>();
+        userGuideController = transform.GetComponentInChildren<UserGuideController>();
         resetPos = transform.Find("resetPos");
 
         carController = mainCarObject.GetComponentInChildren<SimplifiedCarController>();
@@ -68,9 +71,12 @@ public class TriggerableUserGuide : MonoBehaviour
             if (UnityEngine.Input.anyKeyDown)
             {
                 Debug.Log("Any keyboard/mouse button detected while waiting, proceeding with normal guide.");
-                userGuide.NextMessage();    // Display the *next* message (your first normal instruction)
-                userGuide.ShowAllComplementaryUI(false); // Show the first complementary UI element
-                                                         // Reset long press state to allow normal interaction to start fresh
+                
+                userGuideController.SetuserGuide(startInteractionGuide); // Set the user guide to the one specified for starting interaction
+
+                //userGuideController.NextMessage();    // Display the *next* message (your first normal instruction)
+                //userGuideController.ShowAllComplementaryUI(false); // Show the first complementary UI element
+
                 isPressed = false;
                 timePressed = 0;
 
@@ -86,8 +92,8 @@ public class TriggerableUserGuide : MonoBehaviour
                 {
                     // Fallback if state wasn't stored (e.g., direct call to RestartInteraction without StartInteraction)
                     // Teleport to resetPos with resumeCarSpeed (or 0 if resumeCarSpeed is 0)
-
-                    carController.TeleportCar(resetPos, resumeCarSpeed, true);
+                    float velocity = resumeCarSpeed == 0 ? 1 : resumeCarSpeed;
+                    carController.TeleportCar(resetPos, velocity, true);
                     Debug.LogWarning("No stored car state found for RestartInteraction. Using resetPos and configured resumeCarSpeed as fallback.");
                 }
                 // ----------------------------------------------------------w
@@ -125,8 +131,7 @@ public class TriggerableUserGuide : MonoBehaviour
         if (stopGame)
             GameManager.Instance.PauseGame();
 
-        userGuide.ShowInstruction(true);
-        userGuide.NextMessage();
+        userGuideController.SetuserGuide(startInteractionGuide); // Set the user guide to the one specified for starting interaction
 
         // Always reset state when interaction starts
         isPressed = false;
@@ -141,9 +146,9 @@ public class TriggerableUserGuide : MonoBehaviour
         waitingForAnyInput = false;
 
         isInteractionEnabled = false;
-        Debug.Log("End Interaction");
+        Debug.Log("End Interaction : " + this.name.ToString());
 
-        userGuide.ShowInstruction(false);
+        userGuideController.EnableUserGuides(false);
 
         if (resumeGame)
             GameManager.Instance.ResumeGame();
@@ -161,7 +166,7 @@ public class TriggerableUserGuide : MonoBehaviour
         }
     }
 
-    public void RestartInteraction()
+    private void RestartInteraction()
     {
         enterCollider.enabled = false;
 
@@ -184,12 +189,13 @@ public class TriggerableUserGuide : MonoBehaviour
         //}
         //// ----------------------------------------------------------
 
-
-        userGuide.ResetUserGuide();
-        userGuide.ShowInstruction(true);
-        userGuide.NextMessage();
-        userGuide.NextMessage();
-        userGuide.ShowAllComplementaryUI(true); // Hide the first complementary UI element if it was shown
+        userGuideController.SetuserGuide(outOfBoundsUserGuide); // Reset the user guide to the one specified for starting interaction
+        
+        //userGuideController.ResetUserGuides();
+        //userGuideController.EnableUserGuides(true);
+        //userGuideController.NextMessage();
+        //userGuideController.NextMessage();
+        //userGuideController.ShowAllComplementaryUI(true); // Hide the first complementary UI element if it was shown
 
 
         isInteractionEnabled = true;
@@ -201,6 +207,9 @@ public class TriggerableUserGuide : MonoBehaviour
 
     public void ExitBoundedAred()
     {
+        if(!isInteractionEnabled)
+            return;
+
         RestartInteraction();
     }
 
@@ -213,10 +222,10 @@ public class TriggerableUserGuide : MonoBehaviour
 
         isPressed = false; // Reset isPressed after handling the interaction
         timePressed = 0; // Reset the timer as well
-        isInteractionEnabled = false;
+        //isInteractionEnabled = false;
         waitingForAnyInput = false; // Ensure this is false after a correct interaction
 
-        userGuide.ShowInstruction(false);
+        userGuideController.EnableUserGuides(false);
         GameManager.Instance.ResumeGame();
 
     }

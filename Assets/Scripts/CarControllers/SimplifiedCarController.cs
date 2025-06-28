@@ -531,6 +531,17 @@ public class SimplifiedCarController : MonoBehaviour // This is the main system 
         UpdateSpeedText(currentSpeed);
     }
 
+    public void TeleportCar(Vector3 targetPosition, Quaternion targetRotation, float desiredSpeed, bool forward)
+    {
+        // Create a temporary transform to hold the target position and rotation
+        Transform targetTransform = new GameObject("TempTarget").transform;
+        targetTransform.SetPositionAndRotation(targetPosition, targetRotation);
+        // Call the overloaded TeleportCar method with the temporary transform
+        TeleportCar(targetTransform, desiredSpeed, forward);
+        // Clean up the temporary transform
+        Destroy(targetTransform.gameObject);
+    }
+
     /// <summary>
     /// Teleports the car's Rigidbody to a new position and rotation,
     /// stopping all current velocity to ensure a clean placement.

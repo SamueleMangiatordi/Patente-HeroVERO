@@ -6,7 +6,8 @@ using UnityEngine.Events;
 public class BoundaryTrigger : MonoBehaviour
 {
     [SerializeField] private string[] validTags = { "Player" };
-    [SerializeField] public UnityEvent onTriggerEnter;
+    public UnityEvent onTriggerEnter;
+    public UnityEvent onTriggerExit;
 
     void OnTriggerEnter(Collider other)
     {
@@ -14,6 +15,15 @@ public class BoundaryTrigger : MonoBehaviour
         if (validTags.Contains(other.tag))
         {
             onTriggerEnter?.Invoke();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        // Check if the collider that entered the trigger is your player car
+        if (validTags.Contains(other.tag))
+        {
+            onTriggerExit?.Invoke();
         }
     }
 }

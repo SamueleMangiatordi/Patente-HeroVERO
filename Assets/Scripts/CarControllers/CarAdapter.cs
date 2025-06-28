@@ -1,8 +1,12 @@
+using Ezereal;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CarAdapter : MonoBehaviour
 {
     public SimplifiedCarController carController;
+
 
     /// <summary>
     /// Simulates throttle input for the car. This directly sets the throttle value on the car controller.

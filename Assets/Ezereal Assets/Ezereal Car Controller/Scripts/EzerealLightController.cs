@@ -41,6 +41,12 @@ namespace Ezereal
         [SerializeField] bool rightTurnActive = false;
         [SerializeField] bool hazardLightsActive = false;
 
+        // --- NEW PUBLIC PROPERTIES TO EXPOSE LIGHT STATES ---
+        public bool IsLeftTurnActive => leftTurnActive;
+        public bool IsRightTurnActive => rightTurnActive;
+        public bool AreHazardLightsActive => hazardLightsActive;
+        // ----------------------------------------------------
+
         private void Start()
         {
             AllLightsOff();

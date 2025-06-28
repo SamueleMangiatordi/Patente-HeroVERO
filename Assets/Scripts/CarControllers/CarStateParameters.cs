@@ -147,4 +147,15 @@ public class CarStateParameters
         //     cameraController.ResetCurrentCameraRotation();
         // }
     }
+
+    public void TeleportCarToSavedPos(SimplifiedCarController carController, float desiredSpeed, bool forward)
+    {
+        if (carController == null || carController.vehicleRB == null)
+        {
+            Debug.LogError("Cannot teleport to car: CarController or its Rigidbody is not assigned.");
+            return;
+        }
+
+        carController.TeleportCar(position, rotation, desiredSpeed, forward);
+    }
 }

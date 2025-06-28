@@ -74,6 +74,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
     <Compile Include="Assets\Ezereal Assets\Ezereal Car Controller\Scripts\Demo\HideCursor.cs" />
     <Compile Include="Assets\Loading Games\Toon City Pack\Demo\Scripts\Helicopter.cs" />
+    <Compile Include="Assets\Scripts\CarControllers\CarTurnLightSignalController.cs" />
     <Compile Include="Assets\Scripts\CarControllers\CarStateParameters.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_ExampleScript_01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMPro_InstructionOverlay.cs" />
@@ -90,6 +91,7 @@
     <Compile Include="Assets\Ezereal Assets\Ezereal Car Controller\Scripts\Enums\LightBeam.cs" />
     <Compile Include="Assets\Scripts\Monobehaviours\SceneLoader.cs" />
     <Compile Include="Assets\Scripts\CarControllers\CarAdapter.cs" />
+    <Compile Include="Assets\Scripts\CarControllers\CarResetPosition.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
     <Compile Include="Assets\Loading Games\Toon City Pack\Demo\Scripts\TrafficLights.cs" />
@@ -113,7 +115,9 @@
     <Compile Include="Assets\Scripts\Monobehaviours\GameManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
+    <Compile Include="Assets\Scripts\User Guide\UserGuideController.cs" />
     <Compile Include="Assets\Loading Games\Toon City Pack\Demo\Scripts\BuildingLights.cs" />
+    <Compile Include="Assets\Scripts\Enums\UserGuideType.cs" />
     <Compile Include="Assets\Loading Games\Toon City Pack\Demo\Scripts\StreetLight.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexColorCycler.cs" />
