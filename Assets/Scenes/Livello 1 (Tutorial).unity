@@ -1728,7 +1728,7 @@ PrefabInstance:
       objectReference: {fileID: 331669005}
     - target: {fileID: 7275628854871331075, guid: e6978b2a7ea48cb4887ccd2b0cf84339, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.7
+      value: 3.1
       objectReference: {fileID: 0}
     - target: {fileID: 7499356715895489752, guid: e6978b2a7ea48cb4887ccd2b0cf84339, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2153,6 +2153,10 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0.075405814
       objectReference: {fileID: 0}
+    - target: {fileID: 6996840201334875006, guid: b3a82b13987baa54ebbb9697ad26ad6a, type: 3}
+      propertyPath: car
+      value: 
+      objectReference: {fileID: 1014658834}
     - target: {fileID: 6996840201334875006, guid: b3a82b13987baa54ebbb9697ad26ad6a, type: 3}
       propertyPath: currentCameraView
       value: 0
@@ -2845,6 +2849,10 @@ PrefabInstance:
       propertyPath: _instructionPanel
       value: 
       objectReference: {fileID: 331669005}
+    - target: {fileID: 7275628854871331075, guid: e6978b2a7ea48cb4887ccd2b0cf84339, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.3
+      objectReference: {fileID: 0}
     - target: {fileID: 7499356715895489752, guid: e6978b2a7ea48cb4887ccd2b0cf84339, type: 3}
       propertyPath: m_LocalPosition.x
       value: 152.8
@@ -11546,6 +11554,7 @@ MonoBehaviour:
   carResetPos: {fileID: 2141222810}
   userGuideController: {fileID: 1278380985}
   errorCountText: {fileID: 1401433059}
+  delayBeforeCheckingForAnyInput: 1
   carResetPosHistoryTime: 20
   intervalBeforeCheckAgain: 10
   turnAngleThreshold: 10
@@ -14226,7 +14235,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: / 4
+  m_text: / 3
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -16401,7 +16410,11 @@ PrefabInstance:
       objectReference: {fileID: 331669005}
     - target: {fileID: 7275628854871331075, guid: e6978b2a7ea48cb4887ccd2b0cf84339, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.7
+      value: 4.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7275628854871331075, guid: e6978b2a7ea48cb4887ccd2b0cf84339, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7499356715895489752, guid: e6978b2a7ea48cb4887ccd2b0cf84339, type: 3}
       propertyPath: m_LocalPosition.x
@@ -19431,6 +19444,10 @@ PrefabInstance:
       propertyPath: _instructionPanel
       value: 
       objectReference: {fileID: 331669005}
+    - target: {fileID: 7275628854871331075, guid: e6978b2a7ea48cb4887ccd2b0cf84339, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.3
+      objectReference: {fileID: 0}
     - target: {fileID: 7499356715895489752, guid: e6978b2a7ea48cb4887ccd2b0cf84339, type: 3}
       propertyPath: m_LocalPosition.x
       value: 24.07

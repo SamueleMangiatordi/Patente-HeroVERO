@@ -21,6 +21,7 @@ public class CarTurnLightSignalController : MonoBehaviour
     [SerializeField] private UserGuideController userGuideController; // Reference to the UserGuideController
 
     [SerializeField] private TextMeshProUGUI errorCountText; // Text to display the error count (optional, can be used for debugging)
+    [SerializeField] private float delayBeforeCheckingForAnyInput = 1f; // Delay before waiting for any input after an error
 
     [Tooltip("Time in seconds where to reset the car position")]
     [SerializeField] private float carResetPosHistoryTime = 10f; // Time in seconds to keep the car reset position history
@@ -155,7 +156,7 @@ public class CarTurnLightSignalController : MonoBehaviour
                         userGuideController.SetuserGuide(UserGuideType.TurnSignalErrorExceeded);
                         GameManager.Instance.PauseGame();
                         onErrorExceeded?.Invoke(); // Invoke the event for exceeding error limit
-                        waitingForAnyInput = true;
+                        StartCoroutine(WaitToDetectAnyInput(delayBeforeCheckingForAnyInput)); // Wait before checking for any input, so the user can see the warning and not discard it without reading it
                     }
                     // Trigger your specific behavior here, e.g., play a sound, show UI
                     // Example: PlayWarningSound();
@@ -196,7 +197,7 @@ public class CarTurnLightSignalController : MonoBehaviour
                         userGuideController.SetuserGuide(UserGuideType.TurnSignalErrorExceeded);
                         onErrorExceeded?.Invoke(); // Invoke the event for exceeding error limit
                         GameManager.Instance.PauseGame();
-                        waitingForAnyInput = true;
+                        StartCoroutine(WaitToDetectAnyInput(delayBeforeCheckingForAnyInput)); // Wait before checking for any input, so the user can see the warning and not discard it without reading it
                     }
                 }
             }
@@ -236,6 +237,12 @@ public class CarTurnLightSignalController : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         isTurnLightSignalCheckEnabled = true; // Reset the timer to check again
+    }
+
+    IEnumerator WaitToDetectAnyInput(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        waitingForAnyInput = true; // Reset the flag after waiting
     }
 
 

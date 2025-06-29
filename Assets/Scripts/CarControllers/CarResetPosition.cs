@@ -161,7 +161,7 @@ public class CarResetPos : MonoBehaviour
 
     IEnumerator WaitForInput(float delay)
     {
-        yield return new WaitForSeconds(delay);
+        yield return new WaitForSecondsRealtime(delay);
         waitingForAnyInput = true; // Set the flag to indicate we are waiting for input
         userGuideController.SetuserGuide(UserGuideType.CarResetPosition); // Set the user guide to the car reset position type
     }

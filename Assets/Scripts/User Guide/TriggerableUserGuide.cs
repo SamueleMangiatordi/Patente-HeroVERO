@@ -1,3 +1,4 @@
+using Ezereal;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
@@ -38,6 +39,7 @@ public class TriggerableUserGuide : MonoBehaviour
 
     private SimplifiedCarController carController; // Reference to the car controller, if needed for further interactions
     private CarStateParameters storedCarState; // New field to store the car's state
+    private EzerealCameraController cameraController;
 
     private bool waitingForAnyInput = false;
 
@@ -52,12 +54,15 @@ public class TriggerableUserGuide : MonoBehaviour
         resetPos = transform.Find("resetPos");
 
         carController = mainCarObject.GetComponentInChildren<SimplifiedCarController>();
+        cameraController = mainCarObject.GetComponentInChildren<EzerealCameraController>();
     }
 #endif
+
+
     public void Awake()
     {
         carController = mainCarObject.GetComponentInChildren<SimplifiedCarController>();
-
+        cameraController = mainCarObject.GetComponentInChildren<EzerealCameraController>();
     }
 
     public void Update()
@@ -131,6 +136,7 @@ public class TriggerableUserGuide : MonoBehaviour
         if (stopGame)
             GameManager.Instance.PauseGame();
 
+        cameraController.ResetCurrentCameraRotation(); // Reset the camera rotation to default
         userGuideController.SetuserGuide(startInteractionGuide); // Set the user guide to the one specified for starting interaction
 
         // Always reset state when interaction starts
@@ -190,13 +196,6 @@ public class TriggerableUserGuide : MonoBehaviour
         //// ----------------------------------------------------------
 
         userGuideController.SetuserGuide(outOfBoundsUserGuide); // Reset the user guide to the one specified for starting interaction
-        
-        //userGuideController.ResetUserGuides();
-        //userGuideController.EnableUserGuides(true);
-        //userGuideController.NextMessage();
-        //userGuideController.NextMessage();
-        //userGuideController.ShowAllComplementaryUI(true); // Hide the first complementary UI element if it was shown
-
 
         isInteractionEnabled = true;
         waitingForAnyInput = true;
