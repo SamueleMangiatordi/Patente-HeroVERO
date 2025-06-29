@@ -1,11 +1,14 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
+using UnityEngine.Events;
 
 namespace Ezereal
 {
     public class EzerealLightController : MonoBehaviour // This system uses Input System and has no references. Some methods here are called from other scripts.
     {
+        public UnityEvent<float> onTurnSignal;
+
         [Header("Beam Lights")]
 
         [SerializeField] LightBeam currentBeam = LightBeam.off;
@@ -105,6 +108,8 @@ namespace Ezereal
                 if (leftTurnActive)
                 {
                     StartCoroutine(TurnSignalController(leftTurnLights, leftTurnActive));
+                    onTurnSignal?.Invoke(-1); // Notify subscribers about the turn signal activation
+
                 }
             }
         }
@@ -121,6 +126,7 @@ namespace Ezereal
                 if (rightTurnActive)
                 {
                     StartCoroutine(TurnSignalController(rightTurnLights, rightTurnActive));
+                    onTurnSignal?.Invoke(1); // Notify subscribers about the turn signal activation
                 }
             }
         }

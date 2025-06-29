@@ -58,9 +58,9 @@ public class CarTurnLightSignalController : MonoBehaviour
                 carResetPos.ResetCarPosition(carResetPosHistoryTime); // Reset car position if any input is detected
                 ResetErrorCount();
                 waitingForAnyInput = false; // Reset the flag
+
                 isTurnLightSignalCheckEnabled = false; // Reset the timer to check again
                 StartCoroutine(WaitToCheckAgainTurnLight(intervalBeforeCheckAgain)); // Wait a bit before checking again
-                //StartCoroutine(GameManager.Instance.WaitToPause(0.15f)); // Wait a bit before pausing to ensure the car is telported and ready
 
                 return; // Consume this input for the guide, do not proceed with other Update logic if any
             }
@@ -83,7 +83,7 @@ public class CarTurnLightSignalController : MonoBehaviour
         if (waitingForAnyInput)
             return;
 
-        if(_warningActive)
+        if (_warningActive)
             return;
 
         float currentSteer = carController.CurrentSteerAngle; // Get the actual applied steer angle from carController
@@ -108,9 +108,10 @@ public class CarTurnLightSignalController : MonoBehaviour
                     _warningActive = true; // Activate warning flag to prevent repeated warnings
                     StartCoroutine(ClearWarningAfterDelay(warningDuration));
 
-                    if( ErrorsCount < errorsAllowd)
+                    ErrorsCount++; // Increment error count
+
+                    if (ErrorsCount < errorsAllowd)
                     {
-                        ErrorsCount++; // Increment error count
                         onError?.Invoke(); // Invoke the event if set
                         userGuideController.SetuserGuide(UserGuideType.TurnSignalError);
                         StartCoroutine(ClearErrorAfterDelay(warningDuration)); // Clear error after warning duration
@@ -149,9 +150,10 @@ public class CarTurnLightSignalController : MonoBehaviour
                     _warningActive = true; // Activate warning flag
                     StartCoroutine(ClearWarningAfterDelay(warningDuration));
 
+                    ErrorsCount++; // Increment error count
+
                     if (ErrorsCount < errorsAllowd)
                     {
-                        ErrorsCount++; // Increment error count
                         onError?.Invoke(); // Invoke the event if set
                         userGuideController.SetuserGuide(UserGuideType.TurnSignalError);
                         StartCoroutine(ClearErrorAfterDelay(warningDuration)); // Clear error after warning duration

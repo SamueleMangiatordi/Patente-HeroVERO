@@ -66,7 +66,7 @@ public class CarResetPos : MonoBehaviour
         {
             _timeSinceLastSave = 0f; // Reset the timer
 
-            if (Vector3.Distance(carStateHistory[_headIndex].position, carController.vehicleRB.position ) < 1f)
+            if (_headIndex != 0 && Vector3.Distance(carStateHistory[_headIndex].position, carController.vehicleRB.position ) < 1f)
                 return; // Skip saving if the position hasn't changed significantly
 
             // Increment head index and wrap around the buffer size
@@ -136,8 +136,8 @@ public class CarResetPos : MonoBehaviour
             Debug.LogWarning($"CarResetPos: Attempted to restore a null state at index {targetIndex}. This might indicate an issue with history tracking.", this);
         }
 
-        userGuideController.SetuserGuide(UserGuideType.CarResetPosition); // Set the user guide to the car reset position type
-        waitingForAnyInput = true; // Set the flag to indicate we are waiting for input
+        float waitInputDelay = Mathf.Max(0.05f, resumeGameDelayAfterResetPos - 0.05f); // Ensure we wait a minimum time before allowing input
+        StartCoroutine(WaitForInput(waitInputDelay)); // Start waiting for user input after resetting position
         StartCoroutine(GameManager.Instance.WaitToPause(resumeGameDelayAfterResetPos)); // Pause the game to allow user interaction
     }
 
@@ -159,4 +159,10 @@ public class CarResetPos : MonoBehaviour
         ResetCarPosition(5f);
     }
 
+    IEnumerator WaitForInput(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        waitingForAnyInput = true; // Set the flag to indicate we are waiting for input
+        userGuideController.SetuserGuide(UserGuideType.CarResetPosition); // Set the user guide to the car reset position type
+    }
 }

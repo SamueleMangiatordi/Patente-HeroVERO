@@ -6,6 +6,7 @@ public enum UserGuideType
     Accelerate,
     Decelerate,
     Turn,
+    TurnSignal,
     TurnSignalError,
     TurnSignalErrorExceeded,
     OffRoad,
