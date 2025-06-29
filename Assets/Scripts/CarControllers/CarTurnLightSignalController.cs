@@ -1,5 +1,6 @@
 using Ezereal;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -8,7 +9,6 @@ public class CarTurnLightSignalController : MonoBehaviour
     public bool isTurnLightSignalCheckEnabled = true; // Enable or disable the turn signal check
 
     public int errorsAllowd = 3; // Number of allowed errors before triggering a warning
-    public int ErrorsCount { get; private set; } = 0; // Current error count
 
     [Tooltip("Event triggered when the car is turning without the appropriate turn signal active.")]
     public UnityEvent onError;
@@ -19,6 +19,8 @@ public class CarTurnLightSignalController : MonoBehaviour
     [SerializeField] private EzerealLightController ezerealLightController; // Assign this in the Inspector
     [SerializeField] private CarResetPos carResetPos; // Reference to the CarResetPos script for resetting car state
     [SerializeField] private UserGuideController userGuideController; // Reference to the UserGuideController
+
+    [SerializeField] private TextMeshProUGUI errorCountText; // Text to display the error count (optional, can be used for debugging)
 
     [Tooltip("Time in seconds where to reset the car position")]
     [SerializeField] private float carResetPosHistoryTime = 10f; // Time in seconds to keep the car reset position history
@@ -35,6 +37,37 @@ public class CarTurnLightSignalController : MonoBehaviour
     [Tooltip("How long the warning persists if light is not active.")]
     [SerializeField]
     private float warningDuration = 5f;
+
+    private int _errorsCount = 0;
+    public int ErrorsCount
+    {
+        get
+        {
+            // The getter simply returns the value from the backing field.
+            return _errorsCount;
+        }
+        private set
+        {
+            // ---- Validation Logic ----
+            // Ensure error count does not go negative.
+            if (value < 0)
+            {
+                value = 0; // The 'value' keyword refers to the new value being assigned to the property.
+            }
+
+            // ---- Update Backing Field ----
+            // Assign the (potentially validated) new value to the private backing field.
+            _errorsCount = value;
+
+            // ---- UI Update Logic ----
+            // Update the UI text with the current error count.
+            // Always null-check UI references before using them to prevent errors if not assigned.
+            if (errorCountText != null)
+            {
+                errorCountText.text = _errorsCount.ToString();
+            }
+        }
+    }
 
 
     private float _turnSignalCheckTimer = 0f;
