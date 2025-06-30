@@ -8,6 +8,9 @@ namespace Ezereal
     public class EzerealLightController : MonoBehaviour // This system uses Input System and has no references. Some methods here are called from other scripts.
     {
         public UnityEvent<float> onTurnSignal;
+        [Tooltip("Steering angle to overcome before resetting the turn light")]
+        [SerializeField] private float steeringAngleThreshold = 20f;
+        [SerializeField] private float steeringAngleResetDelay = 0.5f; // Delay before resetting turn lights after steering straightens
 
         [Header("Beam Lights")]
 
@@ -40,20 +43,23 @@ namespace Ezereal
         [SerializeField] float lightBlinkDelay = 0.5f;
 
         [Header("Debug")]
-        [SerializeField] bool leftTurnActive = false;
-        [SerializeField] bool rightTurnActive = false;
-        [SerializeField] bool hazardLightsActive = false;
+        [SerializeField] bool _leftTurnActiveInternal = false;
+        [SerializeField] bool _rightTurnActiveInternal = false;
+        [SerializeField] bool _hazardLightsActiveInternal = false;
 
         // --- NEW PUBLIC PROPERTIES TO EXPOSE LIGHT STATES ---
-        public bool IsLeftTurnActive => leftTurnActive;
-        public bool IsRightTurnActive => rightTurnActive;
-        public bool AreHazardLightsActive => hazardLightsActive;
+        public bool IsLeftTurnActive => _leftTurnActiveInternal;
+        public bool IsRightTurnActive => _rightTurnActiveInternal;
+        public bool AreHazardLightsActive => _hazardLightsActiveInternal;
         // ----------------------------------------------------
+
+        private bool _wasOverSteeringThreshold = false; // To track if the steering angle is over the threshold
 
         private void Start()
         {
             AllLightsOff();
         }
+
 
         public void AllLightsOff()
         {
@@ -98,16 +104,16 @@ namespace Ezereal
         }
         void OnLeftTurnSignal()
         {
-            if (!hazardLightsActive)
+            if (!_hazardLightsActiveInternal)
             {
                 StopAllCoroutines();
                 TurnLightsOff();
-                rightTurnActive = false;
-                leftTurnActive = !leftTurnActive;
+                _rightTurnActiveInternal = false;
+                _leftTurnActiveInternal = !_leftTurnActiveInternal;
 
-                if (leftTurnActive)
+                if (_leftTurnActiveInternal)
                 {
-                    StartCoroutine(TurnSignalController(leftTurnLights, leftTurnActive));
+                    StartCoroutine(TurnSignalController(leftTurnLights, _leftTurnActiveInternal));
                     onTurnSignal?.Invoke(-1); // Notify subscribers about the turn signal activation
 
                 }
@@ -116,16 +122,16 @@ namespace Ezereal
 
         void OnRightTurnSignal()
         {
-            if (!hazardLightsActive)
+            if (!_hazardLightsActiveInternal)
             {
                 StopAllCoroutines();
                 TurnLightsOff();
-                leftTurnActive = false;
-                rightTurnActive = !rightTurnActive;
+                _leftTurnActiveInternal = false;
+                _rightTurnActiveInternal = !_rightTurnActiveInternal;
 
-                if (rightTurnActive)
+                if (_rightTurnActiveInternal)
                 {
-                    StartCoroutine(TurnSignalController(rightTurnLights, rightTurnActive));
+                    StartCoroutine(TurnSignalController(rightTurnLights, _rightTurnActiveInternal));
                     onTurnSignal?.Invoke(1); // Notify subscribers about the turn signal activation
                 }
             }
@@ -135,11 +141,11 @@ namespace Ezereal
         {
             StopAllCoroutines();
             TurnLightsOff();
-            leftTurnActive = false;
-            rightTurnActive = false;
-            hazardLightsActive = !hazardLightsActive;
+            _leftTurnActiveInternal = false;
+            _rightTurnActiveInternal = false;
+            _hazardLightsActiveInternal = !_hazardLightsActiveInternal;
 
-            if (hazardLightsActive)
+            if (_hazardLightsActiveInternal)
             {
                 StartCoroutine(HazardLightsController());
             }
@@ -158,7 +164,7 @@ namespace Ezereal
 
         IEnumerator HazardLightsController()
         {
-            while (hazardLightsActive)
+            while (_hazardLightsActiveInternal)
             {
                 TurnLightsOn();
                 yield return new WaitForSeconds(lightBlinkDelay);
@@ -277,5 +283,47 @@ namespace Ezereal
         {
             SetLight(miscLights, true);
         }
+
+        /// <summary>
+        /// Checks the current steering angle to automatically disable turn signals
+        /// if the steering wheel straightens after a turn.
+        /// </summary>
+        /// <param name="currentSteeringAngle">The current actual steering angle of the wheels.</param>
+        public void AutoDisableTurnLight(float currentSteeringAngle)
+        {
+            // Use absolute value for comparison with threshold
+            float absSteeringAngle = Mathf.Abs(currentSteeringAngle);
+
+            // If currently turning (angle exceeds threshold)
+            if (absSteeringAngle > steeringAngleThreshold)
+            {
+                _wasOverSteeringThreshold = true; // Mark that we've been turning
+            }
+            // If we were turning, and now the steering wheel is near center (within threshold)
+            else if (_wasOverSteeringThreshold && absSteeringAngle <= steeringAngleThreshold)
+            {
+                // Only auto-disable if individual turn signals are active, NOT hazard lights
+                if ((_leftTurnActiveInternal || _rightTurnActiveInternal) && !_hazardLightsActiveInternal)
+                {
+                   StartCoroutine(WaitToDisableLight(steeringAngleResetDelay)); // Wait before disabling to allow for a smooth transition
+                }
+                _wasOverSteeringThreshold = false; // Reset the flag
+            }
+            // If hazard lights are active, this method should not interfere with them.
+            // If no turn signals are active and steering is straight, _wasOverSteeringThreshold remains false.
+        }
+        IEnumerator WaitToDisableLight(float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            StopAllCoroutines(); // Stop any active turn signal coroutine
+            TurnLightsOff(); // Turn off both turn signal visuals
+            _leftTurnActiveInternal = false; // Reset internal flags
+            _rightTurnActiveInternal = false;
+            onTurnSignal?.Invoke(0); // Notify subscribers that turn signals are off
+        }
+
+
     }
+
+
 }

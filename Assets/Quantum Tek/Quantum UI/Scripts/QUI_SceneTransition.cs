@@ -25,7 +25,8 @@ namespace QuantumTek.QuantumUI
     [DisallowMultipleComponent]
     public class QUI_SceneTransition : MonoBehaviour
     {
-        [SerializeField] float minTimeTransition = 0f;
+        [Tooltip("The duration of each loading phase, in seconds. The first phase is the longest, and the last phase is the shortest.")]
+        [SerializeField] float[] loadPhasesDuration = { 0.7f, 0.5f, 0.4f};
         [Header("Scene Transition Object References")]
         [Tooltip("The animator used in running the scene transition.")]
         public QUI_ElementAnimator animator;
@@ -111,7 +112,7 @@ namespace QuantumTek.QuantumUI
             float loadProgress = 0f;
 
             // Fase 1: in 0.5 secondi
-            float phase1Duration = 0.7f;
+            float phase1Duration = loadPhasesDuration[0];
             float elapsed = 0f;
             float range = Random.Range(0f, 0.5f);
             while (elapsed < phase1Duration)
@@ -126,7 +127,7 @@ namespace QuantumTek.QuantumUI
 
 
             // Fase 2: in 0.6 secondi
-            float phase2Duration = 0.6f;
+            float phase2Duration = loadPhasesDuration[1];
             elapsed = 0f;
 
             float start = loadProgress;
@@ -147,7 +148,7 @@ namespace QuantumTek.QuantumUI
             yield return new WaitForSeconds(0.5f);
 
             // Fase 3: 0.2 secondi
-            float phase3Duration = 0.4f;
+            float phase3Duration = loadPhasesDuration[2];
             elapsed = 0f;
 
             start = loadProgress;
