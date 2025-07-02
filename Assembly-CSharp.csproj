@@ -61,38 +61,68 @@
     <Analyzer Include="D:\Domenico Scuola\Unity 6\6000.0.42f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Racing Starter Kit\RSK Assets\ScriptableObjects\RealTimeRacePositionsItem.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventHandler.cs" />
     <Compile Include="Assets\Quantum Tek\Quantum UI\Scripts\QUI_ElementAudio.cs" />
+    <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\RaceFinishCamera.cs" />
+    <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\AI\AIWaypointTracker.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs" />
     <Compile Include="Assets\Scripts\Monobehaviours\BoundaryTrigger.cs" />
+    <Compile Include="Assets\Racing Starter Kit\RSK Assets\ScriptableObjects\RuntimeItem.cs" />
     <Compile Include="Assets\Scripts\User Guide\TriggerableUserGuide.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
     <Compile Include="Assets\FastMesh\Scripts\SceneViewText.cs" />
+    <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\Managers\RaceManager.cs" />
+    <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\Mobile Input\PlatformSpecific\MobileInput.cs" />
+    <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\Car\CarAudio.cs" />
     <Compile Include="Assets\Ezereal Assets\Ezereal Car Controller\Scripts\EzerealWheelFrictionController.cs" />
     <Compile Include="Assets\Scripts\Monobehaviours\LerpMovement.cs" />
     <Compile Include="Assets\Ezereal Assets\Ezereal Car Controller\Scripts\Demo\Restart.cs" />
     <Compile Include="Assets\Ezereal Assets\Ezereal Car Controller\Scripts\EzerealCameraController.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
     <Compile Include="Assets\Ezereal Assets\Ezereal Car Controller\Scripts\Demo\HideCursor.cs" />
+    <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\Car\CarFreeze.cs" />
     <Compile Include="Assets\Quantum Tek\Quantum UI\Scripts\QUI_Menu.cs" />
     <Compile Include="Assets\Loading Games\Toon City Pack\Demo\Scripts\Helicopter.cs" />
     <Compile Include="Assets\Scripts\CarControllers\CarTurnLightSignalController.cs" />
+    <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\GUI\RaceFinishGUI.cs" />
     <Compile Include="Assets\Scripts\CarControllers\CarStateParameters.cs" />
+    <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\PlayersSpawner.cs" />
+    <Compile Include="Assets\Racing Starter Kit\RSK Assets\ScriptableObjects\AIWaypointSet.cs" />
+    <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\Car\CarController.cs" />
+    <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\GUI\LapSelectorGUI.cs" />
+    <Compile Include="Assets\Racing Starter Kit\RSK Assets\ScriptableObjects\RaceManagerItem.cs" />
     <Compile Include="Assets\Quantum Tek\Quantum UI\Scripts\QUI_ElementAudioClip.cs" />
+    <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\Car\CarUserControl.cs" />
+    <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\Car\CarAIControl.cs" />
     <Compile Include="Assets\Quantum Tek\Quantum UI\Scripts\QUI_TabGroup.cs" />
+    <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\AI\AICarWaypointTrackerColliderTrigger.cs" />
+    <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\GUI\LapsGUI.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_ExampleScript_01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMPro_InstructionOverlay.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />
+    <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\Managers\GameManager.cs" />
+    <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\Car\BrakeLight.cs" />
+    <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\Mobile Input\MobileControlRig.cs" />
+    <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\GUI\CarColorPickerGUI.cs" />
+    <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\AI\AIWaypoints.cs" />
     <Compile Include="Assets\Ezereal Assets\Ezereal Car Controller\Scripts\Enums\CameraViews.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexJitter.cs" />
     <Compile Include="Assets\Ezereal Assets\Ezereal Car Controller\Scripts\EzerealCarController.cs" />
+    <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\Checkpoint.cs" />
+    <Compile Include="Assets\Racing Starter Kit\RSK Assets\ScriptableObjects\GameEvents.cs" />
+    <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\GUI\RaceTimerGUI.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_UiFrameRateCounter.cs" />
+    <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\CheckpointTracker.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_B.cs" />
+    <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\GUI\SelectorGUI.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ShaderPropAnimator.cs" />
+    <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\GUI\PreRaceCountdownGUI.cs" />
     <Compile Include="Assets\Ezereal Assets\Ezereal Car Controller\Scripts\Enums\LightBeam.cs" />
+    <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\GUI\MenuGUI.cs" />
     <Compile Include="Assets\Scripts\Monobehaviours\SceneLoader.cs" />
     <Compile Include="Assets\Scripts\CarControllers\CarAdapter.cs" />
     <Compile Include="Assets\Scripts\CarControllers\CarResetPosition.cs" />
@@ -102,7 +132,11 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
     <Compile Include="Assets\Loading Games\Toon City Pack\Demo\Scripts\TrafficLights.cs" />
     <Compile Include="Assets\Quantum Tek\Quantum UI\Scripts\QUI_Window.cs" />
+    <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\GUI\RacePositionGUI.cs" />
+    <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\Mobile Input\MobileInputManager.cs" />
+    <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\PlayerCarCameraController.cs" />
     <Compile Include="Assets\Scripts\CarControllers\SimplifiedCarController.cs" />
+    <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\GUI\PauseRestartGUI.cs" />
     <Compile Include="Assets\Loading Games\Toon City Pack\Demo\Scripts\PoliceSiren.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SimpleScript.cs" />
@@ -110,6 +144,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark04.cs" />
     <Compile Include="Assets\Quantum Tek\Quantum UI\Scripts\QUI_SwitchToggle.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ChatController.cs" />
+    <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\AI\AICarAvoidanceSmartSteering.cs" />
     <Compile Include="Assets\Quantum Tek\Quantum UI\Scripts\QUI_Element.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_DigitValidator.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_FrameRateCounter.cs" />
@@ -124,6 +159,8 @@
     <Compile Include="Assets\Ezereal Assets\Ezereal Car Controller\Scripts\Enums\DriveTypes.cs" />
     <Compile Include="Assets\Scripts\Monobehaviours\LerpPath.cs" />
     <Compile Include="Assets\Scripts\Monobehaviours\GameManager.cs" />
+    <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\Car\CarColor.cs" />
+    <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\RealTimeRacePositions.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
     <Compile Include="Assets\Quantum Tek\Quantum UI\Scripts\QUI_ElementAudioPreset.cs" />
@@ -136,25 +173,45 @@
     <Compile Include="Assets\Quantum Tek\Quantum UI\Scripts\QUI_OptionList.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexColorCycler.cs" />
+    <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\Checkpoints.cs" />
+    <Compile Include="Assets\Racing Starter Kit\RSK Assets\VFX\SkidTrail.cs" />
+    <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\GUI\LapTimeGUI.cs" />
     <Compile Include="Assets\Ezereal Assets\Ezereal Car Controller\Scripts\EzerealSuspensionBumpDetector.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ObjectSpin.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_PhoneNumberValidator.cs" />
+    <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\PlayerChangeCameras.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextConsoleSimulator.cs" />
+    <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\StartMenuCamera.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TeleType.cs" />
+    <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\RaceFinish.cs" />
+    <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\AI\AICarAvoidanceBehaviour.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
     <Compile Include="Assets\Ezereal Assets\Ezereal Car Controller\Scripts\EzerealSoundController.cs" />
+    <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\Mobile Input\MobileButtonHandler.cs" />
     <Compile Include="Assets\Ezereal Assets\Ezereal Car Controller\Scripts\Enums\AutomaticGears.cs" />
+    <Compile Include="Assets\Racing Starter Kit\RSK Assets\ScriptableObjects\RuntimeSet.cs" />
     <Compile Include="Assets\Quantum Tek\Quantum UI\Scripts\QUI_TabWindow.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshProFloatingText.cs" />
+    <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\SFXPlayer.cs" />
+    <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\GUI\BotSelectorGUI.cs" />
     <Compile Include="Assets\Scripts\CarControllers\SimplifiedSoundController.cs" />
+    <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\Car\WheelEffects.cs" />
+    <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\Mobile Input\MobileVirtualInput.cs" />
+    <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\Mobile Input\PlatformSpecific\StandaloneInput.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\Ezereal Assets\Ezereal Car Controller\Help\Bed Rack placement.txt" />
     <None Include="Assets\FastMesh\README.txt" />
+    <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Roboto-Bold - License.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile-2-Pass.shader" />
+    <None Include="Assets\Racing Starter Kit\RSK Assets\Models\Cars\License.txt" />
+    <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Unity - OFL.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
+    <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Oswald-Bold - OFL.txt" />
+    <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Roboto-Bold - AFL.txt" />
+    <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Anton OFL.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
     <None Include="Assets\Quantum Tek\Quantum UI\Fonts\Montserrat\OFL.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
@@ -168,14 +225,22 @@
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
+    <None Include="Assets\Racing Starter Kit\RSK Assets\Shaders\LPW_Vegetation.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
+    <None Include="Assets\Racing Starter Kit\RSK Assets\Documentation\YouTube Channel.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
     <None Include="Assets\Ezereal Assets\Ezereal Car Controller\Help\Quick Start Guide.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
+    <None Include="Assets\Racing Starter Kit\RSK Assets\Shaders\License.txt" />
     <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
+    <None Include="Assets\Racing Starter Kit\RSK Assets\Fonts\License.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
+    <None Include="Assets\Racing Starter Kit\RSK Assets\Documentation\Documentation.txt" />
+    <None Include="Assets\Racing Starter Kit\RSK Assets\Skybox\License.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
+    <None Include="Assets\Racing Starter Kit\RSK Assets\Models\Environment\Author License.txt" />
+    <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Bangers - OFL.txt" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -656,6 +721,10 @@
     </Reference>
     <Reference Include="Mono.Cecil">
       <HintPath>Library\PackageCache\com.unity.nuget.mono-cecil@d6f9955a5d5f\Mono.Cecil.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@74deb55db2a0\Runtime\Newtonsoft.Json.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Android.Types">
@@ -1316,6 +1385,10 @@
     </Reference>
     <Reference Include="Unity.RenderPipelines.Core.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VSCode.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.RenderPipelines.Universal.Runtime">
