@@ -2985,6 +2985,38 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &1802394414566005380
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7695423694174156715}
+  m_Layer: 0
+  m_Name: userGuides
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7695423694174156715
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1802394414566005380}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3308570122549997126}
+  m_Father: {fileID: 3987142335746564088}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1998069377293653735
 GameObject:
   m_ObjectHideFlags: 0
@@ -3605,8 +3637,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2527139974356385983}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.084719226, y: 0.12404019, z: -0.010629802, w: 0.98859686}
-  m_LocalPosition: {x: -1.42, y: -5.170587, z: 14.805755}
+  m_LocalRotation: {x: 0.084879205, y: 0.12559143, z: -0.010785368, w: 0.9883856}
+  m_LocalPosition: {x: -1.6999972, y: -5.140587, z: 14.905755}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3673,7 +3705,7 @@ MonoBehaviour:
     AngularDampingMode: 0
     RotationDamping: {x: 0, y: 0, z: 0}
     QuaternionDamping: 1
-  FollowOffset: {x: -1.42, y: 0.67, z: 0.5}
+  FollowOffset: {x: -1.7, y: 0.7, z: 0.6}
 --- !u!114 &2113729984584615469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4043,6 +4075,39 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &3068973876105323774
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7828948510779353529}
+  m_Layer: 0
+  m_Name: userGuides
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7828948510779353529
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3068973876105323774}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8431113393186252174}
+  - {fileID: 1205658921773413727}
+  m_Father: {fileID: 6748876077356340248}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3078155123653003546
 GameObject:
   m_ObjectHideFlags: 0
@@ -4285,8 +4350,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3114683217114679889}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.11593061, y: -0.0000000041955643, z: 4.8969595e-10, w: 0.99325734}
-  m_LocalPosition: {x: 0, y: -2.133529, z: 4.768585}
+  m_LocalRotation: {x: 0.07734448, y: -0.70286405, z: 0.07734448, w: 0.70286405}
+  m_LocalPosition: {x: 8.106599, y: -2.5845876, z: 14.305756}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4355,7 +4420,7 @@ MonoBehaviour:
     RotationDamping: {x: 1, y: 1, z: 1}
     QuaternionDamping: 1
   OrbitStyle: 0
-  Radius: 10
+  Radius: 8.5
   Orbits:
     Top:
       Radius: 3.72
@@ -4439,6 +4504,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a076c17fe76165e4f8ed21498b877bf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Easing: 0
   Modifiers: []
   references:
     version: 2
@@ -4802,8 +4868,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4006749555956499607}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.09956492, y: -0.0000000060513723, z: 6.0551303e-10, w: 0.9950311}
-  m_LocalPosition: {x: 0, y: -3.0506816, z: 7.677422}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.449997, y: -4.340587, z: 14.475755}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4840,9 +4906,9 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.1
   far clip plane: 1000
-  field of view: 60.000004
+  field of view: 75
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -5337,6 +5403,86 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &4571190958127204931
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6748876077356340248}
+  - component: {fileID: 4158267875774727101}
+  - component: {fileID: 1968961583126571846}
+  m_Layer: 0
+  m_Name: TurnSignalLightController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6748876077356340248
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4571190958127204931}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 4.905066, y: -0.27096266, z: 176.88641}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7828948510779353529}
+  m_Father: {fileID: 2330502037088085464}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4158267875774727101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4571190958127204931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a732808464ed3d41b14cd136002cee9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isTurnLightSignalCheckEnabled: 0
+  errorsAllowd: 3
+  onError:
+    m_PersistentCalls:
+      m_Calls: []
+  onErrorExceeded:
+    m_PersistentCalls:
+      m_Calls: []
+  carController: {fileID: 8633189858576035883}
+  ezerealLightController: {fileID: 4252124203229880378}
+  carResetPos: {fileID: 49188754728655947}
+  userGuideController: {fileID: 1968961583126571846}
+  errorCountText: {fileID: 0}
+  delayBeforeCheckingForAnyInput: 1
+  carResetPosHistoryTime: 20
+  intervalBeforeCheckAgain: 10
+  turnAngleThreshold: 10
+  turnSignalCheckDelay: 0.5
+  warningDuration: 3.5
+--- !u!114 &1968961583126571846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4571190958127204931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5ceb05a6ef153244912b4a71b2156f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  userGuides:
+  - {fileID: 2192314182246827315}
+  - {fileID: 2730207098816112391}
 --- !u!1 &4624670120083264605
 GameObject:
   m_ObjectHideFlags: 0
@@ -5971,7 +6117,7 @@ Transform:
   m_GameObject: {fileID: 5249962899542556076}
   serializedVersion: 2
   m_LocalRotation: {x: -0.000000027823788, y: -0.000000024473861, z: 0.0000000025938993, w: 1}
-  m_LocalPosition: {x: -0.45, y: -4.3305874, z: 14.475755}
+  m_LocalPosition: {x: -0.449997, y: -4.340587, z: 14.475755}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6038,7 +6184,7 @@ MonoBehaviour:
     AngularDampingMode: 0
     RotationDamping: {x: 0, y: 0, z: 0}
     QuaternionDamping: 1
-  FollowOffset: {x: -0.45, y: 1.51, z: 0.17}
+  FollowOffset: {x: -0.45, y: 1.5, z: 0.17}
 --- !u!114 &4574907805826296756
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6095,7 +6241,7 @@ MonoBehaviour:
       Enabled: 1
       Input:
         InputAction: {fileID: 2665944532482622193, guid: 67d1239777fa0e944b8dee2f1d7df18d, type: 3}
-        Gain: 5
+        Gain: 2
         LegacyInput: 
         LegacyGain: 1
         CancelDeltaTime: 0
@@ -6690,6 +6836,72 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.54, y: 0.1201303, z: 0.98722124}
   m_Center: {x: 0, y: 1.8644749, z: 0.16825174}
+--- !u!1 &5999222482070934834
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3987142335746564088}
+  - component: {fileID: 49188754728655947}
+  - component: {fileID: 8225312907187734689}
+  m_Layer: 0
+  m_Name: carResetPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3987142335746564088
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5999222482070934834}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7695423694174156715}
+  m_Father: {fileID: 2330502037088085464}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &49188754728655947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5999222482070934834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 057791070ae25b548aad878af105d9e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  carController: {fileID: 8633189858576035883}
+  userGuideController: {fileID: 8225312907187734689}
+  velocityAfterResetPos: 5
+  resumeGameDelayAfterResetPos: 0.15
+  savePosInterval: 3
+  historyDuration: 60
+--- !u!114 &8225312907187734689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5999222482070934834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5ceb05a6ef153244912b4a71b2156f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  userGuides:
+  - {fileID: 3449529710320777902}
 --- !u!1 &6038947332744669444
 GameObject:
   m_ObjectHideFlags: 0
@@ -7239,8 +7451,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6382442854231002392}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.049948644, y: 0.0000000011684349, z: -5.84348e-11, w: 0.9987518}
-  m_LocalPosition: {x: -0.000000013581772, y: -3.2527952, z: 8.501059}
+  m_LocalRotation: {x: 0.043042537, y: -0.000000042146848, z: -0.000000001317089, w: 0.99907327}
+  m_LocalPosition: {x: 0.00000047683716, y: -3.69449, z: 9.443071}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7301,7 +7513,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 886251e9a18ece04ea8e61686c173e1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CameraDistance: 6
+  CameraDistance: 5
   DeadZoneDepth: 0
   Composition:
     ScreenPosition: {x: 0, y: 0.18}
@@ -7488,6 +7700,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2330502037088085464}
   - component: {fileID: 3252477674481669078}
+  - component: {fileID: 413146581108383894}
   - component: {fileID: 8633189858576035883}
   - component: {fileID: 4252124203229880378}
   - component: {fileID: 3430142193792684374}
@@ -7513,7 +7726,9 @@ Transform:
   m_LocalPosition: {x: -0.49947944, y: 0.9505424, z: 0.27362385}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 3987142335746564088}
+  - {fileID: 6748876077356340248}
   m_Father: {fileID: 7312358037446001903}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3252477674481669078
@@ -7555,24 +7770,12 @@ MonoBehaviour:
     m_ActionName: 'Car/Accelerate[/Keyboard/w,/Keyboard/upArrow]'
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 68512edc-0312-4d01-b020-9719164ebf74
-    m_ActionName: 'Car/Brake[/Keyboard/s,/Keyboard/downArrow]'
-  - m_PersistentCalls:
-      m_Calls: []
     m_ActionId: 72d29971-0a7c-4330-97cc-bbc0f139c4f6
     m_ActionName: 'Car/Look[/Mouse/delta]'
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 43699df9-1a67-48a1-88a6-0e15256ffefb
     m_ActionName: 'Car/Handbrake[/Keyboard/space]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: e943e1de-0f0a-4958-8cc3-0a2cf49e29a1
-    m_ActionName: 'Car/DownShift[/Keyboard/ctrl]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: fa46a2f6-e305-4af2-beb3-1fde607bfdb2
-    m_ActionName: 'Car/UpShift[/Keyboard/shift]'
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: aafa7720-7c36-4ace-9339-720230003692
@@ -7605,7 +7808,20 @@ MonoBehaviour:
   m_DefaultControlScheme: 
   m_DefaultActionMap: SimplifiedCar
   m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 2299065685634062872}
+--- !u!114 &413146581108383894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6526955486676959798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c54fcefdcf22a564e9d0b6a8eec6003a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  carController: {fileID: 8633189858576035883}
 --- !u!114 &8633189858576035883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7618,6 +7834,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c271fd7d50174264b89328f9aa6fc05b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onThrottle:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: TriggerableUserGuide, Assembly-CSharp
+        m_MethodName: HandleInteraction
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: TriggerableUserGuide, Assembly-CSharp
+        m_MethodName: HandleInteraction
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onHandBrake:
+    m_PersistentCalls:
+      m_Calls: []
+  onSteer:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: TriggerableUserGuide, Assembly-CSharp
+        m_MethodName: HandleInteraction
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   ezerealLightController: {fileID: 4252124203229880378}
   simplifiedSoundController: {fileID: 3430142193792684374}
   SimplifiedWheelFrictionController: {fileID: 7159188416569359347}
@@ -7637,11 +7898,11 @@ MonoBehaviour:
   isStarted: 1
   maxForwardSpeed: 200
   maxReverseSpeed: 30
-  horsePower: 1000
+  horsePower: 4000
   brakePower: 2000
   handbrakeForce: 3000
   maxSteerAngle: 30
-  steeringSpeed: 5
+  steeringSpeed: 4
   stopThreshold: 1
   decelerationSpeed: 0.5
   maxSteeringWheelRotation: 100
@@ -7650,9 +7911,6 @@ MonoBehaviour:
   currentSpeed: 0
   currentAccelerationValue: 0
   currentReverseValue: 0
-  currentHandbrakeValue: 0
-  currentSteerAngle: 0
-  targetSteerAngle: 0
   FrontLeftWheelRPM: 0
   FrontRightWheelRPM: 0
   RearLeftWheelRPM: 0
@@ -7670,6 +7928,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3bf8a03c20efa549a4537d8810b36f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onTurnSignal:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: TriggerableUserGuide, Assembly-CSharp
+        m_MethodName: HandleInteraction
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  steeringAngleThreshold: 20
+  steeringAngleResetDelay: 0.5
   currentBeam: 0
   lowBeamHeadlights:
   - {fileID: 6097165702504019368}
@@ -7713,9 +7988,9 @@ MonoBehaviour:
   - {fileID: 8391951847698550596}
   - {fileID: 328799702646597770}
   lightBlinkDelay: 0.5
-  leftTurnActive: 0
-  rightTurnActive: 0
-  hazardLightsActive: 0
+  _leftTurnActiveInternal: 0
+  _rightTurnActiveInternal: 0
+  _hazardLightsActiveInternal: 0
 --- !u!114 &3430142193792684374
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7746,13 +8021,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d59b8a05cc67b0641bbac1890922fab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentCameraView: 1
+  car: {fileID: 8090497815158325181}
   cameras:
   - {fileID: 5249962899542556076}
   - {fileID: 8196829626676958490}
   - {fileID: 3114683217114679889}
   - {fileID: 6382442854231002392}
   - {fileID: 2527139974356385983}
+  resetRotationDuration: 0.5
 --- !u!114 &7159188416569359347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7778,6 +8054,59 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ed10bb776776ed4093c534cf60bd0f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &6559145112754837121
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1205658921773413727}
+  - component: {fileID: 2730207098816112391}
+  m_Layer: 0
+  m_Name: errorsExceeded
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1205658921773413727
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6559145112754837121}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7828948510779353529}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2730207098816112391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6559145112754837121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 217ed072911fe5247b1f8cf2af5161eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  userGuideType: 6
+  text: {fileID: 0}
+  message: "La freccia \xE8 importante!!! Hai sbagliato trppe volte, riprova!"
+  complementaryUIElements:
+  - uiElement: {fileID: 0}
+    shouldFloat: 0
+  floatingSpeed: 0.5
+  floatingHeight: 0.1
+  _instructionPanel: {fileID: 0}
 --- !u!1 &6563598950748112674
 GameObject:
   m_ObjectHideFlags: 0
@@ -9106,6 +9435,57 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &7349862871340060054
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3308570122549997126}
+  - component: {fileID: 3449529710320777902}
+  m_Layer: 0
+  m_Name: carResetPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3308570122549997126
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7349862871340060054}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7695423694174156715}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3449529710320777902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7349862871340060054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 217ed072911fe5247b1f8cf2af5161eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  userGuideType: 8
+  text: {fileID: 0}
+  message: Premi qualunque tasto per cotinuare
+  complementaryUIElements: []
+  floatingSpeed: 0.5
+  floatingHeight: 0.1
+  _instructionPanel: {fileID: 0}
 --- !u!1 &7379794525002958325
 GameObject:
   m_ObjectHideFlags: 0
@@ -10178,9 +10558,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3311954479734768474}
   - component: {fileID: 942197027727222076}
+  - component: {fileID: 7691329064160163917}
   m_Layer: 0
   m_Name: Electric Truck
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10196,7 +10577,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8147930623339507040}
   - {fileID: 2381300899241906805}
@@ -10235,6 +10616,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &7691329064160163917
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8090497815158325181}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.5167764, y: 0.6840694, z: 4.231041}
+  m_Center: {x: 0.0034806728, y: 0.7773632, z: -0.2279787}
 --- !u!1 &8173273231458777453
 GameObject:
   m_ObjectHideFlags: 0
@@ -10400,8 +10802,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8196829626676958490}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0995649, y: -0.000000006051371, z: 6.0551286e-10, w: 0.9950311}
-  m_LocalPosition: {x: 0, y: -3.0506816, z: 7.677422}
+  m_LocalRotation: {x: 0.055353444, y: -0.7049369, z: 0.055353448, w: 0.7049369}
+  m_LocalPosition: {x: 4.7685857, y: -3.637058, z: 14.305756}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10470,7 +10872,7 @@ MonoBehaviour:
     RotationDamping: {x: 1, y: 1, z: 1}
     QuaternionDamping: 1
   OrbitStyle: 0
-  Radius: 6.95
+  Radius: 5
   Orbits:
     Top:
       Radius: 3.72
@@ -10554,6 +10956,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a076c17fe76165e4f8ed21498b877bf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Easing: 0
   Modifiers: []
   references:
     version: 2
@@ -10767,10 +11170,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Start Car - Alt (Hold)\nShift Up - Shift\nShift Down - Ctrl\nAccelerate
-    - W\nBrake - S\nHandbrake - Space\nTurn Signals - Q / E\nHazard Lights - H\nLow
-    Beam Lights - L\nHigh Beam Lights - L (Hold) \nSwitch Camera - V\nRestart Scene
-    - R"
+  m_text: "Accelerate - W\nBrake - S\nHandbrake - Space\nTurn Left / Right - A /
+    D\nTurn Signals - Q / E\nHazard Lights - H\nLow Beam Lights - L\nHigh Beam Lights
+    - L (Hold) \nSwitch Camera - V\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -11339,6 +11741,57 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &8551392887628262777
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8431113393186252174}
+  - component: {fileID: 2192314182246827315}
+  m_Layer: 0
+  m_Name: singleError
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8431113393186252174
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8551392887628262777}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7828948510779353529}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2192314182246827315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8551392887628262777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 217ed072911fe5247b1f8cf2af5161eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  userGuideType: 5
+  text: {fileID: 0}
+  message: Ricordati di attivare la freccia dal lato giusto prima di svoltare!
+  complementaryUIElements: []
+  floatingSpeed: 0.5
+  floatingHeight: 0.1
+  _instructionPanel: {fileID: 0}
 --- !u!1 &8571351221389136953
 GameObject:
   m_ObjectHideFlags: 0
@@ -11437,7 +11890,7 @@ GameObject:
   - component: {fileID: 7312358037446001903}
   m_Layer: 0
   m_Name: Simplified Electric Truck - Ready To Drive (1)
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11453,7 +11906,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.76, y: 2.56, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2330502037088085464}
   - {fileID: 3311954479734768474}
@@ -11598,7 +12051,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 2
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 2299065685634062872}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
