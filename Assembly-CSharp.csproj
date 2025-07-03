@@ -112,9 +112,9 @@
     <Compile Include="Assets\Ezereal Assets\Ezereal Car Controller\Scripts\EzerealCarController.cs" />
     <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\Checkpoint.cs" />
     <Compile Include="Assets\Racing Starter Kit\RSK Assets\ScriptableObjects\GameEvents.cs" />
-    <Compile Include="Assets\Scripts\CheckpointTrigger.cs" />
     <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\GUI\RaceTimerGUI.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_UiFrameRateCounter.cs" />
+    <Compile Include="Assets\Scripts\Checkpoint\CheckpointTrigger.cs" />
     <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\CheckpointTracker.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_B.cs" />
@@ -162,7 +162,6 @@
     <Compile Include="Assets\Scripts\Monobehaviours\LerpPath.cs" />
     <Compile Include="Assets\Scripts\Monobehaviours\GameManager.cs" />
     <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\Car\CarColor.cs" />
-    <Compile Include="Assets\Scripts\CheckpointManager.cs" />
     <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\RealTimeRacePositions.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
@@ -174,6 +173,7 @@
     <Compile Include="Assets\Loading Games\Toon City Pack\Demo\Scripts\StreetLight.cs" />
     <Compile Include="Assets\Quantum Tek\Quantum UI\Scripts\QUI_Bar.cs" />
     <Compile Include="Assets\Quantum Tek\Quantum UI\Scripts\QUI_OptionList.cs" />
+    <Compile Include="Assets\Scripts\Checkpoint\CheckpointManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexColorCycler.cs" />
     <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\Checkpoints.cs" />
@@ -723,16 +723,12 @@
       <HintPath>Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Mono.Cecil">
-      <HintPath>Library\PackageCache\com.unity.nuget.mono-cecil@d6f9955a5d5f\Mono.Cecil.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@74deb55db2a0\Runtime\Newtonsoft.Json.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.Android.Types">
-      <HintPath>D:\Domenico Scuola\Unity 6\6000.0.42f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Types.dll</HintPath>
+    <Reference Include="Mono.Cecil">
+      <HintPath>Library\PackageCache\com.unity.nuget.mono-cecil@d6f9955a5d5f\Mono.Cecil.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="netstandard">

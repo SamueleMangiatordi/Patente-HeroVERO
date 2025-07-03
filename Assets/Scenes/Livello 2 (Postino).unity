@@ -1197,7 +1197,6 @@ GameObject:
   - component: {fileID: 97293352}
   - component: {fileID: 97293358}
   - component: {fileID: 97293357}
-  - component: {fileID: 97293356}
   - component: {fileID: 97293355}
   - component: {fileID: 97293354}
   - component: {fileID: 97293353}
@@ -1232,10 +1231,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 97293351}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b95ebb2e7d43eef4cb38837ceca2a9f3, type: 3}
+  m_Script: {fileID: 11500000, guid: 3a88915d842e0f141ad1476c9c63f493, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checkpointManager: {fileID: 1477232732}
+  checkpointManager: {fileID: 1477232734}
 --- !u!64 &97293354
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1251,11 +1250,11 @@ MeshCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!65 &97293355
@@ -1278,27 +1277,6 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 2, y: 2, z: 2}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!135 &97293356
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 97293351}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &97293357
 MeshRenderer:
@@ -3519,7 +3497,6 @@ GameObject:
   - component: {fileID: 431343893}
   - component: {fileID: 431343899}
   - component: {fileID: 431343898}
-  - component: {fileID: 431343897}
   - component: {fileID: 431343896}
   - component: {fileID: 431343895}
   - component: {fileID: 431343894}
@@ -3554,10 +3531,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 431343892}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b95ebb2e7d43eef4cb38837ceca2a9f3, type: 3}
+  m_Script: {fileID: 11500000, guid: 3a88915d842e0f141ad1476c9c63f493, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checkpointManager: {fileID: 1477232732}
+  checkpointManager: {fileID: 1477232734}
 --- !u!64 &431343895
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3573,11 +3550,11 @@ MeshCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!65 &431343896
@@ -3600,27 +3577,6 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 2, y: 2, z: 2}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!135 &431343897
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 431343892}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &431343898
 MeshRenderer:
@@ -4518,7 +4474,6 @@ GameObject:
   - component: {fileID: 598172832}
   - component: {fileID: 598172838}
   - component: {fileID: 598172837}
-  - component: {fileID: 598172836}
   - component: {fileID: 598172835}
   - component: {fileID: 598172834}
   - component: {fileID: 598172833}
@@ -4553,10 +4508,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 598172831}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b95ebb2e7d43eef4cb38837ceca2a9f3, type: 3}
+  m_Script: {fileID: 11500000, guid: 3a88915d842e0f141ad1476c9c63f493, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checkpointManager: {fileID: 1477232732}
+  checkpointManager: {fileID: 1477232734}
 --- !u!64 &598172834
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4572,11 +4527,11 @@ MeshCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!65 &598172835
@@ -4599,27 +4554,6 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 2, y: 2, z: 2}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!135 &598172836
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 598172831}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &598172837
 MeshRenderer:
@@ -5205,7 +5139,6 @@ GameObject:
   - component: {fileID: 658871402}
   - component: {fileID: 658871408}
   - component: {fileID: 658871407}
-  - component: {fileID: 658871406}
   - component: {fileID: 658871405}
   - component: {fileID: 658871404}
   - component: {fileID: 658871403}
@@ -5240,10 +5173,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 658871401}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b95ebb2e7d43eef4cb38837ceca2a9f3, type: 3}
+  m_Script: {fileID: 11500000, guid: 3a88915d842e0f141ad1476c9c63f493, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checkpointManager: {fileID: 1477232732}
+  checkpointManager: {fileID: 1477232734}
 --- !u!64 &658871404
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -5259,11 +5192,11 @@ MeshCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!65 &658871405
@@ -5286,27 +5219,6 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 2, y: 2, z: 2}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!135 &658871406
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 658871401}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &658871407
 MeshRenderer:
@@ -6537,7 +6449,6 @@ GameObject:
   - component: {fileID: 847646948}
   - component: {fileID: 847646954}
   - component: {fileID: 847646953}
-  - component: {fileID: 847646952}
   - component: {fileID: 847646951}
   - component: {fileID: 847646950}
   - component: {fileID: 847646949}
@@ -6572,10 +6483,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 847646947}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b95ebb2e7d43eef4cb38837ceca2a9f3, type: 3}
+  m_Script: {fileID: 11500000, guid: 3a88915d842e0f141ad1476c9c63f493, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checkpointManager: {fileID: 1477232732}
+  checkpointManager: {fileID: 1477232734}
 --- !u!64 &847646950
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -6591,11 +6502,11 @@ MeshCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!65 &847646951
@@ -6618,27 +6529,6 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 2, y: 2, z: 2}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!135 &847646952
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 847646947}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &847646953
 MeshRenderer:
@@ -7244,7 +7134,6 @@ GameObject:
   - component: {fileID: 971713543}
   - component: {fileID: 971713549}
   - component: {fileID: 971713548}
-  - component: {fileID: 971713547}
   - component: {fileID: 971713546}
   - component: {fileID: 971713545}
   - component: {fileID: 971713544}
@@ -7279,10 +7168,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 971713542}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b95ebb2e7d43eef4cb38837ceca2a9f3, type: 3}
+  m_Script: {fileID: 11500000, guid: 3a88915d842e0f141ad1476c9c63f493, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checkpointManager: {fileID: 1477232732}
+  checkpointManager: {fileID: 1477232734}
 --- !u!64 &971713545
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -7298,11 +7187,11 @@ MeshCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!65 &971713546
@@ -7325,27 +7214,6 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 2, y: 2, z: 2}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!135 &971713547
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 971713542}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &971713548
 MeshRenderer:
@@ -8040,7 +7908,6 @@ GameObject:
   - component: {fileID: 1071554435}
   - component: {fileID: 1071554441}
   - component: {fileID: 1071554440}
-  - component: {fileID: 1071554439}
   - component: {fileID: 1071554438}
   - component: {fileID: 1071554437}
   - component: {fileID: 1071554436}
@@ -8075,10 +7942,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1071554434}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b95ebb2e7d43eef4cb38837ceca2a9f3, type: 3}
+  m_Script: {fileID: 11500000, guid: 3a88915d842e0f141ad1476c9c63f493, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checkpointManager: {fileID: 1477232732}
+  checkpointManager: {fileID: 1477232734}
 --- !u!64 &1071554437
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -8094,11 +7961,11 @@ MeshCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!65 &1071554438
@@ -8121,27 +7988,6 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 2, y: 2, z: 2}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!135 &1071554439
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1071554434}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1071554440
 MeshRenderer:
@@ -11237,6 +11083,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1477232733}
   - component: {fileID: 1477232732}
+  - component: {fileID: 1477232734}
   m_Layer: 0
   m_Name: CheckpointManager
   m_TagString: Untagged
@@ -11265,6 +11112,7 @@ MonoBehaviour:
   - {fileID: 431343893}
   - {fileID: 1628136555}
   - {fileID: 598172832}
+  currentCheckpointIndex: 0
 --- !u!4 &1477232733
 Transform:
   m_ObjectHideFlags: 0
@@ -11280,6 +11128,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1477232734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1477232731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5980261af4280d4aa8dcef5e48b9976, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkpoints:
+  - {fileID: 971713543}
+  - {fileID: 847646948}
+  - {fileID: 97293352}
+  - {fileID: 1071554435}
+  - {fileID: 658871402}
+  - {fileID: 431343893}
+  - {fileID: 1628136555}
+  - {fileID: 598172832}
 --- !u!1001 &1517437468
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12474,7 +12343,6 @@ GameObject:
   - component: {fileID: 1628136555}
   - component: {fileID: 1628136561}
   - component: {fileID: 1628136560}
-  - component: {fileID: 1628136559}
   - component: {fileID: 1628136558}
   - component: {fileID: 1628136557}
   - component: {fileID: 1628136556}
@@ -12509,10 +12377,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1628136554}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b95ebb2e7d43eef4cb38837ceca2a9f3, type: 3}
+  m_Script: {fileID: 11500000, guid: 3a88915d842e0f141ad1476c9c63f493, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checkpointManager: {fileID: 1477232732}
+  checkpointManager: {fileID: 1477232734}
 --- !u!64 &1628136557
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -12528,11 +12396,11 @@ MeshCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!65 &1628136558
@@ -12555,27 +12423,6 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 2, y: 2, z: 2}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!135 &1628136559
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1628136554}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1628136560
 MeshRenderer:
