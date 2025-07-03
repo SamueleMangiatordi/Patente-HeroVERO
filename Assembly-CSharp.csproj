@@ -74,6 +74,7 @@
     <Compile Include="Assets\FastMesh\Scripts\SceneViewText.cs" />
     <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\Managers\RaceManager.cs" />
     <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\Mobile Input\PlatformSpecific\MobileInput.cs" />
+    <Compile Include="Assets\Scripts\AiCar\Custom_AICarSpawner.cs" />
     <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\Car\CarAudio.cs" />
     <Compile Include="Assets\Ezereal Assets\Ezereal Car Controller\Scripts\EzerealWheelFrictionController.cs" />
     <Compile Include="Assets\Scripts\Monobehaviours\LerpMovement.cs" />
@@ -131,8 +132,8 @@
     <Compile Include="Assets\Quantum Tek\Quantum UI\Scripts\QUI_ElementAnimationPreset.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
     <Compile Include="Assets\Loading Games\Toon City Pack\Demo\Scripts\TrafficLights.cs" />
-    <Compile Include="Assets\Quantum Tek\Quantum UI\Scripts\QUI_Window.cs" />
     <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\GUI\RacePositionGUI.cs" />
+    <Compile Include="Assets\Quantum Tek\Quantum UI\Scripts\QUI_Window.cs" />
     <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\Mobile Input\MobileInputManager.cs" />
     <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\PlayerCarCameraController.cs" />
     <Compile Include="Assets\Scripts\CarControllers\SimplifiedCarController.cs" />
@@ -182,11 +183,12 @@
     <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\PlayerChangeCameras.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextConsoleSimulator.cs" />
     <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\StartMenuCamera.cs" />
-    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TeleType.cs" />
     <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\RaceFinish.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TeleType.cs" />
     <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\AI\AICarAvoidanceBehaviour.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
     <Compile Include="Assets\Ezereal Assets\Ezereal Car Controller\Scripts\EzerealSoundController.cs" />
+    <Compile Include="Assets\Scripts\AiCar\Custom_AIWaypointTracker.cs" />
     <Compile Include="Assets\Racing Starter Kit\RSK Assets\Scripts\Mobile Input\MobileButtonHandler.cs" />
     <Compile Include="Assets\Ezereal Assets\Ezereal Car Controller\Scripts\Enums\AutomaticGears.cs" />
     <Compile Include="Assets\Racing Starter Kit\RSK Assets\ScriptableObjects\RuntimeSet.cs" />
@@ -719,12 +721,12 @@
       <HintPath>Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Mono.Cecil">
-      <HintPath>Library\PackageCache\com.unity.nuget.mono-cecil@d6f9955a5d5f\Mono.Cecil.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@74deb55db2a0\Runtime\Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Mono.Cecil">
+      <HintPath>Library\PackageCache\com.unity.nuget.mono-cecil@d6f9955a5d5f\Mono.Cecil.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Android.Types">
@@ -1385,10 +1387,6 @@
     </Reference>
     <Reference Include="Unity.RenderPipelines.Core.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.VSCode.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.RenderPipelines.Universal.Runtime">

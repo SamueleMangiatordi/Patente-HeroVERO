@@ -19,7 +19,7 @@ namespace SpinMotion
                 OnToggleCarFreeze(true);
         }
 
-        private void OnToggleCarFreeze(bool isFreezed)
+        public void OnToggleCarFreeze(bool isFreezed)
         {
             if (isFreezed)
             {
