@@ -6,6 +6,7 @@ using UnityEngine;
 public class AiCarSpawner : MonoBehaviour
 {
     public GameObject aiWaypointTrackerPrefab;
+    [SerializeField] private bool spawnOnAwake = true;
     [SerializeField] private List<AICarSpawnData> aiCarSpawnDataList = new();
 
     private readonly List<(GameObject aiCar, Vector3 spawnPos, Quaternion spawnRot)> spawnedPlayers = new();
@@ -55,6 +56,9 @@ public class AiCarSpawner : MonoBehaviour
 
         foreach (AICarSpawnData aiCarSpawnData in aiCarSpawnDataList)
             if (aiCarSpawnData.spawnPoint.TryGetComponent<Renderer>(out var renderer)) { renderer.enabled = false; }
+
+        if (spawnOnAwake)
+            SpawnPlayers();
     }
 
     public void SpawnPlayers()
@@ -69,7 +73,11 @@ public class AiCarSpawner : MonoBehaviour
             aiTracker.SetupAICarCollider(aiCar.GetComponentInChildren<AICarWaypointTrackerColliderTrigger>().GetColliderTrigger());
 
             aiCar.GetComponent<CarAIControl>().SetTarget(aiTracker.transform); // replace with your car controller ai target to aim/follow
+        }
 
+        foreach (var (aiCar, _, _) in spawnedPlayers)
+        {
+            aiCar.GetComponent<CarFreeze>().OnToggleCarFreeze(false);
         }
 
     }

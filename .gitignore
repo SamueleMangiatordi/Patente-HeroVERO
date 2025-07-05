@@ -61,3 +61,5 @@ crashlytics-build.properties
 #Google Chrome Portable
 /[Aa]ssets/[Rr]esources/GoogleChromePortable/*
 /Assets/Art/Materials/Water.mat
+/Assembly-CSharp-Editor.csproj
+/Assembly-CSharp.csproj

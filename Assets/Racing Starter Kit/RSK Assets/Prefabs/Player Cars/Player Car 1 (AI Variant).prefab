@@ -79,8 +79,8 @@ MonoBehaviour:
   aiCarController: {fileID: 1483835861577561291}
   raycastDistance: 2
   smartSteeringRaycastCheckDelay: 2
-  leftRaycastOffset: {x: 0.25, y: 0.25, z: 0}
-  rightRaycastOffset: {x: -0.25, y: 0.25, z: 0}
+  leftRaycastOffset: {x: 0, y: 0.65, z: 1}
+  rightRaycastOffset: {x: 0, y: 0.65, z: 1}
 --- !u!65 &5794799031351574139
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -119,6 +119,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1201834900730299755, guid: 67f7e9c2d00e44d1a8bae5a09d2bc4ab,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1201834900730299755, guid: 67f7e9c2d00e44d1a8bae5a09d2bc4ab,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1201834900730299755, guid: 67f7e9c2d00e44d1a8bae5a09d2bc4ab,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1201834900730299755, guid: 67f7e9c2d00e44d1a8bae5a09d2bc4ab,
         type: 3}
@@ -170,6 +185,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1294833859935737666, guid: 67f7e9c2d00e44d1a8bae5a09d2bc4ab,
+        type: 3}
+      propertyPath: rolloffMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1294833859935737666, guid: 67f7e9c2d00e44d1a8bae5a09d2bc4ab,
+        type: 3}
+      propertyPath: spreadCustomCurve.m_Curve.Array.data[0].value
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2109295878419042857, guid: 67f7e9c2d00e44d1a8bae5a09d2bc4ab,
         type: 3}
       propertyPath: useRandom
@@ -180,9 +205,39 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2767376486922194524, guid: 67f7e9c2d00e44d1a8bae5a09d2bc4ab,
+        type: 3}
+      propertyPath: rolloffMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2767376486922194524, guid: 67f7e9c2d00e44d1a8bae5a09d2bc4ab,
+        type: 3}
+      propertyPath: spreadCustomCurve.m_Curve.Array.data[0].value
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2827736103486690470, guid: 67f7e9c2d00e44d1a8bae5a09d2bc4ab,
         type: 3}
       propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3238842109787964598, guid: 67f7e9c2d00e44d1a8bae5a09d2bc4ab,
+        type: 3}
+      propertyPath: rolloffMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3238842109787964598, guid: 67f7e9c2d00e44d1a8bae5a09d2bc4ab,
+        type: 3}
+      propertyPath: spreadCustomCurve.m_Curve.Array.data[0].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3263076084211808622, guid: 67f7e9c2d00e44d1a8bae5a09d2bc4ab,
+        type: 3}
+      propertyPath: rolloffMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3263076084211808622, guid: 67f7e9c2d00e44d1a8bae5a09d2bc4ab,
+        type: 3}
+      propertyPath: spreadCustomCurve.m_Curve.Array.data[0].value
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3623019400935060744, guid: 67f7e9c2d00e44d1a8bae5a09d2bc4ab,
@@ -203,7 +258,12 @@ PrefabInstance:
     - target: {fileID: 4978299879913551241, guid: 67f7e9c2d00e44d1a8bae5a09d2bc4ab,
         type: 3}
       propertyPath: m_Topspeed
-      value: 35
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 4978299879913551241, guid: 67f7e9c2d00e44d1a8bae5a09d2bc4ab,
+        type: 3}
+      propertyPath: m_SpeedType
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4978299879913551241, guid: 67f7e9c2d00e44d1a8bae5a09d2bc4ab,
         type: 3}
@@ -257,8 +317,38 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7345720917679976139, guid: 67f7e9c2d00e44d1a8bae5a09d2bc4ab,
         type: 3}
+      propertyPath: maxVolume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7345720917679976139, guid: 67f7e9c2d00e44d1a8bae5a09d2bc4ab,
+        type: 3}
+      propertyPath: lowPitchMax
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7345720917679976139, guid: 67f7e9c2d00e44d1a8bae5a09d2bc4ab,
+        type: 3}
+      propertyPath: rolloffMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7345720917679976139, guid: 67f7e9c2d00e44d1a8bae5a09d2bc4ab,
+        type: 3}
+      propertyPath: dopplerLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7345720917679976139, guid: 67f7e9c2d00e44d1a8bae5a09d2bc4ab,
+        type: 3}
       propertyPath: pitchMultiplier
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7345720917679976139, guid: 67f7e9c2d00e44d1a8bae5a09d2bc4ab,
+        type: 3}
+      propertyPath: maxRolloffDistance
+      value: 65
+      objectReference: {fileID: 0}
+    - target: {fileID: 7345720917679976139, guid: 67f7e9c2d00e44d1a8bae5a09d2bc4ab,
+        type: 3}
+      propertyPath: highPitchMultiplier
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 8079072630466074956, guid: 67f7e9c2d00e44d1a8bae5a09d2bc4ab,
         type: 3}

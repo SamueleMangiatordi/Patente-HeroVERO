@@ -19,11 +19,14 @@ namespace SpinMotion
         public AudioClip lowDecelClip;
         public AudioClip highAccelClip;
         public AudioClip highDecelClip;
+        [Range(0,1)]
+        public float maxVolume = 0.8f;
         public float pitchMultiplier = 1f;
         public float lowPitchMin = 1f;
         public float lowPitchMax = 6f;
         public float highPitchMultiplier = 0.25f;
         public float maxRolloffDistance = 500;
+        public AudioRolloffMode rolloffMode = AudioRolloffMode.Linear;
         public float dopplerLevel = 1;
         public bool useDoppler = true;
 
@@ -55,7 +58,7 @@ namespace SpinMotion
             if (Camera.main != null)
                 camDist = (Camera.main.transform.position - transform.position).sqrMagnitude;
 
-            float volumeFactor = Mathf.Clamp01(1 - (camDist / (maxRolloffDistance * maxRolloffDistance)));
+            float volumeFactor = Mathf.Clamp( (Mathf.Clamp01(1 - (camDist / (maxRolloffDistance * maxRolloffDistance))) ) , 0, maxVolume);
 
             if (!m_StartedSound)
             {
@@ -111,6 +114,7 @@ namespace SpinMotion
             source.volume = 0;
             source.loop = true;
             source.time = Random.Range(0f, clip.length);
+            source.rolloffMode = rolloffMode;
             source.Play();
             source.minDistance = 5;
             source.maxDistance = maxRolloffDistance;
