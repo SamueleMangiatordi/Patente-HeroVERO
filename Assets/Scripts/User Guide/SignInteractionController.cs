@@ -2,6 +2,7 @@ using Ezereal;
 using TMPro;
 using TMPro.Examples;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class SignInteractionController : MonoBehaviour
@@ -10,37 +11,27 @@ public class SignInteractionController : MonoBehaviour
 
     [Tooltip("The car prefab with all gameObjects (Simplified Electric Truck - Ready) , not only the electric truck prefab")]
     [SerializeField] private GameObject mainCarObject;
-
-    [SerializeField] private GameObject signInstructionPanel;
-    [SerializeField] private SignData signData; // Data for the sign, including image, title, and description
+    [Tooltip("The speed to set the car when ending the interaction. If setted to 0, the car mantains the speed had before starting the interaction.")]
+    [SerializeField] private float resumeCarSpeed = 0f; //the speed to set the car when starting the interaction, usually 0
+    [SerializeField] private float resumeTimeDelay = 0.15f; //the time to wait before resuming the game after the interaction ends
+    [Tooltip("Since when pausing the game with a button pressed and resuming it with the same button still pressed lose the input and the button is considered not pressed anymore, this event is used to simulate the user elevate the button and pressing it again")]
+    public UnityEvent<float> onResumePressedButton; // UnityEvent to simulate the button press
 
     [SerializeField] private Collider enterCollider;
     [SerializeField] private Collider exitCollider; // Colliders to detect when the user enters or exits the interaction area
 
-    private Image signImage;
-    private TextMeshProUGUI title;
-    private TextMeshProUGUI description;
+    [SerializeField] private Transform resetPos;    //where to teleport the car if something is wrong
+
+    [SerializeField] private UserGuideController userGuideController; // Reference to the user guide controller
+    [SerializeField] private UserGuideType startInteractionGuide; // Type of user guide to show when interaction starts
+    [SerializeField] private UserGuideType outOfBoundsUserGuide; // Type of user guide to show when interaction starts
+    [SerializeField] private UserGuideType carHittedUserGuide; // Type of user guide to show when interaction ends
 
     private EzerealCameraController cameraController; // Reference to the camera controller
     private CarStateParameters storedCarState; // Reference to the car state parameters
     private SimplifiedCarController carController; // Reference to the car controller
 
     private bool waitingForAnyInput = false;
-
-    void Awake()
-    {
-        // Initialize the sign instruction panel and its components
-        if (signInstructionPanel != null)
-        {
-            signImage = signInstructionPanel.transform.Find("image").GetComponent<Image>();
-            title = signInstructionPanel.transform.Find("title").GetComponent<TextMeshProUGUI>();
-            description = signInstructionPanel.transform.Find("description").GetComponent<TextMeshProUGUI>();
-        }
-        else
-        {
-            Debug.LogError("Sign Instruction Panel is not assigned in the inspector.", this);
-        }
-    }
 
     void Update()
     {
@@ -51,32 +42,45 @@ public class SignInteractionController : MonoBehaviour
         {
             if (Input.anyKeyDown)
             {
+                userGuideController.SetUserGuide(startInteractionGuide);
+
+                GameManager.Instance.ResumeGame(); // Resume the game
+                if (storedCarState != null && resumeCarSpeed == 0)
+                {
+
+                    storedCarState.ApplyToCarController(carController);
+                    Debug.Log("Car state restored for RestartInteraction.");
+                }
+                else
+                {
+                    // Fallback if state wasn't stored (e.g., direct call to RestartInteraction without StartInteraction)
+                    // Teleport to resetPos with resumeCarSpeed (or 0 if resumeCarSpeed is 0)
+                    float velocity = resumeCarSpeed == 0 ? 1 : resumeCarSpeed;
+                    carController.TeleportCar(resetPos, velocity, true);
+                    Debug.LogWarning("No stored car state found for RestartInteraction. Using resetPos and configured resumeCarSpeed as fallback.");
+                }
+                // ----------------------------------------------------------w
+                StartCoroutine(GameManager.Instance.WaitToPause(resumeTimeDelay)); // Wait a bit before pausing to ensure the car is telported and ready
+                waitingForAnyInput = false; // Stop waiting
+
+                return; // Consume this input for the guide, do not proceed with other Update logic if any
 
             }
         }
     }
 
-    public void RestartInteraction()
-    {
-        enterCollider.enabled = false; // Disable the enter collider
-
-        GameManager.Instance.PauseGame(); // Resume the game
-        signInstructionPanel.SetActive(true); // Hide the sign instruction panel
-        waitingForAnyInput = true;
-    }
 
     public void StartInteraction()
     {
         if (isActive)
         {
-            SetSignData(); // Set the sign data when interaction starts
-            signInstructionPanel.SetActive(true); // Show the sign instruction panel
+            userGuideController.SetUserGuide(startInteractionGuide); // Show the sign instruction panel
 
             GameManager.Instance.PauseGame(); // Pause the game
             cameraController.ResetCurrentCameraRotation(); // Reset the camera rotation to default
 
             storedCarState = new CarStateParameters(carController);
-            waitingForAnyInput = true; // Set the flag to wait for any input
+            waitingForAnyInput = false;
         }
         else
         {
@@ -86,22 +90,28 @@ public class SignInteractionController : MonoBehaviour
 
     public void EndInteraction()
     {
-        signInstructionPanel.SetActive(false); // Hide the sign instruction panel
+        waitingForAnyInput = false; // Reset the flag
+        isActive = false; // Disable the sign interaction
+
+        userGuideController.EnableUserGuides(false); // Hide the user guides
+
         GameManager.Instance.ResumeGame(); // Resume the game
 
-        enterCollider.enabled = false;
         exitCollider.enabled = false; // Disable the exit collider
-        waitingForAnyInput = false; // Reset the flag
-
+        enterCollider.enabled = false; // Disable the enter collider
 
     }
 
-    public void SetSignData()
+    public void RestartInteraction(UserGuideType guideTypeToShow)
     {
-        signImage.sprite = signData.image; // Set the sign image
-        signInstructionPanel.GetComponent<Image>().color = SignTypeColor.GetColor(signData.type); // Set the color based on the sign type
-        title.text = signData.signName; // Set the sign title
-        description.text = signData.description; // Set the sign description
+        enterCollider.enabled = false; // Disable the enter collider
+
+        GameManager.Instance.PauseGame(); // Resume the game
+
+        userGuideController.SetUserGuide(guideTypeToShow); // Show the user guide
+        isActive = true; // Enable the sign interaction
+        waitingForAnyInput = true;
     }
+   
 
 }

@@ -7,7 +7,8 @@ public class SignData : ScriptableObject
 {
     public Sprite image;
     public string signName;
-    public SignType type; 
+    public SignType type;
+    [TextArea(3, 10)]
     public string description;
 }
 
