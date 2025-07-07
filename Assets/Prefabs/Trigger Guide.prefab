@@ -116,6 +116,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onTriggerExit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &3710523609879272466
 GameObject:
   m_ObjectHideFlags: 0
@@ -199,6 +202,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onTriggerExit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &3743532707758685821
 GameObject:
   m_ObjectHideFlags: 0
@@ -244,12 +250,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   userGuideType: 1
-  text: {fileID: 0}
-  message: Premi "W" per accelerare
+  _instructionPanel: {fileID: 0}
   complementaryUIElements: []
   floatingSpeed: 0.5
   floatingHeight: 0.1
-  _instructionPanel: {fileID: 0}
+  mainTitleText: {fileID: 0}
+  mainMessage: 
 --- !u!1 &3753636038216926195
 GameObject:
   m_ObjectHideFlags: 0
@@ -324,6 +330,18 @@ MonoBehaviour:
       - m_Target: {fileID: 665168554190798833}
         m_TargetAssemblyTypeName: TriggerableUserGuide, Assembly-CSharp
         m_MethodName: EndInteraction
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Toggle, UnityEngine.UI
+        m_MethodName: set_isOn
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -333,6 +351,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+  onTriggerExit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &4150007057083457131
 GameObject:
   m_ObjectHideFlags: 0
@@ -471,7 +492,7 @@ MonoBehaviour:
       - m_Target: {fileID: 665168554190798833}
         m_TargetAssemblyTypeName: TriggerableUserGuide, Assembly-CSharp
         m_MethodName: StartInteraction
-        m_Mode: 6
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -480,6 +501,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+  onTriggerExit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &5479895124575185450
 GameObject:
   m_ObjectHideFlags: 0
@@ -531,8 +555,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isInteractionEnabled: 0
-  longPressTreshold: 0.5
-  validAxisDir: 1
   mainCarObject: {fileID: 0}
   resumeCarSpeed: 1
   resumeTimeDelay: 0.15
@@ -555,11 +577,13 @@ MonoBehaviour:
   userGuideController: {fileID: 0}
   enterCollider: {fileID: 4985363632593392349}
   exitCollider: {fileID: 8882538615418962063}
+  startInteractionGuide: 0
+  outOfBoundsUserGuide: 0
+  longPressTreshold: 0.5
+  validAxisDir: 1
   boundedAreaColliders:
   - {fileID: 8665845838853008054}
   - {fileID: 4491490908672514040}
-  startInteractionGuide: 0
-  outOfBoundsUserGuide: 0
 --- !u!114 &7829366952339661898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -583,47 +607,58 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3300792019994587921}
     m_Modifications:
-    - target: {fileID: 7293811468343702865, guid: b06e3a4e2186277498e69b1f476096ab, type: 3}
+    - target: {fileID: 7293811468343702865, guid: b06e3a4e2186277498e69b1f476096ab,
+        type: 3}
       propertyPath: m_Name
       value: OffRoad
       objectReference: {fileID: 0}
-    - target: {fileID: 7999274323314140898, guid: b06e3a4e2186277498e69b1f476096ab, type: 3}
+    - target: {fileID: 7999274323314140898, guid: b06e3a4e2186277498e69b1f476096ab,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7999274323314140898, guid: b06e3a4e2186277498e69b1f476096ab, type: 3}
+    - target: {fileID: 7999274323314140898, guid: b06e3a4e2186277498e69b1f476096ab,
+        type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7999274323314140898, guid: b06e3a4e2186277498e69b1f476096ab, type: 3}
+    - target: {fileID: 7999274323314140898, guid: b06e3a4e2186277498e69b1f476096ab,
+        type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7999274323314140898, guid: b06e3a4e2186277498e69b1f476096ab, type: 3}
+    - target: {fileID: 7999274323314140898, guid: b06e3a4e2186277498e69b1f476096ab,
+        type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7999274323314140898, guid: b06e3a4e2186277498e69b1f476096ab, type: 3}
+    - target: {fileID: 7999274323314140898, guid: b06e3a4e2186277498e69b1f476096ab,
+        type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7999274323314140898, guid: b06e3a4e2186277498e69b1f476096ab, type: 3}
+    - target: {fileID: 7999274323314140898, guid: b06e3a4e2186277498e69b1f476096ab,
+        type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7999274323314140898, guid: b06e3a4e2186277498e69b1f476096ab, type: 3}
+    - target: {fileID: 7999274323314140898, guid: b06e3a4e2186277498e69b1f476096ab,
+        type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7999274323314140898, guid: b06e3a4e2186277498e69b1f476096ab, type: 3}
+    - target: {fileID: 7999274323314140898, guid: b06e3a4e2186277498e69b1f476096ab,
+        type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7999274323314140898, guid: b06e3a4e2186277498e69b1f476096ab, type: 3}
+    - target: {fileID: 7999274323314140898, guid: b06e3a4e2186277498e69b1f476096ab,
+        type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7999274323314140898, guid: b06e3a4e2186277498e69b1f476096ab, type: 3}
+    - target: {fileID: 7999274323314140898, guid: b06e3a4e2186277498e69b1f476096ab,
+        type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
@@ -634,6 +669,7 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: b06e3a4e2186277498e69b1f476096ab, type: 3}
 --- !u!4 &66670354299568061 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 7999274323314140898, guid: b06e3a4e2186277498e69b1f476096ab, type: 3}
+  m_CorrespondingSourceObject: {fileID: 7999274323314140898, guid: b06e3a4e2186277498e69b1f476096ab,
+    type: 3}
   m_PrefabInstance: {fileID: 8065944497224800607}
   m_PrefabAsset: {fileID: 0}

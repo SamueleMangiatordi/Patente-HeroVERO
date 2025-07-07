@@ -1,7 +1,8 @@
 using Ezereal;
 using UnityEngine;
 using UnityEngine.Events;
-using System.Collections; // For coroutines
+using System.Collections;
+using System; // For coroutines
 
 public abstract class InteractionControllerBase : MonoBehaviour
 {
@@ -42,7 +43,10 @@ public abstract class InteractionControllerBase : MonoBehaviour
     protected CarStateParameters storedCarState; // Stores car's state before interaction
     protected EzerealCameraController cameraController;
 
-    protected bool waitingForAnyInput = false; // Flag for waiting for user input to resume game
+    // --- NEW: Action for custom behavior when waiting for any input ---
+    protected Action _onAnyInputReceivedAction; // Renamed for clarity: internal storage for the action
+
+    protected bool _isWaitingForAnyInput = false; // Flag for waiting for user input to resume game
 
 #if UNITY_EDITOR
     // Reset method for editor convenience (called when script is attached or Reset is clicked)
@@ -75,7 +79,7 @@ public abstract class InteractionControllerBase : MonoBehaviour
 #endif
 
     protected virtual void Awake()
-    {
+    { 
         // Ensure essential references are assigned
         if (mainCarObject == null) { Debug.LogError($"InteractionControllerBase: 'mainCarObject' is not assigned on {name}.", this); enabled = false; return; }
         if (userGuideController == null) { Debug.LogError($"InteractionControllerBase: 'userGuideController' is not assigned on {name}.", this); enabled = false; return; }
@@ -93,12 +97,13 @@ public abstract class InteractionControllerBase : MonoBehaviour
         if (!isInteractionEnabled) return;
 
         // Logic for waiting for any input to resume game (common to both)
-        if (waitingForAnyInput)
+        if (_isWaitingForAnyInput)
         {
             if (Input.anyKeyDown)
             {
                 Debug.Log("Any keyboard/mouse button detected while waiting, proceeding.");
-                ResumeGameAfterWait(); // Call a helper method to encapsulate resume logic
+                _onAnyInputReceivedAction?.Invoke();
+                _isWaitingForAnyInput = false; // Stop waiting after input received
                 return;
             }
         }
@@ -108,16 +113,13 @@ public abstract class InteractionControllerBase : MonoBehaviour
     /// Starts the interaction, typically pausing the game and showing an initial guide.
     /// </summary>
     /// <param name="stopGame">If true, pauses the game.</param>
-    public virtual void StartInteraction(bool stopGame = true)
+    public virtual void StartInteraction()
     {
-        waitingForAnyInput = false; // Reset this flag at the start of any interaction
+        _isWaitingForAnyInput = false; // Reset this flag at the start of any interaction
         isInteractionEnabled = true;
         Debug.Log($"Interaction '{name}' started.");
 
-        if (stopGame)
-        {
-            GameManager.Instance.PauseGame();
-        }
+        GameManager.Instance.PauseGame();
 
         cameraController.ResetCurrentCameraRotation(); // Reset camera
         userGuideController.SetUserGuide(startInteractionGuide); // Show initial guide
@@ -130,49 +132,51 @@ public abstract class InteractionControllerBase : MonoBehaviour
     /// Ends the interaction, typically resuming the game and hiding guides.
     /// </summary>
     /// <param name="resumeGame">If true, resumes the game.</param>
-    public virtual void EndInteraction(bool resumeGame = true)
+    public virtual void EndInteraction()
     {
-        waitingForAnyInput = false;
+        _isWaitingForAnyInput = false;
         isInteractionEnabled = false;
         Debug.Log($"Interaction '{name}' ended.");
 
         userGuideController.EnableUserGuides(false); // Hide all user guides
 
-        if (resumeGame)
-        {
-            GameManager.Instance.ResumeGame();
-        }
+        GameManager.Instance.ResumeGame();
 
         // Disable colliders - specific implementation might be overridden
         if (exitCollider != null) exitCollider.enabled = false;
         if (enterCollider != null) enterCollider.enabled = false;
     }
 
+
     /// <summary>
     /// Restarts the interaction, usually after an "out of bounds" or "car hitted" event.
-    /// This method will pause the game and show a specific user guide.
+    /// This method will pause the game and show a specific user guide, then wait for input.
     /// </summary>
     /// <param name="guideTypeToShow">The specific UserGuideType to display for this restart.</param>
-    public virtual void RestartInteraction(UserGuideType guideTypeToShow)
+    /// <param name="customInputReceivedAction">Optional action to execute when input is received during this wait.</param>
+
+    public virtual void RestartInteraction(UserGuideType guideTypeToShow, Action customInputReceivedAction = null)
     {
         // Disable enter collider temporarily to prevent immediate re-trigger
         if (enterCollider != null) enterCollider.enabled = false;
 
         GameManager.Instance.PauseGame(); // Pause the game
 
-       
+
         userGuideController.SetUserGuide(guideTypeToShow); // Show the specific guide for this restart reason
 
         isInteractionEnabled = true; // Re-enable interaction
-        waitingForAnyInput = true; // Start waiting for input to proceed
+        StartWaitingForAnyInput(customInputReceivedAction); // Start waiting with the provided action
     }
 
     /// <summary>
-    /// Helper method to resume the game after waiting for any input.
+    /// Helper method to restore car state and resume the game after a wait.
+    /// This is the default behavior when any input is received during a wait.
     /// </summary>
-    protected void ResumeGameAfterWait()
+    protected void ResumeGameAfterWait(UserGuideType userGuideType = UserGuideType.None)
     {
-        userGuideController.SetUserGuide(startInteractionGuide); // Set to the initial guide for the interaction
+        UserGuideType guideType = userGuideType == UserGuideType.None ? startInteractionGuide : userGuideType; // Default to startInteractionGuide if none provided
+        userGuideController.SetUserGuide(guideType); // Set to the initial guide for the interaction
         GameManager.Instance.ResumeGame();
         if (storedCarState != null && resumeCarSpeed == 0)
         {
@@ -189,9 +193,33 @@ public abstract class InteractionControllerBase : MonoBehaviour
             Debug.LogWarning("No stored car state found for RestartInteraction. Using resetPos and configured resumeCarSpeed as fallback.");
         }
         StartCoroutine(GameManager.Instance.WaitToPause(resumeTimeDelay)); // Wait a bit before pausing again if needed
-        waitingForAnyInput = false; // Stop waiting
     }
 
     // Abstract method that derived classes MUST implement for their specific "correct" action
     public abstract void CorrectInteraction();
+
+
+    /// <summary>
+    /// Starts waiting for any input from the user.
+    /// Derived classes can provide a custom action to be executed when input is received.
+    /// If no action is provided, `ResumeGameAfterWait()` is used as default.
+    /// </summary>
+    /// <param name="customAction">Optional action to execute when input is received.</param>
+    protected void StartWaitingForAnyInput(Action customAction = null)
+    {
+        _isWaitingForAnyInput = true;
+        // Assign the custom action, or set the default action if null
+        _onAnyInputReceivedAction = customAction ?? ( () => ResumeGameAfterWait() ); // Cast needed for method group
+        Debug.Log($"Interaction '{name}' is now waiting for any input.");
+    }
+
+    /// <summary>
+    /// Stops waiting for any input.
+    /// </summary>
+    protected void StopWaitingForAnyInput()
+    {
+        _isWaitingForAnyInput = false;
+        _onAnyInputReceivedAction = null; // Clear the action
+        Debug.Log($"Interaction '{name}' stopped waiting for input.");
+    }
 }

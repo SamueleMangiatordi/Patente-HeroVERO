@@ -120,7 +120,6 @@ namespace Ezereal
             // 3. Either left or right turn signal (but not hazards) is active.
             if (_hasPerformedSignificantTurn && absSteeringAngle <= steeringAngleThreshold)
             {
-                Debug.Log($"Steering returned to center. Current angle: {currentSteeringAngle}", this);
                 // Only auto-disable if individual turn signals are active, NOT hazard lights
                 if ((_leftTurnActiveInternal || _rightTurnActiveInternal) && !_hazardLightsActiveInternal)
                 {
@@ -129,7 +128,6 @@ namespace Ezereal
                     {
                         StopCoroutine(_turnSignalCoroutine);
                     }
-                    Debug.Log($"Auto disabling turn lights after steering reset. Angle: {currentSteeringAngle}", this);
                     StartCoroutine(WaitToDisableLight(steeringAngleResetDelay)); // Wait before disabling
                 }
                 // Reset _hasPerformedSignificantTurn AFTER triggering the disable

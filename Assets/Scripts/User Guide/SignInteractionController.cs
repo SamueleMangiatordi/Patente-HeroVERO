@@ -1,117 +1,73 @@
 using Ezereal;
-using TMPro;
-using TMPro.Examples;
+using System;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.UI;
+using UnityEngine.Events; // Ensure this is present
 
-public class SignInteractionController : MonoBehaviour
+public class SignInteractionController : InteractionControllerBase // Inherit from the base class
 {
-    [SerializeField] public bool isActive = true; // Whether the sign interaction is active or not
+    [Header("Sign Specific Settings")]
+    [Tooltip("UserGuide to show when the car hits something related to the sign.")]
+    [SerializeField] private UserGuideType carHittedUserGuide;
 
-    [Tooltip("The car prefab with all gameObjects (Simplified Electric Truck - Ready) , not only the electric truck prefab")]
-    [SerializeField] private GameObject mainCarObject;
-    [Tooltip("The speed to set the car when ending the interaction. If setted to 0, the car mantains the speed had before starting the interaction.")]
-    [SerializeField] private float resumeCarSpeed = 0f; //the speed to set the car when starting the interaction, usually 0
-    [SerializeField] private float resumeTimeDelay = 0.15f; //the time to wait before resuming the game after the interaction ends
-    [Tooltip("Since when pausing the game with a button pressed and resuming it with the same button still pressed lose the input and the button is considered not pressed anymore, this event is used to simulate the user elevate the button and pressing it again")]
-    public UnityEvent<float> onResumePressedButton; // UnityEvent to simulate the button press
+    // No specific Awake or Update override needed unless you add unique logic here.
+    // The base Awake and Update will handle common initialization and waitingForAnyInput.
 
-    [SerializeField] private Collider enterCollider;
-    [SerializeField] private Collider exitCollider; // Colliders to detect when the user enters or exits the interaction area
-
-    [SerializeField] private Transform resetPos;    //where to teleport the car if something is wrong
-
-    [SerializeField] private UserGuideController userGuideController; // Reference to the user guide controller
-    [SerializeField] private UserGuideType startInteractionGuide; // Type of user guide to show when interaction starts
-    [SerializeField] private UserGuideType outOfBoundsUserGuide; // Type of user guide to show when interaction starts
-    [SerializeField] private UserGuideType carHittedUserGuide; // Type of user guide to show when interaction ends
-
-    private EzerealCameraController cameraController; // Reference to the camera controller
-    private CarStateParameters storedCarState; // Reference to the car state parameters
-    private SimplifiedCarController carController; // Reference to the car controller
-
-    private bool waitingForAnyInput = false;
-
-    void Update()
+#if UNITY_EDITOR
+    protected override void Reset()
     {
-        if (!isActive)
-            return;
+        base.Reset(); // Call base Reset to get common references
+        // No specific reset logic for SignInteractionController's own fields
+    }
+#endif
 
-        if (waitingForAnyInput)
-        {
-            if (Input.anyKeyDown)
-            {
-                userGuideController.SetUserGuide(startInteractionGuide);
-
-                GameManager.Instance.ResumeGame(); // Resume the game
-                if (storedCarState != null && resumeCarSpeed == 0)
-                {
-
-                    storedCarState.ApplyToCarController(carController);
-                    Debug.Log("Car state restored for RestartInteraction.");
-                }
-                else
-                {
-                    // Fallback if state wasn't stored (e.g., direct call to RestartInteraction without StartInteraction)
-                    // Teleport to resetPos with resumeCarSpeed (or 0 if resumeCarSpeed is 0)
-                    float velocity = resumeCarSpeed == 0 ? 1 : resumeCarSpeed;
-                    carController.TeleportCar(resetPos, velocity, true);
-                    Debug.LogWarning("No stored car state found for RestartInteraction. Using resetPos and configured resumeCarSpeed as fallback.");
-                }
-                // ----------------------------------------------------------w
-                StartCoroutine(GameManager.Instance.WaitToPause(resumeTimeDelay)); // Wait a bit before pausing to ensure the car is telported and ready
-                waitingForAnyInput = false; // Stop waiting
-
-                return; // Consume this input for the guide, do not proceed with other Update logic if any
-
-            }
-        }
+    // SignInteractionController doesn't have a "CorrectInteraction" in the same way
+    // as TriggerableUserGuide (it's not about pressing a button).
+    // It's more about reacting to collisions or entering/exiting zones.
+    // So, we'll implement the abstract method, but it might be empty or call EndInteraction.
+    public override void CorrectInteraction()
+    {
+        StartWaitingForAnyInput( OnSignDetailsEnd );
     }
 
-
-    public void StartInteraction()
+    // --- NEW: Method for when the car hits something specific to the sign ---
+    // This would be called by a collision detection script on the sign itself,
+    // or by another script that detects "hitting the sign".
+    public void OnCarHit()
     {
-        if (isActive)
-        {
-            userGuideController.SetUserGuide(startInteractionGuide); // Show the sign instruction panel
+        if (!isInteractionEnabled) return;
 
-            GameManager.Instance.PauseGame(); // Pause the game
-            cameraController.ResetCurrentCameraRotation(); // Reset the camera rotation to default
+        Debug.Log($"Car hit sign '{name}'. Restarting interaction with 'Car Hitted' guide.");
 
-            storedCarState = new CarStateParameters(carController);
-            waitingForAnyInput = false;
-        }
-        else
-        {
-            Debug.LogWarning("Sign interaction is not active.", this);
-        }
+        // Example: Provide a custom action for 'car hitted'
+        RestartInteraction(carHittedUserGuide, OnCarHitResumeAction);
     }
 
-    public void EndInteraction()
+    // Custom action to be invoked when input is received after car hits sign
+    private void OnCarHitResumeAction()
     {
-        waitingForAnyInput = false; // Reset the flag
-        isActive = false; // Disable the sign interaction
-
-        userGuideController.EnableUserGuides(false); // Hide the user guides
-
-        GameManager.Instance.ResumeGame(); // Resume the game
-
-        exitCollider.enabled = false; // Disable the exit collider
-        enterCollider.enabled = false; // Disable the enter collider
-
+        Debug.Log("Custom action for SignInteractionController: Car Hitted, input received.");
+        // Perform specific logic for when the player hits a sign and then presses a key to resume.
+        // For example, maybe you want to disable the sign entirely after one hit, or reset a score.
+        // Then, call the default resume logic:
+        ResumeGameAfterWait();
     }
 
-    public void RestartInteraction(UserGuideType guideTypeToShow)
+    // Override RestartInteraction if you need custom behavior beyond what the base provides
+    // You can call base.RestartInteraction() and then add custom logic.
+    public override void RestartInteraction(UserGuideType guideTypeToShow, Action customInputReceivedAction = null)
     {
-        enterCollider.enabled = false; // Disable the enter collider
-
-        GameManager.Instance.PauseGame(); // Resume the game
-
-        userGuideController.SetUserGuide(guideTypeToShow); // Show the user guide
-        isActive = true; // Enable the sign interaction
-        waitingForAnyInput = true;
+        base.RestartInteraction(guideTypeToShow, customInputReceivedAction);
+        // Add any SignInteractionController specific restart logic here if needed
+        // For example, if hitting the sign should temporarily disable it.
+        // this.isActive = false; // Example: disable it after a hit, re-enable when fixed
     }
-   
 
+    /// <summary>
+    /// Method called when the user click to dismiss the signal detail panel
+    /// </summary>
+    private void OnSignDetailsEnd()
+    {
+        userGuideController.EnableUserGuides(false); // Disable user guides
+        GameManager.Instance.ResumeGame(); // Resume the game after dismissing the sign details
+    }
 }

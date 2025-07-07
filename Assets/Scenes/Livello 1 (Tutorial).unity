@@ -2049,16 +2049,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 770742099813543676, guid: b3a82b13987baa54ebbb9697ad26ad6a,
-        type: 3}
-      propertyPath: Priority.Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2192314182246827315, guid: b3a82b13987baa54ebbb9697ad26ad6a,
-        type: 3}
-      propertyPath: text
-      value: 
-      objectReference: {fileID: 825432358}
     - target: {fileID: 2192314182246827315, guid: b3a82b13987baa54ebbb9697ad26ad6a,
         type: 3}
       propertyPath: _instructionPanel
@@ -2066,14 +2056,14 @@ PrefabInstance:
       objectReference: {fileID: 331669005}
     - target: {fileID: 2299065685634062872, guid: b3a82b13987baa54ebbb9697ad26ad6a,
         type: 3}
+      propertyPath: field of view
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 2299065685634062872, guid: b3a82b13987baa54ebbb9697ad26ad6a,
+        type: 3}
       propertyPath: near clip plane
       value: 0.1
       objectReference: {fileID: 0}
-    - target: {fileID: 2730207098816112391, guid: b3a82b13987baa54ebbb9697ad26ad6a,
-        type: 3}
-      propertyPath: text
-      value: 
-      objectReference: {fileID: 825432358}
     - target: {fileID: 2730207098816112391, guid: b3a82b13987baa54ebbb9697ad26ad6a,
         type: 3}
       propertyPath: _instructionPanel
@@ -2121,11 +2111,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3449529710320777902, guid: b3a82b13987baa54ebbb9697ad26ad6a,
         type: 3}
-      propertyPath: text
-      value: 
-      objectReference: {fileID: 825432358}
-    - target: {fileID: 3449529710320777902, guid: b3a82b13987baa54ebbb9697ad26ad6a,
-        type: 3}
       propertyPath: _instructionPanel
       value: 
       objectReference: {fileID: 331669005}
@@ -2139,36 +2124,6 @@ PrefabInstance:
       propertyPath: onTurnSignal.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1767949555}
-    - target: {fileID: 4574907805826296756, guid: b3a82b13987baa54ebbb9697ad26ad6a,
-        type: 3}
-      propertyPath: PanAxis.Recentering.Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5785365166283527682, guid: b3a82b13987baa54ebbb9697ad26ad6a,
-        type: 3}
-      propertyPath: UpdateMethod
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5785365166283527682, guid: b3a82b13987baa54ebbb9697ad26ad6a,
-        type: 3}
-      propertyPath: IgnoreTimeScale
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5785365166283527682, guid: b3a82b13987baa54ebbb9697ad26ad6a,
-        type: 3}
-      propertyPath: ShowCameraFrustum
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5785365166283527682, guid: b3a82b13987baa54ebbb9697ad26ad6a,
-        type: 3}
-      propertyPath: LensModeOverride.Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6254823369843878369, guid: b3a82b13987baa54ebbb9697ad26ad6a,
-        type: 3}
-      propertyPath: IgnoreTimeScale
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6382011616178552990, guid: b3a82b13987baa54ebbb9697ad26ad6a,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -20318,44 +20273,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5671598878457006745, guid: e6978b2a7ea48cb4887ccd2b0cf84339,
         type: 3}
-      propertyPath: onTriggerEnter.m_PersistentCalls.m_Calls.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5671598878457006745, guid: e6978b2a7ea48cb4887ccd2b0cf84339,
-        type: 3}
-      propertyPath: onTriggerEnter.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 5671598878457006745, guid: e6978b2a7ea48cb4887ccd2b0cf84339,
-        type: 3}
       propertyPath: onTriggerEnter.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 3528580912152540815}
-    - target: {fileID: 5671598878457006745, guid: e6978b2a7ea48cb4887ccd2b0cf84339,
-        type: 3}
-      propertyPath: onTriggerEnter.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5671598878457006745, guid: e6978b2a7ea48cb4887ccd2b0cf84339,
-        type: 3}
-      propertyPath: onTriggerEnter.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: set_isOn
-      objectReference: {fileID: 0}
-    - target: {fileID: 5671598878457006745, guid: e6978b2a7ea48cb4887ccd2b0cf84339,
-        type: 3}
-      propertyPath: onTriggerEnter.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: UnityEngine.UI.Toggle, UnityEngine.UI
-      objectReference: {fileID: 0}
-    - target: {fileID: 5671598878457006745, guid: e6978b2a7ea48cb4887ccd2b0cf84339,
-        type: 3}
-      propertyPath: onTriggerEnter.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5671598878457006745, guid: e6978b2a7ea48cb4887ccd2b0cf84339,
-        type: 3}
-      propertyPath: onTriggerEnter.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 6169897886471806312, guid: e6978b2a7ea48cb4887ccd2b0cf84339,
         type: 3}
       propertyPath: text
