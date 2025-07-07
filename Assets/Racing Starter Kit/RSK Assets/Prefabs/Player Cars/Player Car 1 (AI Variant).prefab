@@ -373,6 +373,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1925208844332577874}
+    - targetCorrespondingSourceObject: {fileID: 8477005404861546044, guid: 67f7e9c2d00e44d1a8bae5a09d2bc4ab,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2871926418005881562}
   m_SourcePrefab: {fileID: 100100000, guid: 67f7e9c2d00e44d1a8bae5a09d2bc4ab, type: 3}
 --- !u!114 &1483835861577561291 stripped
 MonoBehaviour:
@@ -420,6 +424,32 @@ MonoBehaviour:
   m_Target: {fileID: 0}
   m_StopWhenTargetReached: 0
   m_ReachTargetThreshold: 2
+--- !u!1 &2604630927256305534 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8477005404861546044, guid: 67f7e9c2d00e44d1a8bae5a09d2bc4ab,
+    type: 3}
+  m_PrefabInstance: {fileID: 5873218964947796290}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2871926418005881562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2604630927256305534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c6929b96d868294b988f4266085dd35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  validTags:
+  - Player
+  onTriggerEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  onTriggerExit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!54 &4668794905076428566 stripped
 Rigidbody:
   m_CorrespondingSourceObject: {fileID: 1246153206815714900, guid: 67f7e9c2d00e44d1a8bae5a09d2bc4ab,

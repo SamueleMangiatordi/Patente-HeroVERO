@@ -14,16 +14,21 @@ namespace Ezereal
         [SerializeField] private GameObject[] cameras; // Assume cameras are in order: cockpit, close, far, locked, wheel
 
         [Header("Rotation Reset Settings")]
-        [Tooltip("The duration (in seconds) for the camera to smoothly reset its rotation.")]
-        [SerializeField] private float resetRotationDuration = 0.5f; // Default duration for the smooth reset
+        [Tooltip("The duration (in seconds) for Cinemachine's internal recentering animation.")]
+        [SerializeField] private float cinemachineRecenterDuration = 0.5f; // Used for RecenterTime
 
-        // Private fields to manage the smooth rotation process
-        private Coroutine _resetRotationCoroutine; // Stores reference to the running coroutine
-       
+        [Tooltip("The time (in seconds) to wait after input stops before recentering begins.")]
+        [SerializeField] private float cinemachineRecenterWaitTime = 0.1f; // Used for WaitTime
+
+        [Tooltip("Tolerance for checking if a Cinemachine Axis value is effectively zero.")]
+        [SerializeField] private float axisResetTolerance = 0.01f;
+
+        private Coroutine _resetMonitorCoroutine; // Monitors when recentering is complete
+
         private void Awake()
         {
             // Initialize camera view. Assuming Vector3.zero for rotation means identity or default world alignment.
-            SetCameraView(currentCameraView, Vector3.zero);
+            SetCameraView(currentCameraView, true);
         }
 
         void OnSwitchCamera()
@@ -31,188 +36,311 @@ namespace Ezereal
             // Calculate the next camera view
             currentCameraView = (CameraViews)(((int)currentCameraView + 1) % cameras.Length);
 
-            // If a rotation reset is currently in progress, stop it before switching cameras
-            if (_resetRotationCoroutine != null)
+            // If a reset monitor is currently in progress, stop it before switching cameras
+            if (_resetMonitorCoroutine != null)
             {
-                StopCoroutine(_resetRotationCoroutine);
-                _resetRotationCoroutine = null; // Clear the reference
+                StopCoroutine(_resetMonitorCoroutine);
+                _resetMonitorCoroutine = null; // Clear the reference
             }
 
-            // Set the new camera view instantly with its default rotation (Vector3.zero means Quaternion.identity)
-            SetCameraView(currentCameraView, Vector3.zero);
-        }
-
-        public void SetCameraView(CameraViews view, Vector3 rotation) // 'rotation' parameter will now imply default axis values for Cinemachine
-        {
-            for (int i = 0; i < cameras.Length; i++)
-            {
-                // Deactivate all cameras first
-                if (cameras[i] != null)
-                {
-                    cameras[i].SetActive(false);
-                }
-
-                if (i == (int)view)
-                {
-                    if (cameras[i] != null)
-                    {
-                        cameras[i].SetActive(true);
-
-                        // Get the CinemachineVirtualCamera component
-                        CinemachineCamera virtualCamera = cameras[i].GetComponent<CinemachineCamera>();
-                        if (virtualCamera == null)
-                        {
-                            Debug.LogWarning($"EzerealCameraController: Camera GameObject '{cameras[i].name}' does not have a CinemachineVirtualCamera component.", this);
-                            continue;
-                        }
-
-                        // Based on the camera type, set its axis values to default (implied by Vector3.zero in 'rotation')
-                        if (view == CameraViews.cockpit)
-                        {
-                            CinemachinePanTilt panTilt = virtualCamera.GetComponent<CinemachinePanTilt>();
-                            if (panTilt != null)
-                            {
-                                // Reset POV axes to their default (center)
-                                panTilt.PanAxis.Value = 0f;
-                                panTilt.TiltAxis.Value = 0f;
-                            }
-                        }
-                        else if (view == CameraViews.close || view == CameraViews.far)
-                        {
-                            CinemachineOrbitalFollow orbital = virtualCamera.GetComponent<CinemachineOrbitalFollow>();
-                            if (orbital != null)
-                            {
-                                // Reset Orbital X-Axis to its default (0)
-                                orbital.HorizontalAxis.Value = 0f;
-                            }
-                        }
-                        // For other camera types, you might have different default settings or no rotation to reset
-                    }
-                }
-            }
+            // Set the new camera view, instantly resetting its default rotation
+            SetCameraView(currentCameraView, true); // Pass true to force an immediate reset
         }
 
         /// <summary>
-        /// Smoothly resets the currently active camera's rotation (Cinemachine axes) to its default.
+        /// Smoothly resets the currently active camera's rotation using Cinemachine's built-in recentering.
         /// </summary>
         public void ResetCurrentCameraRotation()
         {
-            int index = (int)currentCameraView;
-            GameObject currentCameraGameObject = cameras[index];
-
-            if (currentCameraGameObject == null)
+            if (cameras == null || cameras.Length == 0)
             {
-                Debug.LogWarning("EzerealCameraController: The current camera GameObject is null. Cannot reset rotation.", this);
-                return;
-            }
-            if (car == null)
-            {
-                // This warning is less critical now as we are resetting Cinemachine axes,
-                // which might not directly depend on 'car.transform.rotation' for their target default (usually 0).
-                // However, if the intent was to align with car's *forward*, then car is still relevant.
-                // For POV and Orbital, the default is typically axis.Value = 0.
-                Debug.LogWarning("EzerealCameraController: The 'car' reference is null. Default reset for Cinemachine axes will be to zero.", this);
-            }
-
-            // Stop any existing smooth rotation coroutine before starting a new one
-            if (_resetRotationCoroutine != null)
-            {
-                StopCoroutine(_resetRotationCoroutine);
-            }
-
-            // Get the CinemachineVirtualCamera component from the active camera GameObject
-            CinemachineCamera virtualCamera = currentCameraGameObject.GetComponent<CinemachineCamera>();
-            if (virtualCamera == null)
-            {
-                Debug.LogWarning($"EzerealCameraController: Active camera '{currentCameraGameObject.name}' does not have a CinemachineVirtualCamera component.", this);
+                Debug.LogWarning("EzerealCameraController: Virtual Cameras array is not assigned or empty! Cannot reset rotation.", this);
                 return;
             }
 
-            // Determine the type of Cinemachine component and start the appropriate reset coroutine
-            if (currentCameraView == CameraViews.cockpit)
+            CinemachineCamera activeCamera = cameras[(int)currentCameraView].GetComponent<CinemachineCamera>();
+
+            if (activeCamera == null)
             {
-                CinemachinePanTilt panTilt = virtualCamera.GetComponent<CinemachinePanTilt>();
-                if (panTilt != null)
+                Debug.LogWarning("EzerealCameraController: The current active virtual camera is null. Cannot reset rotation.", this);
+                return;
+            }
+
+            // Stop any existing monitoring coroutine
+            if (_resetMonitorCoroutine != null)
+            {
+                StopCoroutine(_resetMonitorCoroutine);
+                _resetMonitorCoroutine = null;
+            }
+
+            // Enable recentering and start monitoring its completion
+            _resetMonitorCoroutine = StartCoroutine(MonitorCinemachineRecenter(activeCamera));
+        }
+
+        //public void SetCameraView(CameraViews view, bool instantReset) // 'rotation' parameter will now imply default axis values for Cinemachine
+        //{
+        //    for (int i = 0; i < cameras.Length; i++)
+        //    {
+        //        // Deactivate all cameras first
+        //        if (cameras[i] != null)
+        //        {
+        //            cameras[i].SetActive(false);
+        //        }
+
+        //        if (i == (int)view)
+        //        {
+        //            if (cameras[i] != null)
+        //            {
+        //                cameras[i].SetActive(true);
+
+        //                // Get the CinemachineVirtualCamera component
+        //                CinemachineCamera virtualCamera = cameras[i].GetComponent<CinemachineCamera>();
+        //                if (virtualCamera == null)
+        //                {
+        //                    Debug.LogWarning($"EzerealCameraController: Camera GameObject '{cameras[i].name}' does not have a CinemachineVirtualCamera component.", this);
+        //                    continue;
+        //                }
+
+        //                // Based on the camera type, set its axis values to default (implied by Vector3.zero in 'rotation')
+        //                if (view == CameraViews.cockpit)
+        //                {
+        //                    CinemachinePanTilt panTilt = virtualCamera.GetComponent<CinemachinePanTilt>();
+        //                    if (panTilt != null)
+        //                    {
+        //                        // Reset POV axes to their default (center)
+        //                        panTilt.PanAxis.Value = 0f;
+        //                        panTilt.TiltAxis.Value = 0f;
+        //                    }
+        //                }
+        //                else if (view == CameraViews.close || view == CameraViews.far)
+        //                {
+        //                    CinemachineOrbitalFollow orbital = virtualCamera.GetComponent<CinemachineOrbitalFollow>();
+        //                    if (orbital != null)
+        //                    {
+        //                        // Reset Orbital X-Axis to its default (0)
+        //                        orbital.HorizontalAxis.Value = 0f;
+        //                    }
+        //                }
+        //                // For other camera types, you might have different default settings or no rotation to reset
+        //            }
+        //        }
+        //    }
+        //}
+
+        /// <summary>
+        /// Activates a specific virtual camera view and optionally resets its Cinemachine axes.
+        /// </summary>
+        /// <param name="view">The CameraViews enum representing the desired camera.</param>
+        /// <param name="instantReset">If true, axes are set directly to 0. If false, existing axis values are maintained.</param>
+        public void SetCameraView(CameraViews view, bool instantReset)
+        {
+
+            for (int i = 0; i < cameras.Length; i++)
+            {
+                if (cameras[i] != null)
                 {
-                    _resetRotationCoroutine = StartCoroutine(SmoothlyResetPanTilt(panTilt));
-                }
-                else
-                {
-                    Debug.LogWarning("EzerealCameraController: Cockpit camera view but no CinemachinePOV component found.", this);
+                    cameras[i].gameObject.SetActive(i == (int)view);
                 }
             }
-            else if (currentCameraView == CameraViews.close || currentCameraView == CameraViews.far)
+
+            CinemachineCamera activeCamera = cameras[(int)view].GetComponent<CinemachineCamera>();
+
+            // If we are resetting, ensure any active recentering is stopped first.
+            if (instantReset)
             {
-                CinemachineOrbitalFollow orbital = virtualCamera.GetComponent<CinemachineOrbitalFollow>();
-                if (orbital != null)
-                {
-                    _resetRotationCoroutine = StartCoroutine(SmoothlyResetOrbitalXAxis(orbital));
-                }
-                else
-                {
-                    Debug.LogWarning("EzerealCameraController: Free camera view but no CinemachineOrbitalTransposer component found.", this);
-                }
-            }
-            else
-            {
-                Debug.LogWarning($"EzerealCameraController: Reset not implemented for camera view: {currentCameraView}", this);
+                // Directly set the axis values to 0 for instant reset
+                ResetCinemachineAxesInstant(activeCamera);
             }
         }
 
-        // Coroutine to handle smooth reset for CinemachinePOV axes (Pan and Tilt)
-        private IEnumerator SmoothlyResetPanTilt(CinemachinePanTilt panTilt)
+        ///// <summary>
+        ///// Smoothly resets the currently active camera's rotation (Cinemachine axes) to its default.
+        ///// </summary>
+        //public void ResetCurrentCameraRotation()
+        //{
+        //    int index = (int)currentCameraView;
+        //    GameObject currentCameraGameObject = cameras[index];
+
+        //    if (currentCameraGameObject == null)
+        //    {
+        //        Debug.LogWarning("EzerealCameraController: The current camera GameObject is null. Cannot reset rotation.", this);
+        //        return;
+        //    }
+        //    if (car == null)
+        //    {
+        //        // This warning is less critical now as we are resetting Cinemachine axes,
+        //        // which might not directly depend on 'car.transform.rotation' for their target default (usually 0).
+        //        // However, if the intent was to align with car's *forward*, then car is still relevant.
+        //        // For POV and Orbital, the default is typically axis.Value = 0.
+        //        Debug.LogWarning("EzerealCameraController: The 'car' reference is null. Default reset for Cinemachine axes will be to zero.", this);
+        //    }
+
+        //    // Stop any existing smooth rotation coroutine before starting a new one
+        //    if (_resetRotationCoroutine != null)
+        //    {
+        //        StopCoroutine(_resetRotationCoroutine);
+        //    }
+
+        //    // Get the CinemachineVirtualCamera component from the active camera GameObject
+        //    CinemachineCamera virtualCamera = currentCameraGameObject.GetComponent<CinemachineCamera>();
+        //    if (virtualCamera == null)
+        //    {
+        //        Debug.LogWarning($"EzerealCameraController: Active camera '{currentCameraGameObject.name}' does not have a CinemachineVirtualCamera component.", this);
+        //        return;
+        //    }
+
+        //    // Determine the type of Cinemachine component and start the appropriate reset coroutine
+        //    if (currentCameraView == CameraViews.cockpit)
+        //    {
+        //        CinemachinePanTilt panTilt = virtualCamera.GetComponent<CinemachinePanTilt>();
+
+        //        if (panTilt != null)
+        //        {
+        //            _resetRotationCoroutine = StartCoroutine(SmoothlyResetPanTilt(panTilt));
+        //        }
+        //        else
+        //        {
+        //            Debug.LogWarning("EzerealCameraController: Cockpit camera view but no CinemachinePOV component found.", this);
+        //        }
+        //    }
+        //    else if (currentCameraView == CameraViews.close || currentCameraView == CameraViews.far)
+        //    {
+        //        CinemachineOrbitalFollow orbital = virtualCamera.GetComponent<CinemachineOrbitalFollow>();
+        //        if (orbital != null)
+        //        {
+        //            _resetRotationCoroutine = StartCoroutine(SmoothlyResetOrbitalXAxis(orbital));
+        //        }
+        //        else
+        //        {
+        //            Debug.LogWarning("EzerealCameraController: Free camera view but no CinemachineOrbitalTransposer component found.", this);
+        //        }
+        //    }
+        //    else
+        //    {
+        //        Debug.LogWarning($"EzerealCameraController: Reset not implemented for camera view: {currentCameraView}", this);
+        //    }
+        //}
+
+        // Helper to instantly reset Cinemachine axes
+        private void ResetCinemachineAxesInstant(CinemachineCamera virtualCamera)
         {
-            if (panTilt == null) yield break; // Safety check
-
-            float initialVerticalValue = panTilt.TiltAxis.Value;
-            float initialHorizontalValue = panTilt.PanAxis.Value;
-
-            float resetStartTimeUnscaled = Time.unscaledTime; // Use unscaled time
-            float elapsedTime = 0f;
-
-            while (elapsedTime < resetRotationDuration)
+            // Reset POV component (for cockpit)
+            if (virtualCamera.TryGetComponent<CinemachinePanTilt>(out var panTilt))
             {
-                elapsedTime = Time.unscaledTime - resetStartTimeUnscaled; // Use unscaled time
-                float t = elapsedTime / resetRotationDuration;
-
-                // Lerp both vertical and horizontal axis values to 0
-                panTilt.TiltAxis.Value = Mathf.Lerp(initialVerticalValue, 0f, t);
-                panTilt.PanAxis.Value = Mathf.Lerp(initialHorizontalValue, 0f, t);
-
-                panTilt.transform.rotation = Quaternion.Euler(panTilt.TiltAxis.Value, panTilt.PanAxis.Value, 0f); // Update rotation based on axes
-                yield return null;
+                panTilt.PanAxis.Value = 0f;
+                panTilt.TiltAxis.Value = 0f;
+                panTilt.PanAxis.Recentering.Enabled = false; // Ensure it's not trying to recenter
+                panTilt.TiltAxis.Recentering.Enabled = false;
+                Debug.Log($"EzerealCameraController: Instantly reset PanTilt for {virtualCamera.name}");
             }
-
-            // Ensure values are exactly 0 at the end
-            panTilt.TiltAxis.Value = 0f;
-            panTilt.PanAxis.Value = 0f;
-            _resetRotationCoroutine = null;
+            // Reset Orbital component (for close/far)
+            if (virtualCamera.TryGetComponent<CinemachineOrbitalFollow>(out var orbital))
+            {
+                orbital.HorizontalAxis.Value = 0f;
+                orbital.HorizontalAxis.Recentering.Enabled = false; // Ensure it's not trying to recenter
+                Debug.Log($"EzerealCameraController: Instantly reset Orbital X-Axis for {virtualCamera.name}");
+            }
+            // Add other Cinemachine components if you have more types (e.g., FreeLook, Transposer etc.)
         }
 
-        // Coroutine to handle smooth reset for CinemachineOrbitalTransposer's X-Axis
-        private IEnumerator SmoothlyResetOrbitalXAxis(CinemachineOrbitalFollow orbital)
+        // Coroutine to enable Cinemachine recentering and monitor its completion
+        IEnumerator MonitorCinemachineRecenter(CinemachineCamera virtualCamera)
         {
-            if (orbital == null) yield break; // Safety check
+            bool recenterStarted = false;
+            bool panTiltRecenterEnabled = false;
+            bool orbitalRecenterEnabled = false;
 
-            float initialXAxisValue = orbital.HorizontalAxis.Value;
+            // Get Cinemachine components.
+            CinemachinePanTilt panTilt = virtualCamera.GetComponent<CinemachinePanTilt>();
+            CinemachineOrbitalFollow orbital = virtualCamera.GetComponent<CinemachineOrbitalFollow>();
 
-            float resetStartTimeUnscaled = Time.unscaledTime; // Use unscaled time
-            float elapsedTime = 0f;
-
-            while (elapsedTime < resetRotationDuration)
+            if (panTilt != null)
             {
-                elapsedTime = Time.unscaledTime - resetStartTimeUnscaled; // Use unscaled time
-                float t = elapsedTime / resetRotationDuration;
-
-                // Lerp the X-Axis value to 0
-                orbital.HorizontalAxis.Value = Mathf.Lerp(initialXAxisValue, 0f, t);
-
-                yield return null;
+                panTilt.PanAxis.Recentering.Enabled = true;
+                panTilt.PanAxis.Recentering.Wait = cinemachineRecenterWaitTime;
+                panTilt.PanAxis.Recentering.Time = cinemachineRecenterDuration;
+                panTilt.TiltAxis.Recentering.Enabled = true;
+                panTilt.TiltAxis.Recentering.Wait = cinemachineRecenterWaitTime;
+                panTilt.TiltAxis.Recentering.Time = cinemachineRecenterDuration;
+                panTiltRecenterEnabled = true;
+                recenterStarted = true;
+                Debug.Log($"EzerealCameraController: Enabling PanTilt recentering for {virtualCamera.name}");
+            }
+            if (orbital != null)
+            {
+                orbital.HorizontalAxis.Recentering.Enabled = true;
+                orbital.HorizontalAxis.Recentering.Wait = cinemachineRecenterWaitTime;
+                orbital.HorizontalAxis.Recentering.Time = cinemachineRecenterDuration;
+                orbitalRecenterEnabled = true;
+                recenterStarted = true;
+                Debug.Log($"EzerealCameraController: Enabling Orbital recentering for {virtualCamera.name}");
             }
 
-            // Ensure value is exactly 0 at the end
-            orbital.HorizontalAxis.Value = 0f;
-            _resetRotationCoroutine = null;
+            if (!recenterStarted)
+            {
+                Debug.LogWarning($"EzerealCameraController: No recognizable Cinemachine component for recentering on camera '{virtualCamera.name}'.", this);
+                _resetMonitorCoroutine = null;
+                yield break;
+            }
+
+            // --- IMPORTANT FOR TIME.TIMESCALE = 0 ---
+            // If Time.timeScale is 0, Cinemachine's internal updates might also be paused.
+            // To ensure recentering happens, you might need to manually call virtualCamera.UpdateCameraState().
+            // However, the best approach is usually to configure CinemachineBrain's Update Method.
+            // If you set CinemachineBrain's "Update Method" to "Late Update (unscaled)"
+            // or a similar "unscaled" option, it will update regardless of Time.timeScale.
+            // Alternatively, if you need to manually control updates (e.g., for frame-by-frame debug),
+            // you could set the Virtual Camera's "Update Method" to "Manual Update" and call its UpdateCameraState()
+            // from your own Update/FixedUpdate with Time.unscaledDeltaTime.
+            // For typical gameplay, ensuring CinemachineBrain is set to an unscaled update method is simplest.
+
+            // Wait until recentering is complete
+            bool isRecenterComplete = false;
+            while (!isRecenterComplete)
+            {
+                isRecenterComplete = true; // Assume complete unless proven otherwise
+
+                if (panTiltRecenterEnabled)
+                {
+                    // Check if both Pan and Tilt axes are close to their target (0)
+                    if (Mathf.Abs(panTilt.PanAxis.Value) > axisResetTolerance ||
+                        Mathf.Abs(panTilt.TiltAxis.Value) > axisResetTolerance)
+                    {
+                        isRecenterComplete = false;
+                    }
+                }
+
+                if (orbitalRecenterEnabled)
+                {
+                    // Check if Orbital X-Axis is close to its target (0)
+                    if (Mathf.Abs(orbital.HorizontalAxis.Value) > axisResetTolerance)
+                    {
+                        isRecenterComplete = false;
+                    }
+                }
+
+                // If recentering is not yet complete, yield and check again next frame
+                if (!isRecenterComplete)
+                {
+                    yield return null; // Wait for the next frame
+                }
+            }
+
+            // Recentering is complete, now disable the recentering properties
+            if (panTiltRecenterEnabled)
+            {
+                panTilt.PanAxis.Recentering.Enabled = false;
+                panTilt.TiltAxis.Recentering.Enabled = false;
+                Debug.Log($"EzerealCameraController: PanTilt recentering disabled for {virtualCamera.name}");
+            }
+            if (orbitalRecenterEnabled)
+            {
+                orbital.HorizontalAxis.Recentering.Enabled = false;
+                Debug.Log($"EzerealCameraController: Orbital recentering disabled for {virtualCamera.name}");
+            }
+
+            _resetMonitorCoroutine = null;
+            Debug.Log($"EzerealCameraController: Camera {virtualCamera.name} reset to center completed.");
         }
     }
 }

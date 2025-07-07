@@ -325,7 +325,7 @@ public class SimplifiedCarController : MonoBehaviour // This is the main system 
         CurrentSteerAngle = Mathf.Lerp(CurrentSteerAngle, adjustedTurnAngle, Time.deltaTime * steeringSpeed);
 
         
-        ezerealLightController.AutoDisableTurnLight(TargetSteerAngle); // Disable turn lights if steering angle is zero
+        ezerealLightController.AutoDisableTurnLight(CurrentSteerAngle); // Disable turn lights if steering angle is zero
 
         frontLeftWheelCollider.steerAngle = CurrentSteerAngle;
         frontRightWheelCollider.steerAngle = CurrentSteerAngle;

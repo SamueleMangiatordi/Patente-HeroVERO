@@ -147,13 +147,13 @@ public class CarTurnLightSignalController : MonoBehaviour
                     if (ErrorsCount < errorsAllowd)
                     {
                         onError?.Invoke(); // Invoke the event if set
-                        userGuideController.SetuserGuide(UserGuideType.TurnSignalError);
+                        userGuideController.SetUserGuide(UserGuideType.TurnSignalError);
                         StartCoroutine(ClearErrorAfterDelay(warningDuration)); // Clear error after warning duration
 
                     }
                     else
                     {
-                        userGuideController.SetuserGuide(UserGuideType.TurnSignalErrorExceeded);
+                        userGuideController.SetUserGuide(UserGuideType.TurnSignalErrorExceeded);
                         GameManager.Instance.PauseGame();
                         onErrorExceeded?.Invoke(); // Invoke the event for exceeding error limit
                         StartCoroutine(WaitToDetectAnyInput(delayBeforeCheckingForAnyInput)); // Wait before checking for any input, so the user can see the warning and not discard it without reading it
@@ -189,12 +189,12 @@ public class CarTurnLightSignalController : MonoBehaviour
                     if (ErrorsCount < errorsAllowd)
                     {
                         onError?.Invoke(); // Invoke the event if set
-                        userGuideController.SetuserGuide(UserGuideType.TurnSignalError);
+                        userGuideController.SetUserGuide(UserGuideType.TurnSignalError);
                         StartCoroutine(ClearErrorAfterDelay(warningDuration)); // Clear error after warning duration
                     }
                     else
                     {
-                        userGuideController.SetuserGuide(UserGuideType.TurnSignalErrorExceeded);
+                        userGuideController.SetUserGuide(UserGuideType.TurnSignalErrorExceeded);
                         onErrorExceeded?.Invoke(); // Invoke the event for exceeding error limit
                         GameManager.Instance.PauseGame();
                         StartCoroutine(WaitToDetectAnyInput(delayBeforeCheckingForAnyInput)); // Wait before checking for any input, so the user can see the warning and not discard it without reading it

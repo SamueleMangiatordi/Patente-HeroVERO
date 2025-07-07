@@ -163,6 +163,6 @@ public class CarResetPos : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(delay);
         waitingForAnyInput = true; // Set the flag to indicate we are waiting for input
-        userGuideController.SetuserGuide(UserGuideType.CarResetPosition); // Set the user guide to the car reset position type
+        userGuideController.SetUserGuide(UserGuideType.CarResetPosition); // Set the user guide to the car reset position type
     }
 }

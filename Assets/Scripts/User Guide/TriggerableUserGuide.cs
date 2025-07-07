@@ -77,7 +77,7 @@ public class TriggerableUserGuide : MonoBehaviour
             {
                 Debug.Log("Any keyboard/mouse button detected while waiting, proceeding with normal guide.");
                 
-                userGuideController.SetuserGuide(startInteractionGuide); // Set the user guide to the one specified for starting interaction
+                userGuideController.SetUserGuide(startInteractionGuide); // Set the user guide to the one specified for starting interaction
 
                 //userGuideController.NextMessage();    // Display the *next* message (your first normal instruction)
                 //userGuideController.ShowAllComplementaryUI(false); // Show the first complementary UI element
@@ -137,7 +137,7 @@ public class TriggerableUserGuide : MonoBehaviour
             GameManager.Instance.PauseGame();
 
         cameraController.ResetCurrentCameraRotation(); // Reset the camera rotation to default
-        userGuideController.SetuserGuide(startInteractionGuide); // Set the user guide to the one specified for starting interaction
+        userGuideController.SetUserGuide(startInteractionGuide); // Set the user guide to the one specified for starting interaction
 
         // Always reset state when interaction starts
         isPressed = false;
@@ -195,7 +195,7 @@ public class TriggerableUserGuide : MonoBehaviour
         //}
         //// ----------------------------------------------------------
 
-        userGuideController.SetuserGuide(outOfBoundsUserGuide); // Reset the user guide to the one specified for starting interaction
+        userGuideController.SetUserGuide(outOfBoundsUserGuide); // Reset the user guide to the one specified for starting interaction
 
         isInteractionEnabled = true;
         waitingForAnyInput = true;

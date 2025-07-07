@@ -11,5 +11,6 @@ public enum UserGuideType
     TurnSignalErrorExceeded,
     OffRoad,
     CarResetPosition,
-    // Add all your specific user guide identifiers here
+    CarHitted,
+    //!!ALWAYS PUT NEW TYPE AT THE AND OF THE LIST!! Otherwise the index will change and break existing references
 }

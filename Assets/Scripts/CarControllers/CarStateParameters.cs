@@ -63,7 +63,8 @@ public class CarStateParameters
     /// This method performs a robust state restoration.
     /// </summary>
     /// <param name="carController">The SimplifiedCarController instance to apply state to.</param>
-    public void ApplyToCarController(SimplifiedCarController carController)
+    /// <param name="steerAngle">Optional steer angle to apply. If not specified the saved steer will used.</param> 
+    public void ApplyToCarController(SimplifiedCarController carController, float steerAngle = 100)
     {
         if (carController.vehicleRB == null)
         {
@@ -119,8 +120,8 @@ public class CarStateParameters
         carController.SetIsStarted(isStarted);
         carController.CurrentThrottleInput = Mathf.Clamp(currentThrottleInput, -1, 1);
         carController.CurrentHandbrakeValue = Mathf.Clamp(currentHandbrakeValue, 0, 1);
-        carController.TargetSteerAngle = targetSteerAngle;
-        carController.CurrentSteerAngle = currentSteerAngle; // Set the current steer angle directly for immediate visual/physics accuracy
+        carController.TargetSteerAngle = steerAngle == 100 ? 0 : targetSteerAngle;
+        carController.CurrentSteerAngle = steerAngle == 100 ? 0 : currentSteerAngle; // Set the current steer angle directly for immediate visual/physics accuracy
 
         // Immediately try to put the Rigidbody to sleep if it's supposed to be stationary.
         // If it has a non-zero velocity, it will wake up on its own.
@@ -148,14 +149,15 @@ public class CarStateParameters
         // }
     }
 
-    public void TeleportCarToSavedPos(SimplifiedCarController carController, float desiredSpeed, bool forward)
+    public void TeleportCarToSavedPos(SimplifiedCarController carController, float desiredSpeed = 0, bool forward = true)
     {
         if (carController == null || carController.vehicleRB == null)
         {
             Debug.LogError("Cannot teleport to car: CarController or its Rigidbody is not assigned.");
             return;
         }
+        float velocity = desiredSpeed > 0 ? desiredSpeed : currentSpeed; // Use desired speed if provided, otherwise use stored speed
 
-        carController.TeleportCar(position, rotation, desiredSpeed, forward);
+        carController.TeleportCar(position, rotation, velocity, forward);
     }
 }

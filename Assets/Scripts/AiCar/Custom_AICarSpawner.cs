@@ -2,6 +2,7 @@ using SpinMotion;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class AiCarSpawner : MonoBehaviour
 {
@@ -73,6 +74,9 @@ public class AiCarSpawner : MonoBehaviour
             aiTracker.SetupAICarCollider(aiCar.GetComponentInChildren<AICarWaypointTrackerColliderTrigger>().GetColliderTrigger());
 
             aiCar.GetComponent<CarAIControl>().SetTarget(aiTracker.transform); // replace with your car controller ai target to aim/follow
+
+            BoundaryTrigger bTrig = aiCar.GetComponentInChildren<BoundaryTrigger>();
+            bTrig.onTriggerEnter.AddListener(aICarSpawnData.onCollisionEvent.Invoke);
         }
 
         foreach (var (aiCar, _, _) in spawnedPlayers)
@@ -124,6 +128,9 @@ public class AICarSpawnData
     public Transform spawnPoint;
     [Tooltip("The parent object that contains all the relative AI Waypoints of this car")]
     public GameObject WaypointsParent;
+
+    public UnityEvent onCollisionEvent;
+
 
     public List<AIWaypoint> aiWaypoints; // List of waypoints for the AI car to follow
 }

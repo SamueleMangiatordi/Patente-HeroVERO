@@ -1688,7 +1688,7 @@ PrefabInstance:
     - target: {fileID: 665168554190798833, guid: e6978b2a7ea48cb4887ccd2b0cf84339,
         type: 3}
       propertyPath: resumeCarSpeed
-      value: 0
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 665168554190798833, guid: e6978b2a7ea48cb4887ccd2b0cf84339,
         type: 3}
@@ -1773,6 +1773,11 @@ PrefabInstance:
     - target: {fileID: 3607100497414559449, guid: e6978b2a7ea48cb4887ccd2b0cf84339,
         type: 3}
       propertyPath: text
+      value: 
+      objectReference: {fileID: 825432358}
+    - target: {fileID: 3607100497414559449, guid: e6978b2a7ea48cb4887ccd2b0cf84339,
+        type: 3}
+      propertyPath: mainTitleText
       value: 
       objectReference: {fileID: 825432358}
     - target: {fileID: 3607100497414559449, guid: e6978b2a7ea48cb4887ccd2b0cf84339,
@@ -1875,6 +1880,16 @@ PrefabInstance:
       propertyPath: message
       value: Premi "D" per svoltare a destra
       objectReference: {fileID: 0}
+    - target: {fileID: 6169897886471806312, guid: e6978b2a7ea48cb4887ccd2b0cf84339,
+        type: 3}
+      propertyPath: mainMessage
+      value: Premi "D" per svoltare a destra
+      objectReference: {fileID: 0}
+    - target: {fileID: 6169897886471806312, guid: e6978b2a7ea48cb4887ccd2b0cf84339,
+        type: 3}
+      propertyPath: mainTitleText
+      value: 
+      objectReference: {fileID: 825432358}
     - target: {fileID: 6169897886471806312, guid: e6978b2a7ea48cb4887ccd2b0cf84339,
         type: 3}
       propertyPath: userGuideType
@@ -2034,6 +2049,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 770742099813543676, guid: b3a82b13987baa54ebbb9697ad26ad6a,
+        type: 3}
+      propertyPath: Priority.Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2192314182246827315, guid: b3a82b13987baa54ebbb9697ad26ad6a,
         type: 3}
       propertyPath: text
@@ -2119,6 +2139,36 @@ PrefabInstance:
       propertyPath: onTurnSignal.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1767949555}
+    - target: {fileID: 4574907805826296756, guid: b3a82b13987baa54ebbb9697ad26ad6a,
+        type: 3}
+      propertyPath: PanAxis.Recentering.Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5785365166283527682, guid: b3a82b13987baa54ebbb9697ad26ad6a,
+        type: 3}
+      propertyPath: UpdateMethod
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5785365166283527682, guid: b3a82b13987baa54ebbb9697ad26ad6a,
+        type: 3}
+      propertyPath: IgnoreTimeScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5785365166283527682, guid: b3a82b13987baa54ebbb9697ad26ad6a,
+        type: 3}
+      propertyPath: ShowCameraFrustum
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5785365166283527682, guid: b3a82b13987baa54ebbb9697ad26ad6a,
+        type: 3}
+      propertyPath: LensModeOverride.Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6254823369843878369, guid: b3a82b13987baa54ebbb9697ad26ad6a,
+        type: 3}
+      propertyPath: IgnoreTimeScale
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6382011616178552990, guid: b3a82b13987baa54ebbb9697ad26ad6a,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -2565,6 +2615,11 @@ PrefabInstance:
       objectReference: {fileID: 825432358}
     - target: {fileID: 3607100497414559449, guid: e6978b2a7ea48cb4887ccd2b0cf84339,
         type: 3}
+      propertyPath: mainTitleText
+      value: 
+      objectReference: {fileID: 825432358}
+    - target: {fileID: 3607100497414559449, guid: e6978b2a7ea48cb4887ccd2b0cf84339,
+        type: 3}
       propertyPath: userGuideType
       value: 7
       objectReference: {fileID: 0}
@@ -2638,6 +2693,16 @@ PrefabInstance:
       propertyPath: message
       value: Premi "S" per frenare
       objectReference: {fileID: 0}
+    - target: {fileID: 6169897886471806312, guid: e6978b2a7ea48cb4887ccd2b0cf84339,
+        type: 3}
+      propertyPath: mainMessage
+      value: Premi "S" per decelerare
+      objectReference: {fileID: 0}
+    - target: {fileID: 6169897886471806312, guid: e6978b2a7ea48cb4887ccd2b0cf84339,
+        type: 3}
+      propertyPath: mainTitleText
+      value: 
+      objectReference: {fileID: 825432358}
     - target: {fileID: 6169897886471806312, guid: e6978b2a7ea48cb4887ccd2b0cf84339,
         type: 3}
       propertyPath: userGuideType
@@ -16826,7 +16891,7 @@ PrefabInstance:
     - target: {fileID: 665168554190798833, guid: e6978b2a7ea48cb4887ccd2b0cf84339,
         type: 3}
       propertyPath: resumeCarSpeed
-      value: 0
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 665168554190798833, guid: e6978b2a7ea48cb4887ccd2b0cf84339,
         type: 3}
@@ -16911,6 +16976,11 @@ PrefabInstance:
     - target: {fileID: 3607100497414559449, guid: e6978b2a7ea48cb4887ccd2b0cf84339,
         type: 3}
       propertyPath: text
+      value: 
+      objectReference: {fileID: 825432358}
+    - target: {fileID: 3607100497414559449, guid: e6978b2a7ea48cb4887ccd2b0cf84339,
+        type: 3}
+      propertyPath: mainTitleText
       value: 
       objectReference: {fileID: 825432358}
     - target: {fileID: 3607100497414559449, guid: e6978b2a7ea48cb4887ccd2b0cf84339,
@@ -17048,6 +17118,16 @@ PrefabInstance:
       propertyPath: message
       value: Premi "E" per attivare la freccia destra
       objectReference: {fileID: 0}
+    - target: {fileID: 6169897886471806312, guid: e6978b2a7ea48cb4887ccd2b0cf84339,
+        type: 3}
+      propertyPath: mainMessage
+      value: Usa "Q" ed "E" per mettere le frecce prima di svoltare
+      objectReference: {fileID: 0}
+    - target: {fileID: 6169897886471806312, guid: e6978b2a7ea48cb4887ccd2b0cf84339,
+        type: 3}
+      propertyPath: mainTitleText
+      value: 
+      objectReference: {fileID: 825432358}
     - target: {fileID: 6169897886471806312, guid: e6978b2a7ea48cb4887ccd2b0cf84339,
         type: 3}
       propertyPath: userGuideType
@@ -20208,6 +20288,16 @@ PrefabInstance:
       objectReference: {fileID: 825432358}
     - target: {fileID: 3607100497414559449, guid: e6978b2a7ea48cb4887ccd2b0cf84339,
         type: 3}
+      propertyPath: mainMessage
+      value: Ripeti!
+      objectReference: {fileID: 0}
+    - target: {fileID: 3607100497414559449, guid: e6978b2a7ea48cb4887ccd2b0cf84339,
+        type: 3}
+      propertyPath: mainTitleText
+      value: 
+      objectReference: {fileID: 825432358}
+    - target: {fileID: 3607100497414559449, guid: e6978b2a7ea48cb4887ccd2b0cf84339,
+        type: 3}
       propertyPath: userGuideType
       value: 7
       objectReference: {fileID: 0}
@@ -20269,6 +20359,16 @@ PrefabInstance:
     - target: {fileID: 6169897886471806312, guid: e6978b2a7ea48cb4887ccd2b0cf84339,
         type: 3}
       propertyPath: text
+      value: 
+      objectReference: {fileID: 825432358}
+    - target: {fileID: 6169897886471806312, guid: e6978b2a7ea48cb4887ccd2b0cf84339,
+        type: 3}
+      propertyPath: mainMessage
+      value: Premi "W" per accelerare
+      objectReference: {fileID: 0}
+    - target: {fileID: 6169897886471806312, guid: e6978b2a7ea48cb4887ccd2b0cf84339,
+        type: 3}
+      propertyPath: mainTitleText
       value: 
       objectReference: {fileID: 825432358}
     - target: {fileID: 6169897886471806312, guid: e6978b2a7ea48cb4887ccd2b0cf84339,

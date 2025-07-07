@@ -45,11 +45,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   userGuideType: 5
-  text: {fileID: 0}
-  message: Non uscire dalla strada!
+  _instructionPanel: {fileID: 0}
   complementaryUIElements:
   - uiElement: {fileID: 0}
     shouldFloat: 0
   floatingSpeed: 0.5
   floatingHeight: 0.1
-  _instructionPanel: {fileID: 0}
+  mainTitleText: {fileID: 0}
+  mainMessage: Ripeti!

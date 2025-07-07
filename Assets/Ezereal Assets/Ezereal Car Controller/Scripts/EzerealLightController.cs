@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
 using UnityEngine.Events;
+using System.Security.Cryptography;
 
 namespace Ezereal
 {
@@ -11,6 +12,18 @@ namespace Ezereal
         [Tooltip("Steering angle to overcome before resetting the turn light")]
         [SerializeField] private float steeringAngleThreshold = 20f;
         [SerializeField] private float steeringAngleResetDelay = 0.5f; // Delay before resetting turn lights after steering straightens
+
+        // --- NEW: Steering Threshold Debounce ---
+        [Tooltip("Minimum time the steering angle must stay above the threshold to be considered a 'true' turn.")]
+        [SerializeField] private float minTimeAboveSteeringThreshold = 0.15f; // Example: 0.15 seconds
+        private float _timeAboveThreshold = 0f;
+        private Coroutine _steeringCheckCoroutine; // To manage the continuous checking
+
+        // --- State tracking for auto-disable logic ---
+        // This flag indicates if a "significant turn" (above threshold for min time) has occurred.
+        // It stays true as long as the steering *remains* above the threshold or just returned below it.
+        private bool _hasPerformedSignificantTurn = false;
+
 
         [Header("Beam Lights")]
 
@@ -53,12 +66,109 @@ namespace Ezereal
         public bool AreHazardLightsActive => _hazardLightsActiveInternal;
         // ----------------------------------------------------
 
-        private bool _wasOverSteeringThreshold = false; // To track if the steering angle is over the threshold
+        // Coroutine for blinking turn lights (assuming it exists elsewhere or you'll add it)
+        private Coroutine _turnSignalCoroutine;
+
 
         private void Start()
         {
             AllLightsOff();
         }
+
+        /// <summary>
+        /// Checks the current steering angle to automatically disable turn signals
+        /// if the steering wheel straightens after a turn.
+        /// This method is designed to be called continuously (e.g., from an input manager or vehicle physics).
+        /// </summary>
+        /// <param name="currentSteeringAngle">The current actual steering angle of the wheels.</param>
+        public void AutoDisableTurnLight(float currentSteeringAngle)
+        {
+            // Debug.Log($"AutoDisableTurnLight called with angle: {currentSteeringAngle}", this); // Keep for debugging if needed
+
+            // Use absolute value for comparison with threshold
+            float absSteeringAngle = Mathf.Abs(currentSteeringAngle);
+
+            // --- Logic for ensuring steering stays above threshold for minimum time ---
+            if (absSteeringAngle > steeringAngleThreshold)
+            {
+                // If we are currently above the threshold, and we haven't confirmed a significant turn yet,
+                // or if the check coroutine isn't running, start it.
+                if (!_hasPerformedSignificantTurn && _steeringCheckCoroutine == null)
+                {
+                    _steeringCheckCoroutine = StartCoroutine(CheckSteeringAboveThreshold());
+                }
+                // If already confirmed as a significant turn, keep _hasPerformedSignificantTurn true
+                // as long as we're above the threshold.
+            }
+            else // Steering is at or below threshold
+            {
+                // If steering is no longer above threshold, stop the check and reset timer
+                if (_steeringCheckCoroutine != null)
+                {
+                    StopCoroutine(_steeringCheckCoroutine);
+                    _steeringCheckCoroutine = null;
+                }
+                _timeAboveThreshold = 0f; // Reset the timer
+                                          // If steering returns to center, also reset the _wasSteeringSignificantlyTurned flag
+                                          // to allow a new "true" turn detection.
+            }
+
+            // --- AUTO-DISABLE LOGIC ---
+            // This part runs ONLY when:
+            // 1. A significant turn was previously detected (_hasPerformedSignificantTurn is true).
+            // 2. The steering has now returned to being near center (absSteeringAngle <= steeringAngleThreshold).
+            // 3. Either left or right turn signal (but not hazards) is active.
+            if (_hasPerformedSignificantTurn && absSteeringAngle <= steeringAngleThreshold)
+            {
+                Debug.Log($"Steering returned to center. Current angle: {currentSteeringAngle}", this);
+                // Only auto-disable if individual turn signals are active, NOT hazard lights
+                if ((_leftTurnActiveInternal || _rightTurnActiveInternal) && !_hazardLightsActiveInternal)
+                {
+                    // Ensure we stop any active blinking coroutine before starting the disable sequence
+                    if (_turnSignalCoroutine != null)
+                    {
+                        StopCoroutine(_turnSignalCoroutine);
+                    }
+                    Debug.Log($"Auto disabling turn lights after steering reset. Angle: {currentSteeringAngle}", this);
+                    StartCoroutine(WaitToDisableLight(steeringAngleResetDelay)); // Wait before disabling
+                }
+                // Reset _hasPerformedSignificantTurn AFTER triggering the disable
+                // to prevent it from triggering again until a new significant turn occurs.
+                _hasPerformedSignificantTurn = false;
+            }
+        }
+
+        // Coroutine to check if the steering stays above the threshold
+        IEnumerator CheckSteeringAboveThreshold()
+        {
+            _timeAboveThreshold = 0f;
+            while (_timeAboveThreshold < minTimeAboveSteeringThreshold)
+            {
+                _timeAboveThreshold += Time.deltaTime;
+                yield return null; // Wait for the next frame
+            }
+            // If we reach here, the steering has been above the threshold for the minimum time
+            _hasPerformedSignificantTurn = true;
+            _steeringCheckCoroutine = null; // Mark coroutine as finished
+            Debug.Log("Steering has been above threshold for minimum time. Significant turn detected.");
+
+        }
+
+        IEnumerator WaitToDisableLight(float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            StopAllCoroutines(); // Stop any active turn signal coroutine
+                                 // Only proceed if turn signals are still active and hazards are not
+            if ((_leftTurnActiveInternal || _rightTurnActiveInternal) && !_hazardLightsActiveInternal)
+            {
+                TurnLightsOff(); // Turn off both turn signal visuals
+                _leftTurnActiveInternal = false; // Reset internal flags
+                _rightTurnActiveInternal = false;
+                onTurnSignal?.Invoke(0); // Notify subscribers that turn signals are off
+            }
+        }
+
+
 
 
         public void AllLightsOff()
@@ -284,43 +394,6 @@ namespace Ezereal
             SetLight(miscLights, true);
         }
 
-        /// <summary>
-        /// Checks the current steering angle to automatically disable turn signals
-        /// if the steering wheel straightens after a turn.
-        /// </summary>
-        /// <param name="currentSteeringAngle">The current actual steering angle of the wheels.</param>
-        public void AutoDisableTurnLight(float currentSteeringAngle)
-        {
-            // Use absolute value for comparison with threshold
-            float absSteeringAngle = Mathf.Abs(currentSteeringAngle);
-
-            // If currently turning (angle exceeds threshold)
-            if (absSteeringAngle > steeringAngleThreshold)
-            {
-                _wasOverSteeringThreshold = true; // Mark that we've been turning
-            }
-            // If we were turning, and now the steering wheel is near center (within threshold)
-            else if (_wasOverSteeringThreshold && absSteeringAngle <= steeringAngleThreshold)
-            {
-                // Only auto-disable if individual turn signals are active, NOT hazard lights
-                if ((_leftTurnActiveInternal || _rightTurnActiveInternal) && !_hazardLightsActiveInternal)
-                {
-                   StartCoroutine(WaitToDisableLight(steeringAngleResetDelay)); // Wait before disabling to allow for a smooth transition
-                }
-                _wasOverSteeringThreshold = false; // Reset the flag
-            }
-            // If hazard lights are active, this method should not interfere with them.
-            // If no turn signals are active and steering is straight, _wasOverSteeringThreshold remains false.
-        }
-        IEnumerator WaitToDisableLight(float delay)
-        {
-            yield return new WaitForSeconds(delay);
-            StopAllCoroutines(); // Stop any active turn signal coroutine
-            TurnLightsOff(); // Turn off both turn signal visuals
-            _leftTurnActiveInternal = false; // Reset internal flags
-            _rightTurnActiveInternal = false;
-            onTurnSignal?.Invoke(0); // Notify subscribers that turn signals are off
-        }
 
 
     }
