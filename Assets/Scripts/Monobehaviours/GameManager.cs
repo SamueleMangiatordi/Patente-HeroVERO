@@ -25,13 +25,11 @@ public class GameManager : MonoBehaviour
     {
         if (IsGamePaused)
         {
-            Debug.LogWarning("Game is already paused, cannot pause again.");
             return;
         }
 
         Time.timeScale = 0f;
         IsGamePaused = true;
-        Debug.Log("Game Paused");
         // Optionally, show a pause UI or tutorial prompt
     }
 
@@ -39,13 +37,11 @@ public class GameManager : MonoBehaviour
     {
         if(!IsGamePaused)
         {
-            Debug.LogWarning("Game is not paused, cannot resume.");
             return;
         }
 
         Time.timeScale = 1f; // Or your default time scale
         IsGamePaused = false;
-        Debug.Log("Game Resumed");
         // Optionally, hide the pause UI or tutorial prompt
     }
 

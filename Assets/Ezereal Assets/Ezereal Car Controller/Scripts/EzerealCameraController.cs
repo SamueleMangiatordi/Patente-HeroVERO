@@ -231,14 +231,12 @@ namespace Ezereal
                 panTilt.TiltAxis.Value = 0f;
                 panTilt.PanAxis.Recentering.Enabled = false; // Ensure it's not trying to recenter
                 panTilt.TiltAxis.Recentering.Enabled = false;
-                Debug.Log($"EzerealCameraController: Instantly reset PanTilt for {virtualCamera.name}");
             }
             // Reset Orbital component (for close/far)
             if (virtualCamera.TryGetComponent<CinemachineOrbitalFollow>(out var orbital))
             {
                 orbital.HorizontalAxis.Value = 0f;
                 orbital.HorizontalAxis.Recentering.Enabled = false; // Ensure it's not trying to recenter
-                Debug.Log($"EzerealCameraController: Instantly reset Orbital X-Axis for {virtualCamera.name}");
             }
             // Add other Cinemachine components if you have more types (e.g., FreeLook, Transposer etc.)
         }
@@ -264,7 +262,6 @@ namespace Ezereal
                 panTilt.TiltAxis.Recentering.Time = cinemachineRecenterDuration;
                 panTiltRecenterEnabled = true;
                 recenterStarted = true;
-                Debug.Log($"EzerealCameraController: Enabling PanTilt recentering for {virtualCamera.name}");
             }
             if (orbital != null)
             {
@@ -273,12 +270,10 @@ namespace Ezereal
                 orbital.HorizontalAxis.Recentering.Time = cinemachineRecenterDuration;
                 orbitalRecenterEnabled = true;
                 recenterStarted = true;
-                Debug.Log($"EzerealCameraController: Enabling Orbital recentering for {virtualCamera.name}");
             }
 
             if (!recenterStarted)
             {
-                Debug.LogWarning($"EzerealCameraController: No recognizable Cinemachine component for recentering on camera '{virtualCamera.name}'.", this);
                 _resetMonitorCoroutine = null;
                 yield break;
             }
@@ -331,16 +326,13 @@ namespace Ezereal
             {
                 panTilt.PanAxis.Recentering.Enabled = false;
                 panTilt.TiltAxis.Recentering.Enabled = false;
-                Debug.Log($"EzerealCameraController: PanTilt recentering disabled for {virtualCamera.name}");
             }
             if (orbitalRecenterEnabled)
             {
                 orbital.HorizontalAxis.Recentering.Enabled = false;
-                Debug.Log($"EzerealCameraController: Orbital recentering disabled for {virtualCamera.name}");
             }
 
             _resetMonitorCoroutine = null;
-            Debug.Log($"EzerealCameraController: Camera {virtualCamera.name} reset to center completed.");
         }
     }
 }

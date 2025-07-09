@@ -7,7 +7,6 @@ public class CheckpointManager : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("Script CheckpointTrigger attivo!");
         ActivateCheckpoint(currentCheckpointIndex);
     }
 

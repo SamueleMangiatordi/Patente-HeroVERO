@@ -148,7 +148,6 @@ namespace Ezereal
             // If we reach here, the steering has been above the threshold for the minimum time
             _hasPerformedSignificantTurn = true;
             _steeringCheckCoroutine = null; // Mark coroutine as finished
-            Debug.Log("Steering has been above threshold for minimum time. Significant turn detected.");
 
         }
 

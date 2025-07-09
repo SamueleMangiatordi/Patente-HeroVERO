@@ -101,9 +101,9 @@ public abstract class InteractionControllerBase : MonoBehaviour
         {
             if (Input.anyKeyDown)
             {
-                Debug.Log("Any keyboard/mouse button detected while waiting, proceeding.");
                 _onAnyInputReceivedAction?.Invoke();
                 _isWaitingForAnyInput = false; // Stop waiting after input received
+                _onAnyInputReceivedAction = null; // Clear the action to prevent multiple calls
                 return;
             }
         }
@@ -194,10 +194,6 @@ public abstract class InteractionControllerBase : MonoBehaviour
         }
         StartCoroutine(GameManager.Instance.WaitToPause(resumeTimeDelay)); // Wait a bit before pausing again if needed
     }
-
-    // Abstract method that derived classes MUST implement for their specific "correct" action
-    public abstract void CorrectInteraction();
-
 
     /// <summary>
     /// Starts waiting for any input from the user.

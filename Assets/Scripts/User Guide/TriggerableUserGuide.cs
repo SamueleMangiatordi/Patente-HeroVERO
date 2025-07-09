@@ -144,8 +144,7 @@ public class TriggerableUserGuide : InteractionControllerBase // Inherit from th
         timePressed = 0;
     }
 
-    // This method is abstract in base, so it MUST be implemented here
-    public override void CorrectInteraction()
+    private void CorrectInteraction()
     {
         if (resumeCarSpeed != 0f)
             carController.SetCarSpeed(resumeCarSpeed, true);
