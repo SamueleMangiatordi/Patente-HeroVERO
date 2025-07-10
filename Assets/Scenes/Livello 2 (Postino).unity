@@ -17838,7 +17838,7 @@ PrefabInstance:
     - target: {fileID: 8633189858576035883, guid: b3a82b13987baa54ebbb9697ad26ad6a,
         type: 3}
       propertyPath: driveType
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 8633189858576035883, guid: b3a82b13987baa54ebbb9697ad26ad6a,
         type: 3}

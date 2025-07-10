@@ -36,18 +36,10 @@ public class SignInteractionController : InteractionControllerBase // Inherit fr
         Debug.Log($"Car hit sign '{name}'. Restarting interaction with 'Car Hitted' guide.");
 
         // Example: Provide a custom action for 'car hitted'
-        RestartInteraction(carHittedUserGuide, OnCarHitResumeAction);
+        base.RestartInteraction(carHittedUserGuide, OnCarHitResumeAction);
     }
 
-    // Override RestartInteraction if you need custom behavior beyond what the base provides
-    // You can call base.RestartInteraction() and then add custom logic.
-    public override void RestartInteraction(UserGuideType guideTypeToShow, Action customInputReceivedAction = null)
-    {
-        base.RestartInteraction(guideTypeToShow, customInputReceivedAction);
-        // Add any SignInteractionController specific restart logic here if needed
-        // For example, if hitting the sign should temporarily disable it.
-        // this.isActive = false; // Example: disable it after a hit, re-enable when fixed
-    }
+
 
     // Custom action to be invoked when input is received after car hits sign
     private void OnCarHitResumeAction()
@@ -57,6 +49,7 @@ public class SignInteractionController : InteractionControllerBase // Inherit fr
         // For example, maybe you want to disable the sign entirely after one hit, or reset a score.
         // Then, call the default resume logic:
         ResumeGameAfterWait();
+        StartWaitingForAnyInput(OnSignDetailsEnd); // Restart waiting for any input to dismiss the sign details
     }
 
 
@@ -70,5 +63,6 @@ public class SignInteractionController : InteractionControllerBase // Inherit fr
         carController.SetCarSpeed(resumeCarSpeed, true); // Stop the car when sign details are dismissed
         CarAdapter carAdapter = carController.GetComponent<CarAdapter>();
          carAdapter.SimulateThrottleInput(0); // Ensure throttle is set to 0
+        StopWaitingForAnyInput();
     }
 }

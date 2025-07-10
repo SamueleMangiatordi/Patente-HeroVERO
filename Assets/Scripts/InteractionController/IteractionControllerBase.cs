@@ -79,7 +79,7 @@ public abstract class InteractionControllerBase : MonoBehaviour
 #endif
 
     protected virtual void Awake()
-    { 
+    {
         // Ensure essential references are assigned
         if (mainCarObject == null) { Debug.LogError($"InteractionControllerBase: 'mainCarObject' is not assigned on {name}.", this); enabled = false; return; }
         if (userGuideController == null) { Debug.LogError($"InteractionControllerBase: 'userGuideController' is not assigned on {name}.", this); enabled = false; return; }
@@ -102,8 +102,6 @@ public abstract class InteractionControllerBase : MonoBehaviour
             if (Input.anyKeyDown)
             {
                 _onAnyInputReceivedAction?.Invoke();
-                _isWaitingForAnyInput = false; // Stop waiting after input received
-                _onAnyInputReceivedAction = null; // Clear the action to prevent multiple calls
                 return;
             }
         }
@@ -187,10 +185,7 @@ public abstract class InteractionControllerBase : MonoBehaviour
         }
         else
         {
-            // Fallback if state wasn't stored (e.g., direct call to RestartInteraction without StartInteraction)
-            // Teleport to resetPos with resumeCarSpeed (or 0 if resumeCarSpeed is 0)
-            float velocity = resumeCarSpeed == 0 ? 1 : resumeCarSpeed;
-            carController.TeleportCar(resetPos, velocity, true);
+            carController.TeleportCar(resetPos, resumeCarSpeed, true);
             Debug.LogWarning("No stored car state found for RestartInteraction. Using resetPos and configured resumeCarSpeed as fallback.");
         }
         StartCoroutine(GameManager.Instance.WaitToPause(resumeTimeDelay)); // Wait a bit before pausing again if needed
@@ -206,7 +201,7 @@ public abstract class InteractionControllerBase : MonoBehaviour
     {
         _isWaitingForAnyInput = true;
         // Assign the custom action, or set the default action if null
-        _onAnyInputReceivedAction = customAction ?? ( () => ResumeGameAfterWait() ); // Cast needed for method group
+        _onAnyInputReceivedAction = customAction ?? (() => ResumeGameAfterWait()); // Cast needed for method group
         Debug.Log($"Interaction '{name}' is now waiting for any input.");
     }
 
