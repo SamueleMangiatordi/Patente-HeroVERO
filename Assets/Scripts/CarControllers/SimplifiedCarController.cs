@@ -270,10 +270,10 @@ public class SimplifiedCarController : MonoBehaviour // This is the main system 
             rearRightWheelCollider.brakeTorque = brakeTorque;
 
 
-        //Debug.Log($"ThrottleInput: {CurrentThrottleInput}, currentSpeed: {currentSpeed}, motorTorque: {motorTorque}");
-        //Debug.Log($"CurrentSpeed: {currentSpeed}, SpeedFactor: {speedFactor}, MotorTorque: {currentMotorTorque}");
-        //Debug.Log($"FL RPM: {FrontLeftWheelRPM}, RL RPM: {RearLeftWheelRPM}, motorTorque: {rearLeftWheelCollider.motorTorque}");
-        //Debug.Log($"Throttle: {CurrentThrottleInput}, Accel: {currentAccelerationValue}, Rev: {currentReverseValue}");
+            //Debug.Log($"ThrottleInput: {CurrentThrottleInput}, currentSpeed: {currentSpeed}, motorTorque: {motorTorque}");
+            //Debug.Log($"CurrentSpeed: {currentSpeed}, SpeedFactor: {speedFactor}, MotorTorque: {currentMotorTorque}");
+            //Debug.Log($"FL RPM: {FrontLeftWheelRPM}, RL RPM: {RearLeftWheelRPM}, motorTorque: {rearLeftWheelCollider.motorTorque}");
+            //Debug.Log($"Throttle: {CurrentThrottleInput}, Accel: {currentAccelerationValue}, Rev: {currentReverseValue}");
 
 
 
@@ -425,7 +425,6 @@ public class SimplifiedCarController : MonoBehaviour // This is the main system 
             stationary = false;
         }
 
-        
         FrontLeftWheelRPM = frontLeftWheelCollider.rpm;
         FrontRightWheelRPM = frontRightWheelCollider.rpm;
         RearLeftWheelRPM = rearLeftWheelCollider.rpm;
@@ -498,15 +497,17 @@ public class SimplifiedCarController : MonoBehaviour // This is the main system 
     /// </summary>
     /// <param name="desiredSpeedKmh">The desired absolute speed in kilometers per hour (km/h).</param>
     /// <param name="forward">If true, the car will move in its forward direction. If false, it will move in its backward direction.</param>
-    public void SetCarSpeed(float desiredSpeedKmh, bool forward, int numCall = 0)
+    public void SetCarSpeed(float desiredSpeedKmh, bool forward)
     {
         if (vehicleRB == null)
         {
             Debug.LogError("Vehicle Rigidbody is not assigned for SetCarSpeed! Cannot set velocity.");
             return;
         }
-        numCall = Mathf.Clamp(numCall, 0, 3); // Ensure numCall is within a reasonable range
-        desiredSpeedKmh = desiredSpeedKmh < 0.11 ? 0.11f : desiredSpeedKmh; // Ensure a minimum speed to avoid setting zero velocity
+
+        if( Mathf.Abs(desiredSpeedKmh) < 0.1)
+            desiredSpeedKmh = 0.1f * Mathf.Sign(desiredSpeedKmh); // Ensure a minimum speed to avoid zero velocity issues
+
         desiredSpeedKmh = Mathf.Clamp(desiredSpeedKmh, -maxReverseSpeed, maxForwardSpeed); // Clamp speed to valid range
         // Convert desired speed from km/h to meters per second (m/s) for Rigidbody.velocity
         float speedMs = desiredSpeedKmh / 3.6f;
@@ -523,23 +524,26 @@ public class SimplifiedCarController : MonoBehaviour // This is the main system 
         vehicleRB.angularVelocity = Vector3.zero; // Also clear angular velocity
 
 
+        //// --- Temporarily disable all Wheel Colliders ---
+        //foreach (var wheel in wheels)
+        //{
+        //    wheel.enabled = false;
+        //}
+
+
         foreach (var wheel in wheels)
         {
             wheel.motorTorque = 0;
 
             // NEW: blocca il movimento delle ruote con freno anche se la velocità non è zero
-            wheel.brakeTorque = brakePower;
-            wheel.rotationSpeed = 0f;
+            wheel.brakeTorque = 0;
+            wheel.rotationSpeed = wheel.radius * desiredSpeedKmh / 3.6f; // Set rotation speed based on desired speed
         }
-
 
 
         // Reset current input states to prevent the car from immediately accelerating/braking
         // based on previous user input after resuming.
         CurrentThrottleInput = 0f;
-        currentAccelerationValue = 0f;
-        currentReverseValue = 0f;
-
         CurrentHandbrakeValue = 0f;
         TargetSteerAngle = 0f; // Reset steering target
         CurrentSteerAngle = 0f; // Reset current steering angle to neutral
@@ -552,12 +556,21 @@ public class SimplifiedCarController : MonoBehaviour // This is the main system 
         // If the desired speed is very close to zero, ensure the car is truly stopped
         if (desiredSpeedKmh <= 0.1f) // Small threshold for "zero speed"
         {
-            vehicleRB.angularVelocity = Vector3.zero; // Stop any rotational movement
-#if UNITY_6000_0_OR_NEWER
-            vehicleRB.linearVelocity = Vector3.zero; // Explicitly set linear velocity to zero
-#else
-            vehicleRB.velocity = Vector3.zero; // Explicitly set linear velocity to zero
-#endif
+
+//            vehicleRB.angularVelocity = Vector3.zero; // Stop any rotational movement
+//#if UNITY_6000_0_OR_NEWER
+//            vehicleRB.linearVelocity = Vector3.zero; // Explicitly set linear velocity to zero
+//#else
+//            vehicleRB.velocity = Vector3.zero; // Explicitly set linear velocity to zero
+//#endif
+
+//            // Apply brake torque to fully stop wheels if desired speed is zero
+//            foreach (var wheel in wheels)
+//            {
+//                wheel.brakeTorque = brakePower; // Apply full brake to ensure stop
+//                wheel.rotationSpeed = 0f;
+//            }
+
             // Optionally, turn off lights and engine sounds if the car is fully stopped
             if (ezerealLightController != null) ezerealLightController.AllLightsOff();
             if (simplifiedSoundController != null) simplifiedSoundController.TurnOffEngineSound();
@@ -568,17 +581,21 @@ public class SimplifiedCarController : MonoBehaviour // This is the main system 
             if (simplifiedSoundController != null) simplifiedSoundController.TurnOnEngineSound();
         }
 
+        //// --- Re-enable all Wheel Colliders ---
+        //foreach (var wheel in wheels)
+        //{
+        //    wheel.enabled = true;
+        //}
+
+
         // Update the internal 'currentSpeed' variable and UI immediately for consistency.
         currentSpeed = desiredSpeedKmh;
         UpdateSpeedText(currentSpeed);
 
         vehicleRB.WakeUp(); // Ensure Rigidbody is awake for a moment
-        vehicleRB.Sleep(); // Then put it to sleep if it's supposed to hold still without input
-
 
         StartCoroutine(BypassInputs(bypassInputsTime)); // Bypass inputs for a short time to prevent immediate user input interference
-        //StartCoroutine(FreezeWheelsForFrames(3));
-
+                                                      
     }
 
     public void TeleportCar(Vector3 targetPosition, Quaternion targetRotation, float desiredSpeed, bool forward)
@@ -674,26 +691,8 @@ public class SimplifiedCarController : MonoBehaviour // This is the main system 
     IEnumerator BypassInputs(float delay)
     {
         bypassingInputs = true; // Set the flag to indicate inputs are being bypassed
-        yield return new WaitForSeconds(delay);
+        yield return new WaitForSecondsRealtime(delay);
         bypassingInputs = false; // Reset the flag after the delay
     }
 
-    IEnumerator FreezeWheelsForFrames(int frameCount)
-    {
-        for (int i = 0; i < frameCount; i++)
-        {
-            foreach (var wheel in wheels)
-            {
-                wheel.motorTorque = 0f;
-                wheel.brakeTorque = brakePower;
-            }
-            yield return new WaitForFixedUpdate();
-        }
-
-        // Dopo i frame, rimetti brakeTorque a 0 solo se vuoi che riprenda a rotolare
-        foreach (var wheel in wheels)
-        {
-            wheel.brakeTorque = 0;
-        }
-    }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem; // Make sure this namespace is present
 
-public class TriggerableUserGuide : InteractionControllerBase // Inherit from the base class
+public class TutorialInteractionController : InteractionControllerBase // Inherit from the base class
 {
     [Header("Triggerable Specific Settings")]
     [Tooltip("For how long the button must be pressed before considering it a valid press.")]
@@ -146,9 +146,6 @@ public class TriggerableUserGuide : InteractionControllerBase // Inherit from th
 
     private void CorrectInteraction()
     {
-        if (resumeCarSpeed != 0f)
-            carController.SetCarSpeed(resumeCarSpeed, true);
-
         onResumePressedButton?.Invoke(validAxisDir);
 
         userGuideController.EnableUserGuides(false);

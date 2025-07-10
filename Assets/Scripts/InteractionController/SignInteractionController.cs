@@ -67,7 +67,7 @@ public class SignInteractionController : InteractionControllerBase // Inherit fr
     {
         userGuideController.EnableUserGuides(false); // Disable user guides
         GameManager.Instance.ResumeGame(); // Resume the game after dismissing the sign details
-        carController.SetCarSpeed(0.01f, true, 0); // Stop the car when sign details are dismissed
+        carController.SetCarSpeed(resumeCarSpeed, true); // Stop the car when sign details are dismissed
         CarAdapter carAdapter = carController.GetComponent<CarAdapter>();
          carAdapter.SimulateThrottleInput(0); // Ensure throttle is set to 0
     }

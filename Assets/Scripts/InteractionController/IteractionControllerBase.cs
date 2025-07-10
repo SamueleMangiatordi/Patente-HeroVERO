@@ -164,6 +164,7 @@ public abstract class InteractionControllerBase : MonoBehaviour
 
 
         userGuideController.SetUserGuide(guideTypeToShow); // Show the specific guide for this restart reason
+        cameraController.ResetCurrentCameraRotation(); // Reset camera rotation
 
         isInteractionEnabled = true; // Re-enable interaction
         StartWaitingForAnyInput(customInputReceivedAction); // Start waiting with the provided action
