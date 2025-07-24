@@ -117,6 +117,20 @@ public abstract class InteractionControllerBase : MonoBehaviour
         isInteractionEnabled = true;
         Debug.Log($"Interaction '{name}' started.");
 
+        //GameManager.Instance.PauseGame();
+
+        //cameraController.ResetCurrentCameraRotation(); // Reset camera
+        //userGuideController.SetUserGuide(startInteractionGuide); // Show initial guide
+
+        //// Store car state at the beginning of the interaction
+        //storedCarState = new CarStateParameters(carController);
+    }
+
+    /// <summary>
+    /// Stops the interaction, typically pausing the game and showing an initial guide.
+    /// </summary>
+    public virtual void PauseGameAndShowUserGuide()
+    {
         GameManager.Instance.PauseGame();
 
         cameraController.ResetCurrentCameraRotation(); // Reset camera
@@ -151,9 +165,9 @@ public abstract class InteractionControllerBase : MonoBehaviour
     /// This method will pause the game and show a specific user guide, then wait for input.
     /// </summary>
     /// <param name="guideTypeToShow">The specific UserGuideType to display for this restart.</param>
-    /// <param name="customInputReceivedAction">Optional action to execute when input is received during this wait.</param>
+    /// <param name="onInputReceived">Optional action to execute when input is received during this wait.</param>
 
-    public virtual void RestartInteraction(UserGuideType guideTypeToShow, Action customInputReceivedAction = null)
+    public virtual void RestartInteraction(UserGuideType guideTypeToShow, Action onInputReceived = null)
     {
         // Disable enter collider temporarily to prevent immediate re-trigger
         if (enterCollider != null) enterCollider.enabled = false;
@@ -165,7 +179,7 @@ public abstract class InteractionControllerBase : MonoBehaviour
         cameraController.ResetCurrentCameraRotation(); // Reset camera rotation
 
         isInteractionEnabled = true; // Re-enable interaction
-        StartWaitingForAnyInput(customInputReceivedAction); // Start waiting with the provided action
+        StartWaitingForAnyInput(onInputReceived); // Start waiting with the provided action
     }
 
     /// <summary>

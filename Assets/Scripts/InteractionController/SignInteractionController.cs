@@ -9,6 +9,8 @@ public class SignInteractionController : InteractionControllerBase // Inherit fr
     [Tooltip("UserGuide to show when the car hits something related to the sign.")]
     [SerializeField] private UserGuideType carHittedUserGuide;
 
+    public bool RightOfWay { get; set; } = false; // Flag to track right of way status
+
     // No specific Awake or Update override needed unless you add unique logic here.
     // The base Awake and Update will handle common initialization and waitingForAnyInput.
 
@@ -23,7 +25,7 @@ public class SignInteractionController : InteractionControllerBase // Inherit fr
     public override void StartInteraction()
     {
         base.StartInteraction();
-        StartWaitingForAnyInput(OnSignDetailsEnd);
+        //StartWaitingForAnyInput(OnSignDetailsEnd);
     }
 
     // --- NEW: Method for when the car hits something specific to the sign ---
@@ -38,7 +40,13 @@ public class SignInteractionController : InteractionControllerBase // Inherit fr
         // Example: Provide a custom action for 'car hitted'
         base.RestartInteraction(carHittedUserGuide, OnCarHitResumeAction);
     }
+    
+    public void CheckRightOfWay()
+    {
+        if (RightOfWay) return;
 
+        base.RestartInteraction(UserGuideType.RightOfWayNotRespected, OnCarHitResumeAction);
+    }
 
 
     // Custom action to be invoked when input is received after car hits sign

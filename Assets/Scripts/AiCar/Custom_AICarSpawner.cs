@@ -8,18 +8,18 @@ public class AiCarSpawner : MonoBehaviour
 {
     public GameObject aiWaypointTrackerPrefab;
     [SerializeField] private bool spawnOnAwake = true;
-    [SerializeField] private List<AICarSpawnData> aiCarSpawnDataList = new();
+    [SerializeField] private List<AICarData> aiCarDataList = new();
 
     private readonly List<(GameObject aiCar, Vector3 spawnPos, Quaternion spawnRot)> spawnedPlayers = new();
 
     private void Awake()
     {
-        if (aiCarSpawnDataList.Count == 0)
+        if (aiCarDataList.Count == 0)
         {
             Debug.LogError("No spawn points assigned");
         }
 
-        foreach (AICarSpawnData data in aiCarSpawnDataList)
+        foreach (AICarData data in aiCarDataList)
         {
             // Initialize the list for each AICarSpawnData instance if it's not already
             if (data.aiWaypoints == null)
@@ -55,7 +55,7 @@ public class AiCarSpawner : MonoBehaviour
         //gameEvents.SpawnPlayersEvent.AddListener(OnSpawnPlayers);
         //gameEvents.RestartRaceEvent.AddListener(OnRestartRace);
 
-        foreach (AICarSpawnData aiCarSpawnData in aiCarSpawnDataList)
+        foreach (AICarData aiCarSpawnData in aiCarDataList)
             if (aiCarSpawnData.spawnPoint.TryGetComponent<Renderer>(out var renderer)) { renderer.enabled = false; }
 
         if (spawnOnAwake)
@@ -64,7 +64,7 @@ public class AiCarSpawner : MonoBehaviour
 
     public void SpawnPlayers()
     {
-        foreach (AICarSpawnData aICarSpawnData in aiCarSpawnDataList)
+        foreach (AICarData aICarSpawnData in aiCarDataList)
         {
             GameObject aiCar = Instantiate(aICarSpawnData.aiCarPrefab, aICarSpawnData.spawnPoint.position, aICarSpawnData.spawnPoint.rotation);
             spawnedPlayers.Add((aiCar, aiCar.transform.position, aiCar.transform.rotation));
@@ -77,12 +77,18 @@ public class AiCarSpawner : MonoBehaviour
 
             BoundaryTrigger bTrig = aiCar.GetComponentInChildren<BoundaryTrigger>();
             bTrig.onTriggerEnter.AddListener(aICarSpawnData.onCollisionEvent.Invoke);
+
+            GameObject colBottomObj = aiCar.transform.Find("Colliders").Find("ColliderBottom").gameObject;
+            colBottomObj.tag = aICarSpawnData.carTag.ToString(); // Assign the tag to the bottom collider object
+
+            aICarSpawnData.aiCar = aiCar; // Assign the instantiated car to the AICarData for reference
         }
 
         foreach (var (aiCar, _, _) in spawnedPlayers)
         {
             aiCar.GetComponent<CarFreeze>().OnToggleCarFreeze(false);
         }
+
 
     }
 
@@ -122,8 +128,17 @@ public class AiCarSpawner : MonoBehaviour
 
 
 [Serializable]
-public class AICarSpawnData
+public class AICarData
 {
+    [Header("References")]
+    [Tooltip("The AI car GameObject that will be spawned at runtime.")]
+    public GameObject aiCar;
+    
+    [Tooltip("The tag to assing at the car when spawning. Use this to find which car is used for which purpose. " +
+        "Example : For 'RightOfWay' signal, you can assing the tag 'RightOfWay' so that you can search for the car that occupies of the logic for that signal")]
+    public AiCarType carTag;
+
+    [Header("AI Car Spawn Settings")]
     public GameObject aiCarPrefab;
     public Transform spawnPoint;
     [Tooltip("The parent object that contains all the relative AI Waypoints of this car")]
@@ -131,6 +146,7 @@ public class AICarSpawnData
 
     public UnityEvent onCollisionEvent;
 
-
+    [Tooltip("List of AI waypoints for this car to follow. They are finded automatically, leave this field empty.")]
     public List<AIWaypoint> aiWaypoints; // List of waypoints for the AI car to follow
+
 }
