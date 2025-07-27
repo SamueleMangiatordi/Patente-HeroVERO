@@ -32,7 +32,11 @@ namespace CityPeople
         [Header("Pathfinding")]
         [Tooltip("Assign an empty GameObject with Transform children as waypoints.")]
         [SerializeField] private Transform waypointParent; // Parent object holding all waypoint Transforms
-        private List<Vector3> waypoints;
+        [SerializeField]
+        [Tooltip("The tag assigned to the waypoint where you want to start the idle animation")]
+        private string idleWaypointTag = "IdleWaypoint";
+
+        private List<Transform> waypoints;
         private int currentWaypointIndex = 0;
 
         private Rigidbody rb;
@@ -80,12 +84,12 @@ namespace CityPeople
             }
 
             // Setup Waypoints
-            waypoints = new List<Vector3>();
+            waypoints = new List<Transform>();
             if (waypointParent != null)
             {
                 foreach (Transform child in waypointParent)
                 {
-                    waypoints.Add(child.position);
+                    waypoints.Add(child);
                 }
             }
             else
@@ -141,23 +145,36 @@ namespace CityPeople
                 currentWaypointIndex = 0; // Loop back to the start of the path
             }
 
-            Vector3 targetWaypoint = waypoints[currentWaypointIndex];
+            Vector3 targetWaypoint = waypoints[currentWaypointIndex].position;
 
-            while (Vector3.Distance(transform.position, targetWaypoint) > waypointReachedThreshold)
+            while (Vector3.Distance(rb.position, targetWaypoint) > waypointReachedThreshold)
             {
                 // Move towards waypoint
-                Vector3 directionToWaypoint = (targetWaypoint - transform.position).normalized;
+                Vector3 directionToWaypoint = (targetWaypoint - rb.position).normalized;
                 rb.position += directionToWaypoint * walkSpeed * Time.deltaTime;
 
-                // Rotate towards waypoint (only on Y axis)
-                Quaternion targetRotation = Quaternion.LookRotation(directionToWaypoint);
-                rb.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+                // --- MODIFIED PART START ---
+                // Rotate towards waypoint, but only on the Y axis (yaw)
+                // We flatten the direction vector to ignore vertical difference
+                Vector3 flatDirection = new Vector3(directionToWaypoint.x, 0, directionToWaypoint.z).normalized;
+
+
+                // Only calculate targetRotation if there's a valid direction
+                if (flatDirection != Vector3.zero)
+                {
+                    Quaternion targetRotation = Quaternion.LookRotation(flatDirection);
+                    rb.rotation = Quaternion.Slerp(rb.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+                }
+                // --- MODIFIED PART END ---
 
                 yield return null; // Wait for the next frame
             }
 
             Debug.Log($"Reached waypoint {currentWaypointIndex}");
-            currentState = CharacterState.Idling; // Transition to Idling state
+
+            if(waypoints[currentWaypointIndex].CompareTag(idleWaypointTag))
+                currentState = CharacterState.Idling; // Transition to Idling state
+
             currentWaypointIndex++; // Move to the next waypoint for the next walk cycle
         }
 

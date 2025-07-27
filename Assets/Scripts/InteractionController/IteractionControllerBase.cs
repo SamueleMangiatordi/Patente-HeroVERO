@@ -163,6 +163,7 @@ public abstract class InteractionControllerBase : MonoBehaviour
     /// <summary>
     /// Restarts the interaction, usually after an "out of bounds" or "car hitted" event.
     /// This method will pause the game and show a specific user guide, then wait for input.
+    /// When the iinput is recieved, it will call the action provided (if any) or resume the game with the default behavior.
     /// </summary>
     /// <param name="guideTypeToShow">The specific UserGuideType to display for this restart.</param>
     /// <param name="onInputReceived">Optional action to execute when input is received during this wait.</param>
@@ -183,7 +184,7 @@ public abstract class InteractionControllerBase : MonoBehaviour
     }
 
     /// <summary>
-    /// Helper method to restore car state and resume the game after a wait.
+    /// Helper method to restore car state and resume the game after a wait and show the user guide provided (default one if no one is provided).
     /// This is the default behavior when any input is received during a wait.
     /// </summary>
     protected void ResumeGameAfterWait(UserGuideType userGuideType = UserGuideType.None)

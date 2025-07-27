@@ -38,26 +38,29 @@ public class SignInteractionController : InteractionControllerBase // Inherit fr
         Debug.Log($"Car hit sign '{name}'. Restarting interaction with 'Car Hitted' guide.");
 
         // Example: Provide a custom action for 'car hitted'
-        base.RestartInteraction(carHittedUserGuide, OnCarHitResumeAction);
+        base.RestartInteraction(carHittedUserGuide, OnResumeAction);
     }
     
     public void CheckRightOfWay()
     {
         if (RightOfWay) return;
 
-        base.RestartInteraction(UserGuideType.RightOfWayNotRespected, OnCarHitResumeAction);
+        base.RestartInteraction(UserGuideType.RightOfWayNotRespected, OnResumeAction);
     }
 
 
-    // Custom action to be invoked when input is received after car hits sign
-    private void OnCarHitResumeAction()
+    /// <summary>
+    /// Action to perform when the player commits an error and a user guide tells them to press any key to resume.
+    /// When any key is pressed, it will perform this method.
+    /// </summary>
+    private void OnResumeAction()
     {
         Debug.Log("Custom action for SignInteractionController: Car Hitted, input received.");
         // Perform specific logic for when the player hits a sign and then presses a key to resume.
         // For example, maybe you want to disable the sign entirely after one hit, or reset a score.
         // Then, call the default resume logic:
-        ResumeGameAfterWait();
-        StartWaitingForAnyInput(OnSignDetailsEnd); // Restart waiting for any input to dismiss the sign details
+        base.ResumeGameAfterWait();
+        base.StartWaitingForAnyInput(OnSignDetailsEnd); // Restart waiting for any input to dismiss the sign details
     }
 
 
