@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 /// <summary>
@@ -9,6 +10,14 @@ namespace SpinMotion
     [RequireComponent(typeof (CarController))]
     public class CarAIControl : MonoBehaviour
     {
+        private int defaultAILayer; // Stores the original AI car layer (AIPlayer)
+        private int noPlayerCollideLayer; // Stores the temporary layer (NoPlayerCollide)
+
+        private Collider _colliderBody;
+        private Collider _colliderBottom;
+
+
+
         public enum BrakeCondition
         {
             NeverBrake,                 // the car simply accelerates at full throttle all the time.
@@ -56,6 +65,20 @@ namespace SpinMotion
             m_RandomPerlin = Random.value*100;
 
             m_Rigidbody = GetComponent<Rigidbody>();
+
+
+
+            defaultAILayer = LayerMask.NameToLayer("AIPlayer"); // Make sure "AIPlayer" layer exists!
+            noPlayerCollideLayer = LayerMask.NameToLayer("NoAIPlayerCollider");
+
+            if (defaultAILayer == -1 || noPlayerCollideLayer == -1)
+            {
+                Debug.LogError("One or more AI-related layers not found! Check Project Settings -> Tags & Layers. " +
+                               "Expected 'AIPlayer' and 'NoPlayerCollide'.");
+            }
+
+            _colliderBody = gameObject.transform.Find("Colliders").Find("ColliderBody").GetComponent<Collider>();
+            _colliderBottom = gameObject.transform.Find("Colliders").Find("ColliderBottom").GetComponent<Collider>();
         }
 
         public void SetTarget(Transform target)
@@ -216,5 +239,46 @@ namespace SpinMotion
                 }
             }
         }
+
+
+
+
+
+        /// <summary>
+        /// Temporarily changes the AI car's layer to ignore collisions with the player for the desired amount of time.
+        /// </summary>
+        /// <param name="duration">How long the AI car should ignore the player.</param>
+        public void IgnoreAiPlayerCollision(float duration)
+        {
+            // Stop any existing coroutine to prevent conflicts
+            StopCoroutine("IgnorePlayerCollisionCoroutine");
+            StartCoroutine(IgnorePlayerCollisionCoroutine(duration));
+        }
+
+        private IEnumerator IgnorePlayerCollisionCoroutine(float duration)
+        {
+            // Check if layers are valid
+            if (noPlayerCollideLayer == -1 || defaultAILayer == -1)
+            {
+                Debug.LogWarning("Cannot change AI car layer: Layers not properly set up.");
+                yield break;
+            }
+
+            _colliderBody.gameObject.layer = noPlayerCollideLayer; // Assuming main GameObject layer handles collisions
+            _colliderBottom.gameObject.layer = noPlayerCollideLayer; // Assuming main GameObject layer handles collisions
+
+            Debug.Log($"AI Car {gameObject.name} layer changed to {LayerMask.LayerToName(noPlayerCollideLayer)}.");
+
+            yield return new WaitForSeconds(duration);
+
+            _colliderBody.gameObject.layer = defaultAILayer; // Assuming main GameObject layer handles collisions
+            _colliderBottom.gameObject.layer = defaultAILayer; // Assuming main GameObject layer handles collisions
+
+            Debug.Log($"AI Car {gameObject.name} layer reverted to {LayerMask.LayerToName(defaultAILayer)}.");
+        }
+
+
+
+
     }
 }

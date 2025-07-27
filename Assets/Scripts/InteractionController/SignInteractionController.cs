@@ -9,7 +9,7 @@ public class SignInteractionController : InteractionControllerBase // Inherit fr
     [Tooltip("UserGuide to show when the car hits something related to the sign.")]
     [SerializeField] private UserGuideType carHittedUserGuide;
 
-    public bool RightOfWay { get; set; } = false; // Flag to track right of way status
+    public bool RightOfWay { get; set; } = true; // Flag to track right of way status
 
     // No specific Awake or Update override needed unless you add unique logic here.
     // The base Awake and Update will handle common initialization and waitingForAnyInput.

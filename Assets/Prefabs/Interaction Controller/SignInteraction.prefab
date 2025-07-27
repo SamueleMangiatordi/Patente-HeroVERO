@@ -332,7 +332,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   userGuideType: 11
-  _instructionPanel: {fileID: 0}
+  _instructionPanel: {fileID: 2784668699690346466, guid: 1704e1fa7775ede40bdae6fdff0371f1,
+    type: 3}
   complementaryUIElements:
   - uiElement: {fileID: 0}
     shouldFloat: 0
@@ -385,7 +386,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   userGuideType: 10
-  _instructionPanel: {fileID: 0}
+  _instructionPanel: {fileID: 4452166664608802974, guid: 1789df8d69c8e074e89a06b415798b94,
+    type: 3}
   complementaryUIElements:
   - uiElement: {fileID: 0}
     shouldFloat: 0
@@ -437,7 +439,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   userGuideType: 9
-  _instructionPanel: {fileID: 0}
+  _instructionPanel: {fileID: 2784668699690346466, guid: 1704e1fa7775ede40bdae6fdff0371f1,
+    type: 3}
   complementaryUIElements:
   - uiElement: {fileID: 0}
     shouldFloat: 0
@@ -468,10 +471,30 @@ PrefabInstance:
       propertyPath: onTriggerEnter.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 6632968868173607779}
+    - target: {fileID: 4600586165352790331, guid: e8c1825b8f58e704e8ea850f0469cd4f,
+        type: 3}
+      propertyPath: onTriggerEnter.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6632968868173607779}
+    - target: {fileID: 4600586165352790331, guid: e8c1825b8f58e704e8ea850f0469cd4f,
+        type: 3}
+      propertyPath: onTriggerEnter.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CheckRightOfWay
+      objectReference: {fileID: 0}
     - target: {fileID: 5072541101146897821, guid: e8c1825b8f58e704e8ea850f0469cd4f,
         type: 3}
       propertyPath: m_Name
       value: RightOfWay
+      objectReference: {fileID: 0}
+    - target: {fileID: 5794868301395126473, guid: e8c1825b8f58e704e8ea850f0469cd4f,
+        type: 3}
+      propertyPath: onTriggerEnter.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6632968868173607779}
+    - target: {fileID: 5794868301395126473, guid: e8c1825b8f58e704e8ea850f0469cd4f,
+        type: 3}
+      propertyPath: onTriggerEnter.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CheckRightOfWay
       objectReference: {fileID: 0}
     - target: {fileID: 8745083619158102210, guid: e8c1825b8f58e704e8ea850f0469cd4f,
         type: 3}

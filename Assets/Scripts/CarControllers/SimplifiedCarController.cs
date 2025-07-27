@@ -630,6 +630,9 @@ public class SimplifiedCarController : MonoBehaviour // This is the main system 
             Debug.LogError("Target Transform for TeleportCar is null! Cannot teleport.");
             return;
         }
+
+        AiCarSpawner.IgnoreAllAiPlayerCollision(3f);
+
         // Store original kinematic state
         bool originalIsKinematic = vehicleRB.isKinematic;
 

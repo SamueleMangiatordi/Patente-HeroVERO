@@ -1,5 +1,6 @@
 using SpinMotion;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -8,7 +9,9 @@ public class AiCarSpawner : MonoBehaviour
 {
     public GameObject aiWaypointTrackerPrefab;
     [SerializeField] private bool spawnOnAwake = true;
-    [SerializeField] private List<AICarData> aiCarDataList = new();
+    [SerializeField] public List<AICarData> aiCarDataList = new();
+
+    public static List<AICarData> AiCarDataList = new();
 
     private readonly List<(GameObject aiCar, Vector3 spawnPos, Quaternion spawnRot)> spawnedPlayers = new();
 
@@ -60,6 +63,8 @@ public class AiCarSpawner : MonoBehaviour
 
         if (spawnOnAwake)
             SpawnPlayers();
+
+        AiCarDataList = aiCarDataList; // Store the list of AICarData for global access
     }
 
     public void SpawnPlayers()
@@ -73,7 +78,8 @@ public class AiCarSpawner : MonoBehaviour
             aiTracker.SetTracker(aICarSpawnData.aiWaypoints);
             aiTracker.SetupAICarCollider(aiCar.GetComponentInChildren<AICarWaypointTrackerColliderTrigger>().GetColliderTrigger());
 
-            aiCar.GetComponent<CarAIControl>().SetTarget(aiTracker.transform); // replace with your car controller ai target to aim/follow
+            CarAIControl carAiControl = aiCar.GetComponent<CarAIControl>();
+            carAiControl.SetTarget(aiTracker.transform); // replace with your car controller ai target to aim/follow
 
             BoundaryTrigger bTrig = aiCar.GetComponentInChildren<BoundaryTrigger>();
             bTrig.onTriggerEnter.AddListener(aICarSpawnData.onCollisionEvent.Invoke);
@@ -82,6 +88,7 @@ public class AiCarSpawner : MonoBehaviour
             colBottomObj.tag = aICarSpawnData.carTag.ToString(); // Assign the tag to the bottom collider object
 
             aICarSpawnData.aiCar = aiCar; // Assign the instantiated car to the AICarData for reference
+            aICarSpawnData.carAIControl = carAiControl; // Assign the CarAIControl component to the AICarData for reference
         }
 
         foreach (var (aiCar, _, _) in spawnedPlayers)
@@ -112,6 +119,14 @@ public class AiCarSpawner : MonoBehaviour
             {
                 aiCar.transform.rotation = spawnRot;
             }
+        }
+    }
+
+    public static void IgnoreAllAiPlayerCollision(float duration)
+    {
+        foreach(AICarData aiCarData in AiCarDataList)
+        {
+           aiCarData.carAIControl.IgnoreAiPlayerCollision(duration);
         }
     }
 
@@ -146,7 +161,9 @@ public class AICarData
 
     public UnityEvent onCollisionEvent;
 
+    [Header("Automatic References (Leave Empty)")]
     [Tooltip("List of AI waypoints for this car to follow. They are finded automatically, leave this field empty.")]
     public List<AIWaypoint> aiWaypoints; // List of waypoints for the AI car to follow
+    public CarAIControl carAIControl; // Reference to the CarAIControl component
 
 }

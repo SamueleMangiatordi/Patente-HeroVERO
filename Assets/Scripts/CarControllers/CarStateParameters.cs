@@ -81,7 +81,7 @@ public class CarStateParameters
 
         // Apply position and rotation immediately
         carController.vehicleRB.position = position;
-        carController.vehicleRB.rotation = rotation;
+        carController.vehicleRB.rotation = rotation.normalized;
 
         // CRITICAL: Immediately clear all existing velocities and forces from Rigidbody and WheelColliders
         // This ensures no "leftover" momentum or applied torques cause unwanted movement.
@@ -138,15 +138,6 @@ public class CarStateParameters
         carController.UpdateWheelMeshes();
         carController.UpdateSpeedText(carController.GetCurrentSpeed());
 
-        // REMOVED: carController.SetCarSpeed(currentSpeed, currentSpeed > 0);
-        // This call is redundant and can interfere. LinearVelocity already sets the precise speed.
-        // If a *new* target speed is needed after restoration, it should be an explicit call from TriggerableUserGuide.
-
-        // Removed cameraController logic, as it should be handled by a separate system
-        // if (cameraController != null)
-        // {
-        //     cameraController.ResetCurrentCameraRotation();
-        // }
     }
 
     public void TeleportCarToSavedPos(SimplifiedCarController carController, float desiredSpeed = 0, bool forward = true)
