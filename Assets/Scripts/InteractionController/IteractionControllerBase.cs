@@ -1,4 +1,4 @@
-using Ezereal;
+﻿using Ezereal;
 using UnityEngine;
 using UnityEngine.Events;
 using System.Collections;
@@ -117,6 +117,7 @@ public abstract class InteractionControllerBase : MonoBehaviour
         isInteractionEnabled = true;
         Debug.Log($"Interaction '{name}' started.");
 
+       
         GameManager.Instance.PauseGame();
 
         cameraController.ResetCurrentCameraRotation(); // Reset camera
