@@ -10,6 +10,8 @@ public class SimplifiedSoundController : MonoBehaviour // This system plays tire
     [SerializeField] AudioSource engineAudio;
 
     [Header("Settings")]
+    
+    [Tooltip("Max volume for tire sound. If you need to modify engine volume, you can do it from the object 'Engine Sound' inside 'Electric Truck' object")]
     public float maxVolume = 0.5f; // Maximum volume for high speeds
 
     [Header("Debug")]
@@ -38,6 +40,7 @@ public class SimplifiedSoundController : MonoBehaviour // This system plays tire
 
     public void TurnOnEngineSound()
     {
+        Debug.Log("Turning on engine sound");
         if (useSounds)
         {
             if (engineAudio != null)
@@ -49,6 +52,8 @@ public class SimplifiedSoundController : MonoBehaviour // This system plays tire
 
     public void TurnOffEngineSound()
     {
+        Debug.Log("Turning off engine sound");
+
         if (useSounds)
         {
             if (engineAudio != null)

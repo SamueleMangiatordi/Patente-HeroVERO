@@ -1,4 +1,4 @@
-﻿using Ezereal;
+using Ezereal;
 using UnityEngine;
 using UnityEngine.Events;
 using System.Collections;
@@ -16,23 +16,26 @@ public abstract class InteractionControllerBase : MonoBehaviour
 
     [Tooltip("The speed to set the car when ending the interaction. If 0, car maintains speed.")]
     [SerializeField] protected float resumeCarSpeed = 0f;
-    [Tooltip("Time to wait before resuming game after interaction ends (e.g., for teleport animation).")]
-    [SerializeField] protected float resumeTimeDelay = 0.15f;
+
+    [Tooltip("Time to ignore AI collisions after resuming. This is useful to prevent immediate collisions after teleporting the car, entering in an infinite loop.")]
+    [SerializeField] protected float aiCarIgnoreCollisionTime = 6f; // Time to ignore AI collisions after resuming
+
+    [Tooltip("Time to wait before start considering input as valid. It is used to avoid random input")]
+    [SerializeField] protected float _waitingInputTreshold = 1f;
 
     [Tooltip("Event to simulate a button press after resuming from pause (e.g., for throttle).")]
     public UnityEvent<float> onResumePressedButton; // Public UnityEvent
 
     [Tooltip("Where to teleport the car if something is wrong (e.g., out of bounds).")]
     [SerializeField] protected Transform resetPos;
-
-    [Tooltip("Reference to the UserGuideController in the scene.")]
-    [SerializeField] protected UserGuideController userGuideController;
-
     [Tooltip("Collider that triggers the start of the interaction.")]
     [SerializeField] protected Collider enterCollider;
     [Tooltip("Collider that triggers the end of the interaction (e.g., leaving the area).")]
     [SerializeField] protected Collider exitCollider;
 
+    [Header("User Guide Settings")]
+    [Tooltip("Reference to the UserGuideController in the scene.")]
+    [SerializeField] protected UserGuideController userGuideController;
     [Tooltip("UserGuide to show when interaction starts.")]
     [SerializeField] protected UserGuideType startInteractionGuide;
     [Tooltip("UserGuide to show when car goes out of bounds.")]
@@ -46,7 +49,10 @@ public abstract class InteractionControllerBase : MonoBehaviour
     // --- NEW: Action for custom behavior when waiting for any input ---
     protected Action _onAnyInputReceivedAction; // Renamed for clarity: internal storage for the action
 
+    protected float resumeTimeDelay = 0.15f; //Time to wait before resuming game after interaction ends (e.g., for teleport animation). It is used to allow the movement of the car, which cannot happen if timescale is 0
+
     protected bool _isWaitingForAnyInput = false; // Flag for waiting for user input to resume game
+    private float _waitingInputTimer = 0f; // Timer to track waiting time for input
 
 #if UNITY_EDITOR
     // Reset method for editor convenience (called when script is attached or Reset is clicked)
@@ -99,8 +105,12 @@ public abstract class InteractionControllerBase : MonoBehaviour
         // Logic for waiting for any input to resume game (common to both)
         if (_isWaitingForAnyInput)
         {
-            if (Input.anyKeyDown)
+            _waitingInputTimer += Time.unscaledDeltaTime;
+
+            if (_waitingInputTimer > _waitingInputTreshold && Input.anyKeyDown)
             {
+                _waitingInputTimer = 0f; // Reset the timer after receiving input
+
                 _onAnyInputReceivedAction?.Invoke();
                 return;
             }
@@ -117,14 +127,20 @@ public abstract class InteractionControllerBase : MonoBehaviour
         isInteractionEnabled = true;
         Debug.Log($"Interaction '{name}' started.");
 
-       
+        // Store car state at the beginning of the interaction
+        storedCarState = new CarStateParameters(carController);
+    }
+
+    /// <summary>
+    /// Stops the interaction, typically pausing the game and showing an initial guide.
+    /// </summary>
+    public virtual void PauseGameAndShowUserGuide()
+    {
         GameManager.Instance.PauseGame();
 
         cameraController.ResetCurrentCameraRotation(); // Reset camera
         userGuideController.SetUserGuide(startInteractionGuide); // Show initial guide
 
-        // Store car state at the beginning of the interaction
-        storedCarState = new CarStateParameters(carController);
     }
 
     /// <summary>
@@ -150,11 +166,12 @@ public abstract class InteractionControllerBase : MonoBehaviour
     /// <summary>
     /// Restarts the interaction, usually after an "out of bounds" or "car hitted" event.
     /// This method will pause the game and show a specific user guide, then wait for input.
+    /// When the iinput is recieved, it will call the action provided (if any) or resume the game with the default behavior.
     /// </summary>
     /// <param name="guideTypeToShow">The specific UserGuideType to display for this restart.</param>
-    /// <param name="customInputReceivedAction">Optional action to execute when input is received during this wait.</param>
+    /// <param name="onInputReceived">Optional action to execute when input is received during this wait.</param>
 
-    public virtual void RestartInteraction(UserGuideType guideTypeToShow, Action customInputReceivedAction = null)
+    public virtual void RestartInteraction(UserGuideType guideTypeToShow, Action onInputReceived = null)
     {
         // Disable enter collider temporarily to prevent immediate re-trigger
         if (enterCollider != null) enterCollider.enabled = false;
@@ -166,11 +183,11 @@ public abstract class InteractionControllerBase : MonoBehaviour
         cameraController.ResetCurrentCameraRotation(); // Reset camera rotation
 
         isInteractionEnabled = true; // Re-enable interaction
-        StartWaitingForAnyInput(customInputReceivedAction); // Start waiting with the provided action
+        StartWaitingForAnyInput(onInputReceived); // Start waiting with the provided action
     }
 
     /// <summary>
-    /// Helper method to restore car state and resume the game after a wait.
+    /// Helper method to restore car state and resume the game after a wait and show the user guide provided (default one if no one is provided).
     /// This is the default behavior when any input is received during a wait.
     /// </summary>
     protected void ResumeGameAfterWait(UserGuideType userGuideType = UserGuideType.None)
@@ -182,6 +199,8 @@ public abstract class InteractionControllerBase : MonoBehaviour
         {
 
             storedCarState.ApplyToCarController(carController);
+            AiCarSpawner.IgnoreAllAiPlayerCollision(aiCarIgnoreCollisionTime); // Ignore AI collisions for a short time after resuming
+
             Debug.Log("Car state restored for RestartInteraction.");
         }
         else

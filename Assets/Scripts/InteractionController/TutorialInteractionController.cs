@@ -111,6 +111,7 @@ public class TutorialInteractionController : InteractionControllerBase // Inheri
     public override void StartInteraction()
     {
         base.StartInteraction(); // Call base implementation
+        base.PauseGameAndShowUserGuide();
 
         // Specific setup for TriggerableUserGuide
         if (enterCollider != null) enterCollider.enabled = true; // Enable enter collider to detect car entry

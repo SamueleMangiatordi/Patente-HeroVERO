@@ -573,7 +573,7 @@ public class SimplifiedCarController : MonoBehaviour // This is the main system 
 
             // Optionally, turn off lights and engine sounds if the car is fully stopped
             if (ezerealLightController != null) ezerealLightController.AllLightsOff();
-            if (simplifiedSoundController != null) simplifiedSoundController.TurnOffEngineSound();
+            //if (simplifiedSoundController != null) simplifiedSoundController.TurnOffEngineSound();
         }
         else // If setting a positive speed, ensure car sounds and lights are on
         {
@@ -630,6 +630,9 @@ public class SimplifiedCarController : MonoBehaviour // This is the main system 
             Debug.LogError("Target Transform for TeleportCar is null! Cannot teleport.");
             return;
         }
+
+        AiCarSpawner.IgnoreAllAiPlayerCollision(3f);
+
         // Store original kinematic state
         bool originalIsKinematic = vehicleRB.isKinematic;
 
