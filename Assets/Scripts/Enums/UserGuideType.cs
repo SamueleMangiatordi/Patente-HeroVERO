@@ -13,6 +13,7 @@ public enum UserGuideType
     CarResetPosition,
     CarHitted,
     SignDetails,
-    RightOfWayNotRespected
+    RightOfWayNotRespected,
+    StopSignNotRespected,
     //!!ALWAYS PUT NEW TYPE AT THE AND OF THE LIST!! Otherwise the index will change and break existing references
 }
