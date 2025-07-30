@@ -1,5 +1,6 @@
 using Ezereal;
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events; // Ensure this is present
 
@@ -8,8 +9,13 @@ public class SignInteractionController : InteractionControllerBase // Inherit fr
     [Header("Sign Specific Settings")]
     [Tooltip("UserGuide to show when the car hits something related to the sign.")]
     [SerializeField] private UserGuideType carHittedUserGuide;
+    [Tooltip("UserGuide to show when the player do no respect the right of way")]
+    [SerializeField] private UserGuideType rightOfWayErrorUserGuide = UserGuideType.RightOfWayNotRespected;
 
     public bool RightOfWay { get; set; } = true; // Flag to track right of way status
+
+    [SerializeField] private float maxVelocityOnSignStop = 0f; // Maximum speed to check right of way
+    [SerializeField] private float timeToWaitForSignStop = 2f; // Time to wait for the car to stop at the sign
 
     // No specific Awake or Update override needed unless you add unique logic here.
     // The base Awake and Update will handle common initialization and waitingForAnyInput.
@@ -45,9 +51,18 @@ public class SignInteractionController : InteractionControllerBase // Inherit fr
     {
         if (RightOfWay) return;
 
-        base.RestartInteraction(UserGuideType.RightOfWayNotRespected, OnResumeAction);
+        base.RestartInteraction(rightOfWayErrorUserGuide, OnResumeAction);
     }
 
+    public void OnStopSignStay()
+    {
+        if (carController.GetCurrentSpeed() > maxVelocityOnSignStop)
+        {
+            return;
+        }
+
+        StartCoroutine(OnStopSignRightOfWay());
+    }
 
     /// <summary>
     /// Action to perform when the player commits an error and a user guide tells them to press any key to resume.
@@ -75,5 +90,12 @@ public class SignInteractionController : InteractionControllerBase // Inherit fr
         CarAdapter carAdapter = carController.GetComponent<CarAdapter>();
          carAdapter.SimulateThrottleInput(0); // Ensure throttle is set to 0
         StopWaitingForAnyInput();
+    }
+
+    private IEnumerator OnStopSignRightOfWay()
+    {
+               // Wait for the car to stop at the sign
+        yield return new WaitForSeconds(timeToWaitForSignStop);
+        RightOfWay = true;
     }
 }

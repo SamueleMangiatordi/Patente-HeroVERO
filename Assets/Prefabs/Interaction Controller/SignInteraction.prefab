@@ -51,14 +51,15 @@ MonoBehaviour:
   isInteractionEnabled: 0
   mainCarObject: {fileID: 0}
   resumeCarSpeed: 0
-  resumeTimeDelay: 0.15
+  aiCarIgnoreCollisionTime: 6
+  _waitingInputTreshold: 1
   onResumePressedButton:
     m_PersistentCalls:
       m_Calls: []
   resetPos: {fileID: 4158816288929502303}
-  userGuideController: {fileID: 2283268292976989979}
   enterCollider: {fileID: 51788509455350784}
   exitCollider: {fileID: 7414826398428984480}
+  userGuideController: {fileID: 2283268292976989979}
   startInteractionGuide: 10
   outOfBoundsUserGuide: 7
   carHittedUserGuide: 9
@@ -332,8 +333,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   userGuideType: 11
-  _instructionPanel: {fileID: 2784668699690346466, guid: 1704e1fa7775ede40bdae6fdff0371f1,
-    type: 3}
+  _instructionPanel: {fileID: 0}
   complementaryUIElements:
   - uiElement: {fileID: 0}
     shouldFloat: 0
@@ -386,8 +386,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   userGuideType: 10
-  _instructionPanel: {fileID: 4452166664608802974, guid: 1789df8d69c8e074e89a06b415798b94,
-    type: 3}
+  _instructionPanel: {fileID: 0}
   complementaryUIElements:
   - uiElement: {fileID: 0}
     shouldFloat: 0
@@ -439,8 +438,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   userGuideType: 9
-  _instructionPanel: {fileID: 2784668699690346466, guid: 1704e1fa7775ede40bdae6fdff0371f1,
-    type: 3}
+  _instructionPanel: {fileID: 0}
   complementaryUIElements:
   - uiElement: {fileID: 0}
     shouldFloat: 0
