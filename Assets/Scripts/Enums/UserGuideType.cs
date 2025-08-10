@@ -15,5 +15,8 @@ public enum UserGuideType
     SignDetails,
     RightOfWayNotRespected,
     StopSignNotRespected,
+    FirstQuestionWrongAnswer,
+    FirstQuestionCorrectAnswer,
+    FirstQuestion,
     //!!ALWAYS PUT NEW TYPE AT THE AND OF THE LIST!! Otherwise the index will change and break existing references
 }
