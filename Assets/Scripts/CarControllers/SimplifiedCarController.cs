@@ -13,7 +13,7 @@ public class SimplifiedCarController : MonoBehaviour // This is the main system 
     public UnityEvent<float> onHandBrake;
     public UnityEvent<float> onSteer;
 
-    [SerializeField] private bool bypassingInputs = false; // Flag to indicate if inputs are being bypassed
+    [SerializeField] public bool BypassingInputs { get; set; } = false; // Flag to indicate if inputs are being bypassed
 
     [Tooltip("Time to bypass inputs after setting speed. This is useful for tutorials or when you want to set a speed without user interference.")]
     [SerializeField] float bypassInputsTime = 0.5f; // Time to bypass inputs after setting speed
@@ -178,7 +178,7 @@ public class SimplifiedCarController : MonoBehaviour // This is the main system 
 
     void OnThrottle(InputValue throttleValue)
     {
-        if (bypassingInputs)
+        if (BypassingInputs)
         {
             CurrentThrottleInput = 0; // <--- Ensure this is explicitly set to zero
             return; // Ignore input if bypassing
@@ -341,7 +341,7 @@ public class SimplifiedCarController : MonoBehaviour // This is the main system 
 
     void OnSteer(InputValue turnValue)
     {
-        if (bypassingInputs)
+        if (BypassingInputs)
         {
             TargetSteerAngle = 0; // <--- Ensure this is explicitly set to zero
             return; // Ignore input if bypassing
@@ -693,9 +693,9 @@ public class SimplifiedCarController : MonoBehaviour // This is the main system 
 
     IEnumerator BypassInputs(float delay)
     {
-        bypassingInputs = true; // Set the flag to indicate inputs are being bypassed
+        BypassingInputs = true; // Set the flag to indicate inputs are being bypassed
         yield return new WaitForSecondsRealtime(delay);
-        bypassingInputs = false; // Reset the flag after the delay
+        BypassingInputs = false; // Reset the flag after the delay
     }
 
 }
