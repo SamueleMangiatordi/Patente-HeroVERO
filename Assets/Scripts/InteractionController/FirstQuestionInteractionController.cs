@@ -20,8 +20,16 @@ public class FirstQuestionInteractionController : InteractionControllerBase
 
         StopWaitingForAnyInput(); // Ensure we stop waiting for any input
 
-        base.EndInteraction(); // End the interaction
         GameManager.Instance.ResumeGame();
+    }
+
+    public void OnCarHit()
+    {
+      if(!isInteractionEnabled) return;
+
+        Debug.Log($"Car hit sign '{name}'. Restarting interaction with 'Car Hitted' guide.");
+
+        base.RestartInteraction(UserGuideType.CarHitted, OnResumeAction);
     }
 
     private void OnResumeAction()
