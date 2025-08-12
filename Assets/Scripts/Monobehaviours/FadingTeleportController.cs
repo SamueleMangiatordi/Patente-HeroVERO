@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class AccidentAnimationController : MonoBehaviour
+public class FadingTeleportController : MonoBehaviour
 {
-    [SerializeField] private Transform teleportPoint;
+    public static FadingTeleportController Instance { get; private set; }
+   
     [SerializeField] private GameObject mainCarPrefab;
 
     [Tooltip("Il componente VRCameraFader che gestisce la dissolvenza della telecamera.")]
@@ -15,10 +16,22 @@ public class AccidentAnimationController : MonoBehaviour
     private Coroutine _fadingCoroutine = null;
 
     private SimplifiedCarController _carController;
-   
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
+
     private void Start()
     {
-        _carController = GetComponent<SimplifiedCarController>();
+        _carController = mainCarPrefab.GetComponentInChildren<SimplifiedCarController>();
         if (_carController == null)
         {
             Debug.LogError("SimplifiedCarController non trovato sul GameObject!");

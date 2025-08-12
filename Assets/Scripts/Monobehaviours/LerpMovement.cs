@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -14,8 +15,9 @@ public class LerpMovement : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     [SerializeField] private Rigidbody rb;
     [SerializeField] private Collider col;
 
+    public Action onEndMovement;
     public bool isMovingToTarget { get; private set; } = false; //prevent other interaction while moving to target
-    
+
     private bool _isDragging = false;   // Is the object being dragged by the user
     private bool IsDragging
     {
@@ -52,9 +54,11 @@ public class LerpMovement : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
             {
                 isMovingToTarget = false; // Stop moving when reached
                 _canInteract = true; // Allow interaction again
-                
-                if(_kinematicOnDestination) rb.isKinematic = true;
-                if(_disableColliderOnDestination) col.enabled = false; // Reset collider state
+
+                onEndMovement?.Invoke();
+                onEndMovement = null; // Reset the action to avoid multiple calls
+                if (_kinematicOnDestination) rb.isKinematic = true;
+                if (_disableColliderOnDestination) col.enabled = false; // Reset collider state
             }
 
             if (_isRotatingToTarget)
@@ -125,8 +129,6 @@ public class LerpMovement : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         rb.useGravity = true;
     }
 
-
-
     public void GoTo(Transform transform, bool rotateToTarget = false, float velocity = LerpVelocity.Slow)
     {
         _canInteract = false;
@@ -143,14 +145,29 @@ public class LerpMovement : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         }
     }
 
-    public void GoTo(Vector3 transformPosition, float velocity = LerpVelocity.Normal)
+    public void GoTo(Vector3 transformPosition, Vector3 rotation, float velocity = LerpVelocity.Normal)
     {
         _canInteract = false;
         IsDragging = false;
         isMovingToTarget = true;
         _targetPosition = transformPosition;
 
+        if (rotation != Vector3.zero)
+        {
+            _isRotatingToTarget = true;
+            _targetRotation = rotation;
+        }
+        else
+        {
+            _isRotatingToTarget = false;
+        }
+
         goingSpeed = velocity;
+    }
+
+    public void GoTo(Vector3 transformPosition, float velocity = LerpVelocity.Normal)
+    {
+        GoTo(transformPosition, Vector3.zero, velocity);
     }
 
     public void BlockInteraction()
