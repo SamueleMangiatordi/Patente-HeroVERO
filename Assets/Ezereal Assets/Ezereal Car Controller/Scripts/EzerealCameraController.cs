@@ -7,6 +7,8 @@ namespace Ezereal
 {
     public class EzerealCameraController : MonoBehaviour
     {
+        public static EzerealCameraController Instance { get; private set; }
+
         [Tooltip("The electric truck GameObject used for camera rotation reference.")]
         [SerializeField] private GameObject car;
         [SerializeField] public CameraViews currentCameraView { get; private set; } = CameraViews.cockpit;
@@ -25,8 +27,11 @@ namespace Ezereal
 
         private Coroutine _resetMonitorCoroutine; // Monitors when recentering is complete
 
+
         private void Awake()
         {
+            Instance = this;
+
             // Initialize camera view. Assuming Vector3.zero for rotation means identity or default world alignment.
             SetCameraView(currentCameraView, true);
         }
