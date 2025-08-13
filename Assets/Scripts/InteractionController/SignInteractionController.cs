@@ -39,7 +39,7 @@ public class SignInteractionController : InteractionControllerBase // Inherit fr
     // or by another script that detects "hitting the sign".
     public void OnCarHit()
     {
-        if (!isInteractionEnabled) return;
+        
 
         Debug.Log($"Car hit sign '{name}'. Restarting interaction with 'Car Hitted' guide.");
 
