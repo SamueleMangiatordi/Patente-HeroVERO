@@ -1939,6 +1939,11 @@ PrefabInstance:
       propertyPath: mainCarObject
       value: 
       objectReference: {fileID: 1786529744}
+    - target: {fileID: 6632968868173607779, guid: e57dd2df5b000144db3c561d25871415,
+        type: 3}
+      propertyPath: checkpointManager
+      value: 
+      objectReference: {fileID: 1409887652}
     - target: {fileID: 7078474175013685279, guid: e57dd2df5b000144db3c561d25871415,
         type: 3}
       propertyPath: _instructionPanel
@@ -5057,6 +5062,11 @@ PrefabInstance:
       propertyPath: mainCarObject
       value: 
       objectReference: {fileID: 1786529744}
+    - target: {fileID: 6632968868173607779, guid: e57dd2df5b000144db3c561d25871415,
+        type: 3}
+      propertyPath: checkpointManager
+      value: 
+      objectReference: {fileID: 1409887652}
     - target: {fileID: 7078474175013685279, guid: e57dd2df5b000144db3c561d25871415,
         type: 3}
       propertyPath: _instructionPanel
@@ -25658,7 +25668,7 @@ Transform:
   m_GameObject: {fileID: 1055956218}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 27.402573, y: 1.9465295, z: 119.27609}
+  m_LocalPosition: {x: 27.402573, y: 1.9465295, z: 109.27609}
   m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -28801,6 +28811,11 @@ PrefabInstance:
       propertyPath: mainCarObject
       value: 
       objectReference: {fileID: 1786529744}
+    - target: {fileID: 6632968868173607779, guid: e57dd2df5b000144db3c561d25871415,
+        type: 3}
+      propertyPath: checkpointManager
+      value: 
+      objectReference: {fileID: 1409887652}
     - target: {fileID: 7078474175013685279, guid: e57dd2df5b000144db3c561d25871415,
         type: 3}
       propertyPath: signData
@@ -32108,6 +32123,11 @@ PrefabInstance:
       propertyPath: mainCarObject
       value: 
       objectReference: {fileID: 1786529744}
+    - target: {fileID: 6632968868173607779, guid: e57dd2df5b000144db3c561d25871415,
+        type: 3}
+      propertyPath: checkpointManager
+      value: 
+      objectReference: {fileID: 1409887652}
     - target: {fileID: 7078474175013685279, guid: e57dd2df5b000144db3c561d25871415,
         type: 3}
       propertyPath: signData
@@ -40451,6 +40471,11 @@ PrefabInstance:
       propertyPath: mainCarObject
       value: 
       objectReference: {fileID: 1786529744}
+    - target: {fileID: 6632968868173607779, guid: e57dd2df5b000144db3c561d25871415,
+        type: 3}
+      propertyPath: checkpointManager
+      value: 
+      objectReference: {fileID: 1409887652}
     - target: {fileID: 7078474175013685279, guid: e57dd2df5b000144db3c561d25871415,
         type: 3}
       propertyPath: signData
@@ -40585,12 +40610,12 @@ PrefabInstance:
     - target: {fileID: 8620406569960738109, guid: e57dd2df5b000144db3c561d25871415,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -24.666668
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8620406569960738109, guid: e57dd2df5b000144db3c561d25871415,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 63.937096
+      value: 30.603762
       objectReference: {fileID: 0}
     - target: {fileID: 8620406569960738109, guid: e57dd2df5b000144db3c561d25871415,
         type: 3}

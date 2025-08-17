@@ -27,7 +27,7 @@ public abstract class InteractionControllerBase : MonoBehaviour
     public UnityEvent<float> onResumePressedButton; // Public UnityEvent
 
     [Tooltip("Where to teleport the car if something is wrong (e.g., out of bounds).")]
-    [SerializeField] protected Transform resetPos;
+    [SerializeField] public Transform resetPos;
     [Tooltip("Collider that triggers the start of the interaction.")]
     [SerializeField] protected Collider enterCollider;
     [Tooltip("Collider that triggers the end of the interaction (e.g., leaving the area).")]

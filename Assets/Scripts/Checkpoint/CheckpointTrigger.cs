@@ -12,6 +12,14 @@ public class CheckpointTrigger : MonoBehaviour
             checkpointManager.GoToNextCheckpoint();
             Debug.Log("✅ Checkpoint attraversato");
 
+            // Trova il SignInteractionController della scena
+            SignInteractionController sic = FindObjectOfType<SignInteractionController>();
+            if (sic != null)
+            {
+                sic.resetPos = this.transform;
+                Debug.Log("✅ Checkpoint attraversato - resetPos aggiornato");
+            }
+
         }
     }
 }

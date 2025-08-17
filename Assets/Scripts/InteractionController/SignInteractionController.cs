@@ -1,4 +1,4 @@
-using Ezereal;
+﻿using Ezereal;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -42,6 +42,16 @@ public class SignInteractionController : InteractionControllerBase // Inherit fr
         
 
         Debug.Log($"Car hit sign '{name}'. Restarting interaction with 'Car Hitted' guide.");
+
+        if (resetPos != null)
+        {
+            mainCarObject.transform.position = resetPos.position;
+            mainCarObject.transform.rotation = resetPos.rotation;
+        }
+        else
+        {
+            Debug.LogWarning("⚠ Nessun resetPos impostato!");
+        }
 
         // Example: Provide a custom action for 'car hitted'
         base.RestartInteraction(carHittedUserGuide, OnResumeAction);
