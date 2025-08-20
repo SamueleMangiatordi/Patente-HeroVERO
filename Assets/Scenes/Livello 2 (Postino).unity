@@ -21370,10 +21370,55 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1142550288}
     m_Modifications:
+    - target: {fileID: 1573735175501387074, guid: 1704e1fa7775ede40bdae6fdff0371f1,
+        type: 3}
+      propertyPath: m_text
+      value: Hai colpito l'auto. Riprova!
+      objectReference: {fileID: 0}
+    - target: {fileID: 1573735175501387074, guid: 1704e1fa7775ede40bdae6fdff0371f1,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 60.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2504931531625323745, guid: 1704e1fa7775ede40bdae6fdff0371f1,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 675.73
+      objectReference: {fileID: 0}
+    - target: {fileID: 2504931531625323745, guid: 1704e1fa7775ede40bdae6fdff0371f1,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -3.762
+      objectReference: {fileID: 0}
+    - target: {fileID: 2504931531625323745, guid: 1704e1fa7775ede40bdae6fdff0371f1,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 337.87
+      objectReference: {fileID: 0}
+    - target: {fileID: 2504931531625323745, guid: 1704e1fa7775ede40bdae6fdff0371f1,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -1.881
+      objectReference: {fileID: 0}
     - target: {fileID: 2784668699690346466, guid: 1704e1fa7775ede40bdae6fdff0371f1,
         type: 3}
       propertyPath: m_Name
       value: wrongInteraction
+      objectReference: {fileID: 0}
+    - target: {fileID: 2784668699690346466, guid: 1704e1fa7775ede40bdae6fdff0371f1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6191095711522081093, guid: 1704e1fa7775ede40bdae6fdff0371f1,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 6.825714
+      objectReference: {fileID: 0}
+    - target: {fileID: 6191095711522081093, guid: 1704e1fa7775ede40bdae6fdff0371f1,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -29
       objectReference: {fileID: 0}
     - target: {fileID: 8910885987844592974, guid: 1704e1fa7775ede40bdae6fdff0371f1,
         type: 3}
