@@ -6207,6 +6207,12 @@ PrefabInstance:
       objectReference: {fileID: 702807756}
     - target: {fileID: 7078474175013685279, guid: e57dd2df5b000144db3c561d25871415,
         type: 3}
+      propertyPath: signData
+      value: 
+      objectReference: {fileID: 11400000, guid: 9748d4680f9d06d40ad7db967349507f,
+        type: 2}
+    - target: {fileID: 7078474175013685279, guid: e57dd2df5b000144db3c561d25871415,
+        type: 3}
       propertyPath: _instructionPanel
       value: 
       objectReference: {fileID: 721780217}
@@ -7716,6 +7722,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1142550288}
     m_Modifications:
+    - target: {fileID: 724251163289800712, guid: 1789df8d69c8e074e89a06b415798b94,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2547548972873073040, guid: 1789df8d69c8e074e89a06b415798b94,
         type: 3}
       propertyPath: m_Pivot.x

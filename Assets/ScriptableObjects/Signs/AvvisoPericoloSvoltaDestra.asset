@@ -10,11 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a7059136c5c1d54448be778d96c962e2, type: 3}
-  m_Name: PrecedenzaPedoni
+  m_Name: AvvisoPericoloSvoltaDestra
   m_EditorClassIdentifier: 
-  image: {fileID: 21300000, guid: a47d024cad93b5a43879135b428ed839, type: 3}
-  signName: Triangolo precedenza pedoni
+  image: {fileID: 21300000, guid: 53e69be6112498e499515318500b2ca6, type: 3}
+  signName: Pericolo svolta a destra
   type: 0
-  description: "Quando vedi questo cartello devi rallentare, guardare se la strada
-    \xE8 libera e se non ci sono pedoni, attraversare l'incrocio. Se un pedone attraversa,
-    devi fermarti."
+  description: "Questo cartello ti avvisa di una imminente curva a destra, perci\xF2
+    presta attenzione!"
