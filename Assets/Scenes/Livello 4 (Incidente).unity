@@ -2626,7 +2626,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: Dismiss
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3000,10 +3000,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1924725286}
   - {fileID: 1560123248}
   - {fileID: 631857806}
   - {fileID: 358599079}
+  - {fileID: 1924725286}
   m_Father: {fileID: 1662610033}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &278024623
@@ -3264,7 +3264,7 @@ PrefabInstance:
     - target: {fileID: 2990565645700352911, guid: 8fa5143051527e949b0ae174c8430414,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -417.20135
+      value: -326.00137
       objectReference: {fileID: 0}
     - target: {fileID: 2990565645700352911, guid: 8fa5143051527e949b0ae174c8430414,
         type: 3}
@@ -4653,6 +4653,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3048077167933698130, guid: 777c9604c11680540aa71950402451e3,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3048077167933698130, guid: 777c9604c11680540aa71950402451e3,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3048077167933698130, guid: 777c9604c11680540aa71950402451e3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7547877838919646748, guid: 777c9604c11680540aa71950402451e3,
         type: 3}
       propertyPath: m_text
@@ -4662,6 +4677,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_fontSize
       value: 2.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8624427184110083150, guid: 777c9604c11680540aa71950402451e3,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6871,6 +6891,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3048077167933698130, guid: 777c9604c11680540aa71950402451e3,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3048077167933698130, guid: 777c9604c11680540aa71950402451e3,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3048077167933698130, guid: 777c9604c11680540aa71950402451e3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7547877838919646748, guid: 777c9604c11680540aa71950402451e3,
         type: 3}
       propertyPath: m_text
@@ -6880,6 +6915,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_fontSize
       value: 2.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8624427184110083150, guid: 777c9604c11680540aa71950402451e3,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10701,7 +10741,7 @@ Transform:
   m_GameObject: {fileID: 1057106569}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.94, y: 5.7, z: 162.3}
+  m_LocalPosition: {x: 2.94, y: 5.7, z: 71.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -12520,13 +12560,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1705496463}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 1705496465}
+        m_TargetAssemblyTypeName: TriangleChoiceController, Assembly-CSharp
+        m_MethodName: ConfirmChoice
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -13638,7 +13678,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_NormalColor: {r: 1, g: 0, b: 0, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -13660,7 +13700,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1205643226}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1705496465}
+        m_TargetAssemblyTypeName: TriangleChoiceController, Assembly-CSharp
+        m_MethodName: DismissChoiche
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1205643226
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14191,7 +14243,7 @@ PrefabInstance:
     - target: {fileID: 2299065685634062872, guid: b3a82b13987baa54ebbb9697ad26ad6a,
         type: 3}
       propertyPath: field of view
-      value: 60.000004
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 2299065685634062872, guid: b3a82b13987baa54ebbb9697ad26ad6a,
         type: 3}
@@ -14201,37 +14253,37 @@ PrefabInstance:
     - target: {fileID: 2785109115443603330, guid: b3a82b13987baa54ebbb9697ad26ad6a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.106599
+      value: 4.8628545
       objectReference: {fileID: 0}
     - target: {fileID: 2785109115443603330, guid: b3a82b13987baa54ebbb9697ad26ad6a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.2845876
+      value: -3.3949516
       objectReference: {fileID: 0}
     - target: {fileID: 2785109115443603330, guid: b3a82b13987baa54ebbb9697ad26ad6a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 14.305756
+      value: 14.305731
       objectReference: {fileID: 0}
     - target: {fileID: 2785109115443603330, guid: b3a82b13987baa54ebbb9697ad26ad6a,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.70286405
+      value: 0.7064547
       objectReference: {fileID: 0}
     - target: {fileID: 2785109115443603330, guid: b3a82b13987baa54ebbb9697ad26ad6a,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.07734449
+      value: 0.030402262
       objectReference: {fileID: 0}
     - target: {fileID: 2785109115443603330, guid: b3a82b13987baa54ebbb9697ad26ad6a,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.702864
+      value: -0.7064511
       objectReference: {fileID: 0}
     - target: {fileID: 2785109115443603330, guid: b3a82b13987baa54ebbb9697ad26ad6a,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.07734448
+      value: 0.030402107
       objectReference: {fileID: 0}
     - target: {fileID: 6382011616178552990, guid: b3a82b13987baa54ebbb9697ad26ad6a,
         type: 3}
@@ -16449,7 +16501,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: Confirm
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -19996,6 +20048,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraView: 6
+  correctTriangleDistance: {fileID: 658012731}
   mainTriangle: {fileID: 1092680816}
   triangles:
   - {fileID: 5759065144052049716}
@@ -20003,7 +20056,7 @@ MonoBehaviour:
   - {fileID: 433997952}
   idleHeightAnimation: 3
   idleHeightAnimationSpeed: 1
-  idleRotationSpeed: 30
+  idleRotationSpeed: 0
   distanceChoicePanel: {fileID: 1225434794}
   confirmChoicePanel: {fileID: 1238130254}
 --- !u!1001 &1718420644
@@ -26241,6 +26294,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3048077167933698130, guid: 777c9604c11680540aa71950402451e3,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3048077167933698130, guid: 777c9604c11680540aa71950402451e3,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3048077167933698130, guid: 777c9604c11680540aa71950402451e3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8624427184110083150, guid: 777c9604c11680540aa71950402451e3,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
