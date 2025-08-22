@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using NUnit.Framework;
+using UnityEngine;
 
 public class CheckpointManager : MonoBehaviour
 {
@@ -16,13 +17,26 @@ public class CheckpointManager : MonoBehaviour
         }
     }
 
+    [Tooltip("Used as shortcut to assign checkpoints. Parent object containing all checkpoint transforms as children.")]
+    [SerializeField] private Transform checkpointsParent = null;
 
+    [Tooltip("List of checkpoint transforms in the order they should be reached.")]
     [SerializeField] private Transform[] checkpoints; // lista ordinata
     private int currentCheckpointIndex = 0;
 
 
     private void Start()
     {
+        if(checkpointsParent != null)
+        {
+            int childCount = checkpointsParent.childCount;
+            checkpoints = new Transform[childCount];
+            for (int i = 0; i < childCount; i++)
+            {
+                checkpoints[i] = checkpointsParent.GetChild(i);
+            }
+        }
+
         ActivateCheckpoint(currentCheckpointIndex);
     }
 
