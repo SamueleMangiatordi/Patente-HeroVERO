@@ -4884,6 +4884,7 @@ GameObject:
   - component: {fileID: 8086308765670978696}
   - component: {fileID: 1284987339687640021}
   - component: {fileID: 5785365166283527682}
+  - component: {fileID: 2053958376856152467}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -5041,6 +5042,22 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   CustomBlends: {fileID: 0}
+--- !u!114 &2053958376856152467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4006749555956499607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c49b4cc203aa6414fae5c798d1d0e7d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EventMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_MaxRayIntersections: 0
 --- !u!1 &4098147406507325704
 GameObject:
   m_ObjectHideFlags: 0
@@ -7922,7 +7939,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  bypassingInputs: 0
   bypassInputsTime: 0.5
   ezerealLightController: {fileID: 4252124203229880378}
   simplifiedSoundController: {fileID: 3430142193792684374}

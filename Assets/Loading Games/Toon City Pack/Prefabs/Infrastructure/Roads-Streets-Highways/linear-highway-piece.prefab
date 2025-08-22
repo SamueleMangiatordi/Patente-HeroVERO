@@ -12,6 +12,9 @@ GameObject:
   - component: {fileID: 4899283851555701472}
   - component: {fileID: 7212857839920477738}
   - component: {fileID: 4943258581355980898}
+  - component: {fileID: 8434816881576159049}
+  - component: {fileID: 7473985499070930757}
+  - component: {fileID: 7956052335781059353}
   m_Layer: 0
   m_Name: linear-highway-piece
   m_TagString: Untagged
@@ -109,3 +112,66 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 18.35334, y: 1, z: 18.35334}
   m_Center: {x: 0.055926323, y: 5.1, z: -0.00000047683716}
+--- !u!65 &8434816881576159049
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9158575124850825215}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.5, y: 4, z: 18.35334}
+  m_Center: {x: 0.05, y: 6.5, z: 0}
+--- !u!65 &7473985499070930757
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9158575124850825215}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 4, z: 18.35334}
+  m_Center: {x: 9.3, y: 6.5, z: 0}
+--- !u!65 &7956052335781059353
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9158575124850825215}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 4, z: 18.35334}
+  m_Center: {x: -9.3, y: 6.5, z: 0}
