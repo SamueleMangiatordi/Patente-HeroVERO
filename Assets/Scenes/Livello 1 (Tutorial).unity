@@ -21097,9 +21097,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ad5305de51bd8b46babb7c01a5a2209, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _wantedScene: {fileID: 0}
+  _wantedScene: {fileID: 102900000, guid: fb17e0bb80039cd47a7ad0bb45b3295f, type: 3}
   _loadMode: 0
-  _sceneIndex: -1
+  _sceneIndex: 1
   _useAdditionalCheck: 0
   _onLoadDirectly:
     m_PersistentCalls:
