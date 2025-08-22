@@ -48,7 +48,7 @@ public class LerpMovement : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         if (!IsDragging && !isMovingToTarget)
             return;
 
-        if (rb.position == _targetPosition)
+        if (Vector3.Distance(rb.position, _targetPosition) < 0.5f)
         {
             if (isMovingToTarget)
             {

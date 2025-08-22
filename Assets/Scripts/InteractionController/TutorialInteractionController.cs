@@ -158,13 +158,17 @@ public class TutorialInteractionController : InteractionControllerBase // Inheri
         StopWaitingForAnyInput(); // Ensure we stop waiting for any input
     }
 
-   
+
     // Override ExitBoundedAred to ensure it calls the base RestartInteraction with the correct guide
     public void ExitBoundedAred()
     {
         if (!isInteractionEnabled)
             return;
 
-        RestartInteraction(outOfBoundsUserGuide, () => ResumeGameAfterWait()); //pass the specific guide type and method to execute after recieving an input
+        RestartInteraction(outOfBoundsUserGuide, () =>
+        {
+            ResumeGameAfterWait();
+            StopWaitingForAnyInput();
+        }); //pass the specific guide type and method to execute after recieving an input
     }
 }

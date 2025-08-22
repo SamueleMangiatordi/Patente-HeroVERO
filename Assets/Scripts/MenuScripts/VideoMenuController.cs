@@ -60,4 +60,13 @@ public class VideoMenuController : MonoBehaviour
             objectToAppearAfterVideo.SetActive(true);
         }
     }
+
+    public void SkipVideo()
+    {
+        if (videoPlayer.isPlaying)
+        {
+            videoPlayer.Stop();
+            OnVideoEnd(videoPlayer);
+        }
+    }
 }

@@ -4,6 +4,11 @@ public class CheckpointTrigger : MonoBehaviour
 {
     [SerializeField] private CheckpointManager checkpointManager;
 
+    private void Start()
+    {
+        checkpointManager = FindAnyObjectByType<CheckpointManager>();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
