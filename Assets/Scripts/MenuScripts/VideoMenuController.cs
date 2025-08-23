@@ -16,8 +16,6 @@ public class VideoMenuController : MonoBehaviour
 
     void Start()
     {
-        // Initially, hide the video and the object to appear.
-        videoRawImage.gameObject.SetActive(false);
         if (objectToAppearAfterVideo != null)
         {
             objectToAppearAfterVideo.SetActive(false);
@@ -30,7 +28,7 @@ public class VideoMenuController : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Play Video Button is not assigned!");
+            Debug.LogWarning("Play Video Button is not assigned!");
         }
 
         // Add a listener to the video player's loop point reached event.
@@ -51,6 +49,8 @@ public class VideoMenuController : MonoBehaviour
     {
         // When the video ends, hide the video
         videoRawImage.gameObject.SetActive(false);
+
+        Debug.Log("OnVideoEnd");
 
         onVideoEnd?.Invoke(); // Trigger the UnityEvent if assigned
 
