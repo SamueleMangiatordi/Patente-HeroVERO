@@ -3,10 +3,12 @@
 public class CheckpointTrigger : MonoBehaviour
 {
     [SerializeField] private CheckpointManager checkpointManager;
+    [SerializeField] private SignInteractionController signInteractionController;
 
     private void Start()
     {
         checkpointManager = FindAnyObjectByType<CheckpointManager>();
+        signInteractionController = FindAnyObjectByType<SignInteractionController>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -17,11 +19,9 @@ public class CheckpointTrigger : MonoBehaviour
             checkpointManager.GoToNextCheckpoint();
             Debug.Log("✅ Checkpoint attraversato");
 
-            // Trova il SignInteractionController della scena
-            SignInteractionController sic = FindObjectOfType<SignInteractionController>();
-            if (sic != null)
+            if (signInteractionController != null)
             {
-                sic.resetPos = this.transform;
+                signInteractionController.resetPos = this.transform;
                 Debug.Log("✅ Checkpoint attraversato - resetPos aggiornato");
             }
 

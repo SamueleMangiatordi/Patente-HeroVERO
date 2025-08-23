@@ -82,6 +82,8 @@ namespace QuantumTek.QuantumUI
         /// <param name="sceneName"></param>
         public void LoadScene(string sceneName)
         {
+            Time.timeScale = 1f; // Ensure time scale is normal
+
             if (loadType == QUI_LoadType.Instant)
                 SceneManager.LoadScene(sceneName);
             else if (loadType == QUI_LoadType.LoadingUI)
@@ -92,6 +94,7 @@ namespace QuantumTek.QuantumUI
 
                 if (animator)
                     animator.PlayAnimation(exitSceneAnimation);
+
             }
             else if (loadType == QUI_LoadType.LoadingScene)
             {
@@ -104,7 +107,9 @@ namespace QuantumTek.QuantumUI
 
         protected IEnumerator LoadSceneAsync(string sceneName)
         {
-            yield return new WaitForSeconds(0.5f);
+            Debug.Log("Starting LoadSceneAsync coroutine.");
+
+            yield return new WaitForSecondsRealtime(0.5f);
 
             AsyncOperation loadOperation = SceneManager.LoadSceneAsync(sceneName);
             loadOperation.allowSceneActivation = false;
@@ -115,15 +120,20 @@ namespace QuantumTek.QuantumUI
             float phase1Duration = loadPhasesDuration[0];
             float elapsed = 0f;
             float range = Random.Range(0f, 0.5f);
+
+            Debug.Log($"Entering Phase 1 loop. Elapsed: {elapsed}, Target Duration: {phase1Duration}");
+
             while (elapsed < phase1Duration)
             {
-                elapsed += Time.deltaTime;
+                elapsed += Time.unscaledDeltaTime;
                 loadProgress = Mathf.Lerp(0f, range, elapsed / phase1Duration);
                 if (loadingBar) loadingBar.SetFill(loadProgress);
                 yield return null;
             }
+            Debug.Log($"Finished Phase 1. Final Elapsed: {elapsed}");
 
-            yield return new WaitForSeconds(0.2f);
+
+            yield return new WaitForSecondsRealtime(0.2f);
 
 
             // Fase 2: in 0.6 secondi
@@ -135,17 +145,14 @@ namespace QuantumTek.QuantumUI
 
             while (elapsed < phase2Duration)
             {
-                elapsed += Time.deltaTime;
+                elapsed += Time.unscaledDeltaTime;
                 loadProgress = Mathf.Lerp(start, target, elapsed / phase2Duration);
                 if (loadingBar) loadingBar.SetFill(loadProgress);
                 yield return null;
             }
 
-            // aggiorna range per fase 3
-            range = target;
 
-
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSecondsRealtime(0.5f);
 
             // Fase 3: 0.2 secondi
             float phase3Duration = loadPhasesDuration[2];
@@ -156,7 +163,7 @@ namespace QuantumTek.QuantumUI
 
             while (elapsed < phase3Duration)
             {
-                elapsed += Time.deltaTime;
+                elapsed += Time.unscaledDeltaTime;
                 loadProgress = Mathf.Lerp(start, target, elapsed / phase3Duration);
                 if (loadingBar) loadingBar.SetFill(loadProgress);
                 yield return null;
