@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class switch_scenes : MonoBehaviour {
+public class Switch_scenes : MonoBehaviour {
 	
 	public string sceneName = "";
 

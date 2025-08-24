@@ -18,10 +18,11 @@ public class ResetOffRoad : MonoBehaviour
 
     public void OnOffRoad()
     {
-        Transform currentCheckpointTransform = _checkpointManager.GetCurrentActiveCheckpoint();
+        Transform currentCheckpointTransform = _checkpointManager.GetLastReachedCheckpoint();
 
         if (currentCheckpointTransform == null)
         {
+            Debug.Log("CurrentActiveCheckpoint is null, using ResetOffRoad's transform as fallback.");
             currentCheckpointTransform = this.transform;
         }
 
