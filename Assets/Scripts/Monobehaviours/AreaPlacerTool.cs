@@ -1,10 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// This script can be added to a GameObject in the scene
+// This is a regular MonoBehaviour that acts as a data container for our tool.
 public class AreaPlacerTool : MonoBehaviour
 {
-    // These variables will be set by the Editor window
     public List<GameObject> prefabsToPlace;
     public int numberOfObjects;
     public bool isChaotic;
