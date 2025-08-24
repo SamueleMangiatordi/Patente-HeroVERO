@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class VRCameraFader : MonoBehaviour
+public class CameraFader : MonoBehaviour
 {
     // Il CanvasGroup che conterrà l'overlay nero
     [Tooltip("Il CanvasGroup dell'overlay di dissolvenza.")]
@@ -30,7 +30,7 @@ public class VRCameraFader : MonoBehaviour
         float elapsedTime = 0f;
         while (elapsedTime < duration)
         {
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.unscaledDeltaTime;
             fadeCanvasGroup.alpha = Mathf.Lerp(0f, 1f, elapsedTime / duration);
             yield return null;
         }
@@ -49,7 +49,7 @@ public class VRCameraFader : MonoBehaviour
         float elapsedTime = 0f;
         while (elapsedTime < duration)
         {
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.unscaledDeltaTime;
             fadeCanvasGroup.alpha = Mathf.Lerp(1f, 0f, elapsedTime / duration);
             yield return null;
         }

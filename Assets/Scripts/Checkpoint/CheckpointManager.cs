@@ -1,28 +1,39 @@
-﻿using UnityEngine;
+﻿using NUnit.Framework;
+using UnityEngine;
 
 public class CheckpointManager : MonoBehaviour
 {
     public static CheckpointManager Instance { get; private set; }
+
+    [Tooltip("Used as shortcut to assign checkpoints. Parent object containing all checkpoint transforms as children.")]
+    [SerializeField] private Transform checkpointsParent = null;
+
+    [Tooltip("List of checkpoint transforms in the order they should be reached.")]
+    [SerializeField] private Transform[] checkpoints; // lista ordinata
+    private int currentCheckpointIndex = 0;
+
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); // Optional: Keep this object across scenes
         }
-        else
+
+        if (checkpointsParent != null)
         {
-            Destroy(gameObject);
+            int childCount = checkpointsParent.childCount;
+            checkpoints = new Transform[childCount];
+            for (int i = 0; i < childCount; i++)
+            {
+                checkpoints[i] = checkpointsParent.GetChild(i);
+            }
         }
     }
 
-
-    [SerializeField] private Transform[] checkpoints; // lista ordinata
-    private int currentCheckpointIndex = 0;
-
-
     private void Start()
     {
+        
+
         ActivateCheckpoint(currentCheckpointIndex);
     }
 
@@ -62,19 +73,36 @@ public class CheckpointManager : MonoBehaviour
     /// This is useful for resetting the car to the last checkpoint.
     /// </summary>
     /// <returns></returns>
-    public Transform GetCurrentActiveCheckpoint()
+    public Transform GetLastReachedCheckpoint()
     {
-        if (currentCheckpointIndex < checkpoints.Length)
+        // Check for a valid and populated array
+        if (checkpoints == null || checkpoints.Length == 0)
         {
-            int index = currentCheckpointIndex - 1;
-
-            if ( currentCheckpointIndex < 0 )
-            {
-                return checkpoints[0]; // Return the first checkpoint if no checkpoints have been reached yet
-            }
-
-            return checkpoints[currentCheckpointIndex-1] ;
+            Debug.LogWarning("Checkpoints array is null or empty. Returning null.");
+            return null;
         }
-        return null; // or handle the case where there are no checkpoints
+
+
+        // The 'currentCheckpointIndex' typically points to the *next* checkpoint to reach.
+        // The last reached checkpoint is therefore at index 'currentCheckpointIndex - 1'.
+        int lastReachedIndex = currentCheckpointIndex - 1;
+
+        // If no checkpoints have been reached yet, 'lastReachedIndex' will be -1.
+        if (lastReachedIndex < 0)
+        {
+            return checkpoints[0]; // Return null to indicate no checkpoint has been reached yet
+        }
+
+        // Ensure the index is within the bounds of the array
+        if (lastReachedIndex < checkpoints.Length)
+        {
+            return checkpoints[lastReachedIndex];
+        }
+
+        // If the index is out of bounds (e.g., race finished), return the last checkpoint in the list
+        Debug.LogWarning("Current checkpoint index is out of bounds. Returning the final checkpoint.");
+        return checkpoints[checkpoints.Length - 1];
+
+
     }
 }

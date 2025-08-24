@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Racing Starter Kit/RSK Assets/Scenes/SampleScene.unity
     guid: adc28652a668a9646b0352d63f41b808
   - enabled: 1

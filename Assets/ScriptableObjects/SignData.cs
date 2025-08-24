@@ -1,6 +1,4 @@
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 [CreateAssetMenu(fileName = "SignData", menuName = "Scriptable Objects/SignData")]
 public class SignData : ScriptableObject
