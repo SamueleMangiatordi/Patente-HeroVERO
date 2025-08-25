@@ -54,6 +54,8 @@ public abstract class InteractionControllerBase : MonoBehaviour
     protected bool _isWaitingForAnyInput = false; // Flag for waiting for user input to resume game
     private float _waitingInputTimer = 0f; // Timer to track waiting time for input
 
+    private Transform _resetPos = null;
+
 #if UNITY_EDITOR
     // Reset method for editor convenience (called when script is attached or Reset is clicked)
     protected virtual void Reset()
@@ -96,6 +98,15 @@ public abstract class InteractionControllerBase : MonoBehaviour
 
         if (carController == null) { Debug.LogError($"InteractionControllerBase: SimplifiedCarController not found on 'mainCarObject' or its children for {name}.", this); enabled = false; return; }
         if (cameraController == null) { Debug.LogError($"InteractionControllerBase: EzerealCameraController not found on 'mainCarObject' or its children for {name}.", this); enabled = false; return; }
+    }
+
+    private void Start()
+    {
+        GameObject temp = new GameObject(name + "_ResetPos");
+        temp.transform.position = resetPos.position;
+        temp.transform.rotation = resetPos.rotation;
+
+        _resetPos = temp.transform;
     }
 
     protected virtual void Update()
@@ -205,10 +216,13 @@ public abstract class InteractionControllerBase : MonoBehaviour
         }
         else
         {
+            Debug.Log("Reset pos name = " + resetPos.name);
             carController.TeleportCar(resetPos, resumeCarSpeed, true);
             Debug.LogWarning("No stored car state found for RestartInteraction. Using resetPos and configured resumeCarSpeed as fallback.");
         }
         StartCoroutine(GameManager.Instance.WaitToPause(resumeTimeDelay)); // Wait a bit before pausing again if needed
+
+        StartCoroutine(ResetPosTransform()); 
     }
 
     /// <summary>
@@ -233,5 +247,11 @@ public abstract class InteractionControllerBase : MonoBehaviour
         _isWaitingForAnyInput = false;
         _onAnyInputReceivedAction = null; // Clear the action
         Debug.Log($"Interaction '{name}' stopped waiting for input.");
+    }
+
+    IEnumerator ResetPosTransform()
+    {
+        yield return new WaitForSeconds(3f);
+        resetPos = _resetPos;
     }
 }
