@@ -39,7 +39,7 @@ public abstract class UserGuide : MonoBehaviour
                 }
                 else
                 {
-                    Debug.LogWarning($"UserGuide: Complementary UI element at index {i} is null or its uiElement is not assigned for guide {userGuideType}.", this);
+                    //Debug.LogWarning($"UserGuide: Complementary UI element at index {i} is null or its uiElement is not assigned for guide {userGuideType}.", this);
                     _originalLocalPositions[i] = Vector3.zero;
                 }
             }

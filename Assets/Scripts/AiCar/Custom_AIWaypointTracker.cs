@@ -63,5 +63,17 @@ public class Custom_AIWaypointTracker : MonoBehaviour
         currentWaypoint = aiWaypoints[currentIndex].aiWaypointTransform;
         this.transform.position = currentWaypoint.position;
     }
+
+    public void SetWaypointToReach(Transform transform)
+    {
+        currentIndex = aiWaypoints.FindIndex(waypoint => waypoint.aiWaypointTransform == transform);
+        UpdateTrackerPosition();
+    }
+
+    public void SetWaypointToReach(int index)
+    {
+        currentIndex = index;
+        UpdateTrackerPosition();
+    }
 }
 
