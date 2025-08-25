@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: PrecedenzaPedoni
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: a47d024cad93b5a43879135b428ed839, type: 3}
-  signName: Triangolo pedoni
+  signName: Triangolo precedenza pedoni
   type: 0
   description: "Quando vedi questo cartello devi rallentare, guardare se la strada
-    \xE8 libera e se non ci sono macchine, attraversare l'incrocio. Se ci sono altre
-    macchine, devi fermarti."
+    \xE8 libera e se non ci sono pedoni, attraversare l'incrocio. Se un pedone attraversa,
+    devi fermarti."

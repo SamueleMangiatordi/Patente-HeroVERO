@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7059136c5c1d54448be778d96c962e2, type: 3}
   m_Name: Precedenza Triangolo
   m_EditorClassIdentifier: 
-  image: {fileID: 21300000, guid: 2d736ac19e09d404f837330c590f3d90, type: 3}
-  signName: Triangolo precedenza pedoni
+  image: {fileID: 21300000, guid: d0b9756ac3e3eed4fbcb550e2f49dd11, type: 3}
+  signName: Triangolo precedenza macchine
   type: 0
   description: "Quando vedi questo cartello devi rallentare, guardare se la strada
     \xE8 libera e se non ci sono macchine, attraversare l'incrocio. Se ci sono altre
