@@ -12,11 +12,8 @@ GameObject:
   - component: {fileID: 3527347988576706590}
   - component: {fileID: 1663903073025479892}
   - component: {fileID: 3973241676709712878}
-  - component: {fileID: 4177774136520375023}
-  - component: {fileID: 1604625648617617283}
-  - component: {fileID: 9024655099752465845}
-  - component: {fileID: 1254630593698513697}
-  - component: {fileID: 2310360433535181128}
+  - component: {fileID: 6707922031480704398}
+  - component: {fileID: 1153707301373421564}
   m_Layer: 0
   m_Name: two-lane-intersaction
   m_TagString: Untagged
@@ -36,7 +33,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 4562582871596159011}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3527347988576706590
@@ -105,17 +103,101 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef7b03a9c182ac54f8fde84fd4ee55b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _resetPosOffset: {x: 0, y: 0, z: 5}
+  resetDistance: 5
   onOffroadEvent:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &4177774136520375023
-MonoBehaviour:
+--- !u!54 &6707922031480704398
+Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 871344785740461313}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &1153707301373421564
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 871344785740461313}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 16.815742, y: 0.165, z: 16.815742}
+  m_Center: {x: -0.000002861023, y: -0.1, z: 8.407869}
+--- !u!1 &8525188094113119965
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4562582871596159011}
+  - component: {fileID: 4461896291762807039}
+  - component: {fileID: 3792764216100491274}
+  - component: {fileID: 5389482416258758733}
+  - component: {fileID: 5765840628102086730}
+  - component: {fileID: 3826937742461687335}
+  m_Layer: 0
+  m_Name: OffRoad
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4562582871596159011
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8525188094113119965}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 530426244119048123}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4461896291762807039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8525188094113119965}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6c6929b96d868294b988f4266085dd35, type: 3}
@@ -145,13 +227,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   showDebugMessages: 0
---- !u!65 &1604625648617617283
+--- !u!65 &3792764216100491274
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 871344785740461313}
+  m_GameObject: {fileID: 8525188094113119965}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -164,15 +246,15 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3, y: 0.165, z: 3}
+  m_Size: {x: 3, y: 3, z: 3}
   m_Center: {x: -6.19, y: 0.03173106, z: 14.42}
---- !u!65 &9024655099752465845
+--- !u!65 &5389482416258758733
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 871344785740461313}
+  m_GameObject: {fileID: 8525188094113119965}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -185,15 +267,15 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3, y: 0.165, z: 3}
+  m_Size: {x: 3, y: 3, z: 3}
   m_Center: {x: -6.19, y: 0.03173106, z: 2.22}
---- !u!65 &1254630593698513697
+--- !u!65 &5765840628102086730
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 871344785740461313}
+  m_GameObject: {fileID: 8525188094113119965}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -206,15 +288,15 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3, y: 0.165, z: 3}
+  m_Size: {x: 3, y: 3, z: 3}
   m_Center: {x: 6.3, y: 0.03173106, z: 14.42}
---- !u!65 &2310360433535181128
+--- !u!65 &3826937742461687335
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 871344785740461313}
+  m_GameObject: {fileID: 8525188094113119965}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -227,5 +309,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3, y: 0.165, z: 3}
+  m_Size: {x: 3, y: 3, z: 3}
   m_Center: {x: 6.3, y: 0.03173106, z: 2.03}
