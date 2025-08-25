@@ -22549,6 +22549,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3502814107267383339, guid: 384e410210a2a11449aa35e1a49655e4,
+        type: 3}
+      propertyPath: musicSource
+      value: 
+      objectReference: {fileID: 141844336}
     - target: {fileID: 4156684006066177877, guid: 384e410210a2a11449aa35e1a49655e4,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -22743,6 +22748,11 @@ PrefabInstance:
     - target: {fileID: 6487746896946949465, guid: 384e410210a2a11449aa35e1a49655e4,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 1834381591}
+    - target: {fileID: 6644332067938039300, guid: 384e410210a2a11449aa35e1a49655e4,
+        type: 3}
+      propertyPath: musicSource
       value: 
       objectReference: {fileID: 1834381591}
     - target: {fileID: 6674415789918592017, guid: 384e410210a2a11449aa35e1a49655e4,
