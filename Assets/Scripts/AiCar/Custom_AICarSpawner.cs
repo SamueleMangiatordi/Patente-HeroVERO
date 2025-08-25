@@ -6,7 +6,6 @@ using UnityEngine;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
-
 public class AiCarSpawner : MonoBehaviour
 {
     public GameObject aiWaypointTrackerPrefab;
@@ -20,6 +19,7 @@ public class AiCarSpawner : MonoBehaviour
     [SerializeField] private bool duplicateFirstCarData = false;
     [Tooltip("It will take the first ai car data and use that data to spawn to amount of car wanted, ignoring the other car data")]
     [SerializeField] private int numberOfCarsToSpawn = 1;
+    [SerializeField] private List<SpawnPointData> spawnPoints = new();
 
     [SerializeField] public List<AICarData> aiCarDataList = new();
 
@@ -31,16 +31,28 @@ public class AiCarSpawner : MonoBehaviour
     {
         if (aiCarDataList.Count == 0)
         {
-            Debug.LogError("No spawn points assigned");
+            Debug.LogError("No car assigned");
         }
 
         if (duplicateFirstCarData)
         {
             AICarData firstCarData = aiCarDataList[0];
             aiCarDataList.RemoveAll(item => item != firstCarData); // Keep only the first car data
+
             for (int i = 1; i < numberOfCarsToSpawn; i++)
             {
-                aiCarDataList.Add(aiCarDataList[0]);
+                SpawnPointData spawnPoint = spawnPoints[i % spawnPoints.Count];
+                AICarData temp = new AICarData
+                {
+                    aiCarPrefab = firstCarData.aiCarPrefab,
+                    WaypointsParent = firstCarData.WaypointsParent,
+                    carTag = firstCarData.carTag,
+                    onCollisionEvent = firstCarData.onCollisionEvent,
+                    spawnTransform = spawnPoint.spawnTransform,
+                    startingWaypointTransform = spawnPoint.startingWaypointTransform
+                };
+                aiCarDataList.Add(temp);
+                
             }
         }
 
@@ -78,7 +90,7 @@ public class AiCarSpawner : MonoBehaviour
         }
 
         foreach (AICarData aiCarSpawnData in aiCarDataList)
-            if (aiCarSpawnData.spawnPoint.TryGetComponent<Renderer>(out var renderer)) { renderer.enabled = false; }
+            if (aiCarSpawnData.spawnTransform.TryGetComponent<Renderer>(out var renderer)) { renderer.enabled = false; }
 
         if (spawnOnAwake)
             SpawnAllPlayers();
@@ -90,7 +102,7 @@ public class AiCarSpawner : MonoBehaviour
     {
         foreach (AICarData aiCarSpawnData in aiCarDataList)
         {
-            if (aiCarSpawnData.spawnPoint.TryGetComponent<Renderer>(out var renderer)) { renderer.enabled = false; }
+            if (aiCarSpawnData.spawnTransform.TryGetComponent<Renderer>(out var renderer)) { renderer.enabled = false; }
             if (aiCarSpawnData.WaypointsParent != null)
                 foreach (Transform waypoint in aiCarSpawnData.WaypointsParent.transform)
                     if (waypoint.TryGetComponent<MeshRenderer>(out var meshRenderer)) { meshRenderer.enabled = false; }
@@ -150,12 +162,14 @@ public class AiCarSpawner : MonoBehaviour
     {
         AICarData aICarSpawnData = aiCarDataList[index];
 
-        GameObject aiCar = Instantiate(aICarSpawnData.aiCarPrefab, aICarSpawnData.spawnPoint.position, aICarSpawnData.spawnPoint.rotation);
+        GameObject aiCar = Instantiate(aICarSpawnData.aiCarPrefab, aICarSpawnData.spawnTransform.position, aICarSpawnData.spawnTransform.rotation);
         spawnedPlayers.Add((aiCar, aiCar.transform.position, aiCar.transform.rotation));
 
         Custom_AIWaypointTracker aiTracker = Instantiate(aiWaypointTrackerPrefab).GetComponent<Custom_AIWaypointTracker>();
         aiTracker.SetTracker(aICarSpawnData.aiWaypoints);
         aiTracker.SetupAICarCollider(aiCar.GetComponentInChildren<AICarWaypointTrackerColliderTrigger>().GetColliderTrigger());
+        if(aICarSpawnData.startingWaypointTransform != null)
+            aiTracker.SetWaypointToReach(aICarSpawnData.startingWaypointTransform); // set the first waypoint to reach as the spawn point of the car
 
         CarAIControl carAiControl = aiCar.GetComponent<CarAIControl>();
         carAiControl.SetTarget(aiTracker.transform); // replace with your car controller ai target to aim/follow
@@ -209,7 +223,8 @@ public class AICarData
 
     [Header("AI Car Spawn Settings")]
     public GameObject aiCarPrefab;
-    public Transform spawnPoint;
+    public Transform spawnTransform;
+    public Transform startingWaypointTransform;
     [Tooltip("The parent object that contains all the relative AI Waypoints of this car")]
     public GameObject WaypointsParent;
 
@@ -224,3 +239,9 @@ public class AICarData
 
 }
 
+[Serializable]
+public class SpawnPointData
+{
+    public Transform spawnTransform;
+    public Transform startingWaypointTransform;
+}

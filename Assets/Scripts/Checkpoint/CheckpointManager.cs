@@ -32,7 +32,7 @@ public class CheckpointManager : MonoBehaviour
 
     private void Start()
     {
-        
+
 
         ActivateCheckpoint(currentCheckpointIndex);
     }
@@ -45,8 +45,14 @@ public class CheckpointManager : MonoBehaviour
         }
     }
 
-    public void GoToNextCheckpoint()
+    public void GoToNextCheckpoint(Transform checkpointReached)
     {
+        if(checkpoints[currentCheckpointIndex] != checkpointReached)
+        {
+            Debug.LogWarning("Checkpoint raggiunto non corrisponde al checkpoint attivo. Ignorando.");
+            return;
+        }
+
         currentCheckpointIndex++;
         if (currentCheckpointIndex < checkpoints.Length)
         {
@@ -90,12 +96,14 @@ public class CheckpointManager : MonoBehaviour
         // If no checkpoints have been reached yet, 'lastReachedIndex' will be -1.
         if (lastReachedIndex < 0)
         {
+            Debug.Log("First checkpoint not reached yet, returning the first checkpoint as fallback.");
             return checkpoints[0]; // Return null to indicate no checkpoint has been reached yet
         }
 
         // Ensure the index is within the bounds of the array
         if (lastReachedIndex < checkpoints.Length)
         {
+            Debug.Log("Returning last reached checkpoint at index: " + lastReachedIndex);
             return checkpoints[lastReachedIndex];
         }
 
