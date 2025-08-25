@@ -80,6 +80,7 @@ public class PersonalAccidentController : MonoBehaviour
         accidentPanel.SetActive(true);
         _isWaitingInpit = true;
         _isAccidentEnabled = true;
+        _carController.BypassingInputs = true; // Disabilita gli input del giocatore
 
     }
 }

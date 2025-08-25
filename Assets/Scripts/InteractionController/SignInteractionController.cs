@@ -39,19 +39,30 @@ public class SignInteractionController : InteractionControllerBase // Inherit fr
     // or by another script that detects "hitting the sign".
     public void OnCarHit()
     {
-        
 
-        Debug.Log($"Car hit sign '{name}'. Restarting interaction with 'Car Hitted' guide.");
+        CheckpointManager checkpointManager = FindAnyObjectByType<CheckpointManager>();
+        Transform lastCheckpoint = checkpointManager.GetLastReachedCheckpoint();
 
-        if (resetPos != null)
-        {
-            mainCarObject.transform.position = resetPos.position;
-            mainCarObject.transform.rotation = resetPos.rotation;
-        }
-        else
-        {
-            Debug.LogWarning("⚠ Nessun resetPos impostato!");
-        }
+        //carController.TeleportCar(lastCheckpoint, 0f, true);
+
+        resetPos = lastCheckpoint;
+        Debug.Log("Reset pos name = " + resetPos.name);
+
+
+        //resetPos = carHitResetPos != null ? carHitResetPos : _resetPos;
+
+        //Debug.Log($"Car hit sign '{name}'. Restarting interaction with 'Car Hitted' guide.");
+
+        //if (resetPos != null)
+        //{
+        //    mainCarObject.transform.position = resetPos.position;
+        //    mainCarObject.transform.rotation = resetPos.rotation;
+
+        //}
+        //else
+        //{
+        //    Debug.LogWarning("⚠ Nessun resetPos impostato!");
+        //}
 
         // Example: Provide a custom action for 'car hitted'
         base.RestartInteraction(carHittedUserGuide, OnResumeAction);
