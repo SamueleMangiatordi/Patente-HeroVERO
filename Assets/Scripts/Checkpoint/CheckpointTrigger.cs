@@ -16,8 +16,8 @@ public class CheckpointTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             GetComponent<Collider>().enabled = false;
-            checkpointManager.GoToNextCheckpoint();
-            Debug.Log("✅ Checkpoint attraversato");
+            checkpointManager.GoToNextCheckpoint(this.transform);
+            Debug.Log("✅ Checkpoint attraversato : " + this.name);
 
             if (signInteractionController != null)
             {
