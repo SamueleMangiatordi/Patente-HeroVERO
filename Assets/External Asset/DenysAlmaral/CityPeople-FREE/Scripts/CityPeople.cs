@@ -97,6 +97,11 @@ namespace CityPeople
                 Debug.LogWarning("Waypoint Parent is not assigned. Character will remain idle.", this);
             }
 
+            foreach (Transform child in waypoints)
+            {
+                child.GetComponent<MeshRenderer> ().enabled = false;
+            }
+
             // Start the state machine
             StartCoroutine(CharacterStateMachine());
 
@@ -129,7 +134,7 @@ namespace CityPeople
 
         private IEnumerator HandleWalkingState()
         {
-            Debug.Log("Entering Walking State");
+            //Debug.Log("Entering Walking State");
             animator.SetBool(isWalkingParamName, true); // Tell Animator to play walk animation
 
             if (waypoints.Count == 0)
@@ -151,7 +156,7 @@ namespace CityPeople
             {
                 // Move towards waypoint
                 Vector3 directionToWaypoint = (targetWaypoint - rb.position).normalized;
-                rb.position += directionToWaypoint * walkSpeed * Time.deltaTime;
+                rb.position += Time.deltaTime * walkSpeed * directionToWaypoint;
 
                 // --- MODIFIED PART START ---
                 // Rotate towards waypoint, but only on the Y axis (yaw)
@@ -170,7 +175,7 @@ namespace CityPeople
                 yield return null; // Wait for the next frame
             }
 
-            Debug.Log($"Reached waypoint {currentWaypointIndex}");
+            //Debug.Log($"Reached waypoint {currentWaypointIndex}");
 
             if(waypoints[currentWaypointIndex].CompareTag(idleWaypointTag))
                 currentState = CharacterState.Idling; // Transition to Idling state
@@ -180,12 +185,12 @@ namespace CityPeople
 
         private IEnumerator HandleIdlingState()
         {
-            Debug.Log("Entering Idling State");
+            //Debug.Log("Entering Idling State");
             animator.SetBool(isWalkingParamName, false); // Tell Animator to play idle animation
 
             yield return new WaitForSeconds(idleDuration); // Wait for the specified idle time
 
-            Debug.Log("Idling done. Returning to Walking state.");
+            //Debug.Log("Idling done. Returning to Walking state.");
             currentState = CharacterState.Walking; // Transition back to Walking state
         }
 

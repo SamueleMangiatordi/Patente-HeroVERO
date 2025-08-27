@@ -10,10 +10,10 @@ public class SignUserGuide : UserGuide
 
     // Private references to components within the _instructionPanel.
     // Renamed to avoid confusion with class names or parameters.
-    private Image _signImage;
+    private Image _signImage; //the image inside the panel that holds the sign sprite
     private TextMeshProUGUI _signTitle;
     private TextMeshProUGUI _signDescription;
-    private Image _panelImage; // Reference to the Image component on the _instructionPanel itself
+    private Image _panelImage; // the Image component on the _instructionPanel itself
 
     protected override void Awake()
     {
@@ -22,9 +22,12 @@ public class SignUserGuide : UserGuide
         // Initialize the sign instruction panel's specific components
         if (_instructionPanel != null)
         {
-            _signImage = _instructionPanel.transform.Find("image")?.GetComponent<Image>();
-            _signTitle = _instructionPanel.transform.Find("title")?.GetComponent<TextMeshProUGUI>();
-            _signDescription = _instructionPanel.transform.Find("description")?.GetComponent<TextMeshProUGUI>();
+            _signImage = _instructionPanel.transform.Find("Image")?.GetComponent<Image>();
+
+            Transform parentTexts = _instructionPanel.transform.Find("Text");
+            _signTitle = parentTexts.Find("Title")?.GetComponent<TextMeshProUGUI>();
+            _signDescription = parentTexts.Find("Description")?.GetComponent<TextMeshProUGUI>();
+
             _panelImage = _instructionPanel.GetComponent<Image>(); // Get the image on the panel itself
 
             // Add warnings if components are not found
@@ -47,7 +50,7 @@ public class SignUserGuide : UserGuide
         {
             // Set content only when showing the guide
             if (_signImage != null) _signImage.sprite = signData.image;
-            if (_panelImage != null) _panelImage.color = SignTypeColor.GetColor(signData.type);
+            //if (_panelImage != null) _panelImage.color = SignTypeColor.GetColor(signData.type);
             if (_signTitle != null) _signTitle.text = signData.signName; // Use signName from SignData
             if (_signDescription != null) _signDescription.text = signData.description;
         }

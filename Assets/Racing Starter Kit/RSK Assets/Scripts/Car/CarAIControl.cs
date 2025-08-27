@@ -267,14 +267,14 @@ namespace SpinMotion
             _colliderBody.gameObject.layer = noPlayerCollideLayer; // Assuming main GameObject layer handles collisions
             _colliderBottom.gameObject.layer = noPlayerCollideLayer; // Assuming main GameObject layer handles collisions
 
-            Debug.Log($"AI Car {gameObject.name} layer changed to {LayerMask.LayerToName(noPlayerCollideLayer)}.");
+            //Debug.Log($"AI Car {gameObject.name} layer changed to {LayerMask.LayerToName(noPlayerCollideLayer)}.");
 
             yield return new WaitForSeconds(duration);
 
             _colliderBody.gameObject.layer = defaultAILayer; // Assuming main GameObject layer handles collisions
             _colliderBottom.gameObject.layer = defaultAILayer; // Assuming main GameObject layer handles collisions
 
-            Debug.Log($"AI Car {gameObject.name} layer reverted to {LayerMask.LayerToName(defaultAILayer)}.");
+            //Debug.Log($"AI Car {gameObject.name} layer reverted to {LayerMask.LayerToName(defaultAILayer)}.");
         }
 
 

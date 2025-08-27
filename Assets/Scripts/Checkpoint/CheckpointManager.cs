@@ -47,6 +47,11 @@ public class CheckpointManager : MonoBehaviour
 
     public void GoToNextCheckpoint(Transform checkpointReached)
     {
+        if(currentCheckpointIndex >= checkpoints.Length)
+        {
+            Debug.Log("All checkpoint reached, cannot go to the next one");
+            return;
+        }
         if(checkpoints[currentCheckpointIndex] != checkpointReached)
         {
             Debug.LogWarning("Checkpoint raggiunto non corrisponde al checkpoint attivo. Ignorando.");

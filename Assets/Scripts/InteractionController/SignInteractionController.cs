@@ -12,11 +12,13 @@ public class SignInteractionController : InteractionControllerBase // Inherit fr
     [Tooltip("UserGuide to show when the player do no respect the right of way")]
     [SerializeField] private UserGuideType rightOfWayErrorUserGuide = UserGuideType.RightOfWayNotRespected;
 
+    [Tooltip("Value of right of way when starting the game. Set it to true to allow the player car to pass, set it to false to give precedence to other cars in the scene and trigger an error if the player car cross the road anyway")]
+    public bool rightOfWay = true;
     public bool RightOfWay { get; set; } = true; // Flag to track right of way status
 
     [SerializeField] private float maxVelocityOnSignStop = 0f; // Maximum speed to check right of way
     [SerializeField] private float timeToWaitForSignStop = 2f; // Time to wait for the car to stop at the sign
-
+    [SerializeField] private AudioSource stopConfirmAudioSource = null;
     // No specific Awake or Update override needed unless you add unique logic here.
     // The base Awake and Update will handle common initialization and waitingForAnyInput.
 
@@ -27,6 +29,11 @@ public class SignInteractionController : InteractionControllerBase // Inherit fr
         // No specific reset logic for SignInteractionController's own fields
     }
 #endif
+
+    private void Start()
+    {
+        RightOfWay = rightOfWay;
+    }
 
     public override void StartInteraction()
     {
@@ -67,7 +74,7 @@ public class SignInteractionController : InteractionControllerBase // Inherit fr
         // Example: Provide a custom action for 'car hitted'
         base.RestartInteraction(carHittedUserGuide, OnResumeAction);
     }
-    
+
     public void CheckRightOfWay()
     {
         if (RightOfWay) return;
@@ -109,14 +116,16 @@ public class SignInteractionController : InteractionControllerBase // Inherit fr
         GameManager.Instance.ResumeGame(); // Resume the game after dismissing the sign details
         carController.SetCarSpeed(resumeCarSpeed, true); // Stop the car when sign details are dismissed
         CarAdapter carAdapter = carController.GetComponent<CarAdapter>();
-         carAdapter.SimulateThrottleInput(0); // Ensure throttle is set to 0
+        carAdapter.SimulateThrottleInput(0); // Ensure throttle is set to 0
         StopWaitingForAnyInput();
     }
 
     private IEnumerator OnStopSignRightOfWay()
     {
-               // Wait for the car to stop at the sign
+        // Wait for the car to stop at the sign
         yield return new WaitForSeconds(timeToWaitForSignStop);
         RightOfWay = true;
+        stopConfirmAudioSource = stopConfirmAudioSource ?? GameObject.Find("audio e video").transform.Find("ClickButtonSounds").GetComponent<AudioSource>();
+        stopConfirmAudioSource.Play();
     }
 }

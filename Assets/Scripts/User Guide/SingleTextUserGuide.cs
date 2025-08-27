@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
-using System; // Required for [Serializable]
+using System;
+using System.Linq; // Required for [Serializable]
 
 [Serializable]
 public class SignleTextUserGuide : UserGuide
@@ -42,7 +43,7 @@ public class SignleTextUserGuide : UserGuide
 
         if (show)
         {
-            if (mainTitleText != null)
+            if (mainTitleText != null && mainMessage != null && (mainMessage.Length > 0) )
             {
                 mainTitleText.text = mainMessage; // Set the message text when showing the guide
             }

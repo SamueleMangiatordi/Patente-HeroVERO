@@ -13,7 +13,7 @@ public class ClickableObject : MonoBehaviour, IPointerDownHandler
         }
         catch (MissingComponentException mce)
         {
-            Debug.LogWarning("No audio source attached to the gameobject");
+            Debug.LogWarning("No audio source attached to the gameobject " + mce.ToString());
         }
 
         onClickDown?.Invoke(gameObject);

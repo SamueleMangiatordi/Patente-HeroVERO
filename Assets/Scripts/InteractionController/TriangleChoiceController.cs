@@ -14,7 +14,7 @@ public class TriangleChoiceController : MonoBehaviour
     [Header("Triangle Idle Animation")]
     [SerializeField] private float idleHeightAnimation = 3f;
     [SerializeField] private float idleHeightAnimationSpeed = 1f;
-    [SerializeField] private float idleRotationSpeed = 30f;
+    //[SerializeField] private float idleRotationSpeed = 30f;
     private bool _isIdleAnimationActive = false;
 
     [Header("UI")]

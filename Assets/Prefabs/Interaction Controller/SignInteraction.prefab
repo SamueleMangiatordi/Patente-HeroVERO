@@ -63,6 +63,11 @@ MonoBehaviour:
   startInteractionGuide: 10
   outOfBoundsUserGuide: 7
   carHittedUserGuide: 9
+  rightOfWayErrorUserGuide: 11
+  rightOfWay: 1
+  maxVelocityOnSignStop: 0
+  timeToWaitForSignStop: 2
+  stopConfirmAudioSource: {fileID: 0}
 --- !u!1 &1093736488074143675
 GameObject:
   m_ObjectHideFlags: 0
@@ -200,6 +205,9 @@ MonoBehaviour:
   onTriggerExit:
     m_PersistentCalls:
       m_Calls: []
+  onTriggerStay:
+    m_PersistentCalls:
+      m_Calls: []
   showDebugMessages: 1
 --- !u!1 &2482882268157372534
 GameObject:
@@ -287,6 +295,9 @@ MonoBehaviour:
   onTriggerExit:
     m_PersistentCalls:
       m_Calls: []
+  onTriggerStay:
+    m_PersistentCalls:
+      m_Calls: []
   showDebugMessages: 1
 --- !u!1 &3691242068053818330
 GameObject:
@@ -340,7 +351,8 @@ MonoBehaviour:
   floatingSpeed: 0.5
   floatingHeight: 0.1
   mainTitleText: {fileID: 0}
-  mainMessage: You did not respected the right of way! Give attention to road signs
+  mainMessage: Non hai rispettato la precedenza! Presta attenzione alla segnaletica
+    stradale.
 --- !u!1 &5728885189994805691
 GameObject:
   m_ObjectHideFlags: 0

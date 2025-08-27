@@ -133,7 +133,7 @@ public abstract class UserGuide : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning("UserGuide: One of the complementary UI elements in the list is null or its uiElement is not assigned!", this);
+                //Debug.LogWarning("UserGuide: One of the complementary UI elements in the list is null or its uiElement is not assigned!", this);
             }
         }
     }
