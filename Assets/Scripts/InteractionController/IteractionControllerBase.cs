@@ -2,7 +2,8 @@
 using UnityEngine;
 using UnityEngine.Events;
 using System.Collections;
-using System; // For coroutines
+using System;
+using UnityEngine.UI; // For coroutines
 
 public abstract class InteractionControllerBase : MonoBehaviour
 {

@@ -12,6 +12,8 @@ public class CheckpointManager : MonoBehaviour
     [SerializeField] private Transform[] checkpoints; // lista ordinata
     private int currentCheckpointIndex = 0;
 
+    [SerializeField] private AudioSource checkpointReachedSound;
+
     private void Awake()
     {
         if (Instance == null)
@@ -32,6 +34,7 @@ public class CheckpointManager : MonoBehaviour
 
     private void Start()
     {
+        checkpointReachedSound = checkpointReachedSound ?? GameObject.Find("audio e video").transform.Find("CheckpointReachedSound").GetComponent<AudioSource>();
 
 
         ActivateCheckpoint(currentCheckpointIndex);
@@ -43,16 +46,20 @@ public class CheckpointManager : MonoBehaviour
         {
             checkpoints[i].gameObject.SetActive(i == index);
         }
+        if(index == 1 || index == 0)
+            return; // Do not play sound for the first checkpoint activation at the start of the
+
+        checkpointReachedSound.Play();
     }
 
     public void GoToNextCheckpoint(Transform checkpointReached)
     {
-        if(currentCheckpointIndex >= checkpoints.Length)
+        if (currentCheckpointIndex >= checkpoints.Length)
         {
             Debug.Log("All checkpoint reached, cannot go to the next one");
             return;
         }
-        if(checkpoints[currentCheckpointIndex] != checkpointReached)
+        if (checkpoints[currentCheckpointIndex] != checkpointReached)
         {
             Debug.LogWarning("Checkpoint raggiunto non corrisponde al checkpoint attivo. Ignorando.");
             return;

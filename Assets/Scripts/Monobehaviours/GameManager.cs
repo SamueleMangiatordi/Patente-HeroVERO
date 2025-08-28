@@ -8,10 +8,13 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    public bool IsGamePaused { get; private set; }
+    private int _pauseCount = 0;
 
-    [SerializeField] private AudioSource buttonClickAudioSource;
     [SerializeField] private AudioSource backgroundMusic;
+    [SerializeField] private AudioSource buttonClickAudioSource;
+    [SerializeField] private AudioSource endLevelAudioSource;
+    [SerializeField] private AudioSource checkpointReachedSound;
+
 
     [SerializeField] private GameObject endLevelPanel;
 
@@ -31,6 +34,9 @@ public class GameManager : MonoBehaviour
     {
         buttonClickAudioSource = buttonClickAudioSource ?? GameObject.Find("audio e video").transform.Find("ClickButtonSounds").GetComponent<AudioSource>();
         backgroundMusic = backgroundMusic ?? GameObject.Find("audio e video").transform.Find("MusicaSottofondoLivello").GetComponent<AudioSource>();
+        endLevelAudioSource = endLevelAudioSource ?? GameObject.Find("audio e video").transform.Find("EndLevelSound").GetComponent<AudioSource>();
+        checkpointReachedSound = checkpointReachedSound ?? GameObject.Find("audio e video").transform.Find("CheckpointReachedSound").GetComponent<AudioSource>();
+
 
         // Cerca tutti i Button nella scena, inclusi quelli inattivi.
         Button[] allButtons = Resources.FindObjectsOfTypeAll<Button>();
@@ -45,26 +51,23 @@ public class GameManager : MonoBehaviour
 
     public void PauseGame()
     {
-        if (IsGamePaused)
+        if (_pauseCount == 0)
         {
-            return;
+            Time.timeScale = 0f;
         }
-
-        Time.timeScale = 0f;
-        IsGamePaused = true;
-        // Optionally, show a pause UI or tutorial prompt
+        _pauseCount++;
     }
 
     public void ResumeGame()
     {
-        if (!IsGamePaused)
+        if (_pauseCount > 0)
         {
-            return;
+            _pauseCount--;
+            if (_pauseCount == 0)
+            {
+                Time.timeScale = 1f;
+            }
         }
-
-        Time.timeScale = 1f; // Or your default time scale
-        IsGamePaused = false;
-        // Optionally, hide the pause UI or tutorial prompt
     }
 
     public void EndLevel()
@@ -77,6 +80,9 @@ public class GameManager : MonoBehaviour
 
         PauseGame();
         endLevelPanel.SetActive(true);
+        
+        endLevelAudioSource.Play();
+        StartCoroutine(WaitToRaiseBgMusicVolume(backgroundMusic.volume * 0.2f, 2f, 5f));
     }
 
     public IEnumerator WaitToPause(float delaySeconds)
@@ -89,6 +95,31 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(delaySeconds);
         ResumeGame();
+    }
+
+    public IEnumerator WaitToRaiseBgMusicVolume(float targetVolume, float delaySeconds, float duration)
+    {
+        float startVolume = backgroundMusic.volume;
+        float elapsedTime = 0f;
+        while (elapsedTime < 0.1f)
+        {
+            backgroundMusic.volume = Mathf.Lerp(startVolume, targetVolume, elapsedTime / duration);
+            elapsedTime += Time.unscaledDeltaTime; // Use unscaled time to ignore time scale changes
+            yield return null;
+        }
+        backgroundMusic.volume = targetVolume; // Ensure it ends exactly at target volume
+
+        yield return new WaitForSecondsRealtime(delaySeconds);
+        
+        elapsedTime = 0f;
+        while (elapsedTime < duration)
+        {
+            backgroundMusic.volume = Mathf.Lerp(targetVolume, startVolume, elapsedTime / duration);
+            elapsedTime += Time.unscaledDeltaTime; // Use unscaled time to ignore time scale changes
+            yield return null;
+        }
+        backgroundMusic.volume = startVolume; // Ensure it ends exactly at target volume
+
     }
 
 }

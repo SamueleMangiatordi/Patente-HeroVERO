@@ -4,7 +4,7 @@ public class CheckpointTrigger : MonoBehaviour
 {
     [SerializeField] private CheckpointManager checkpointManager;
     [SerializeField] private SignInteractionController signInteractionController;
-
+    [SerializeField] private ParticleSystem particleEffect;
     private void Start()
     {
         checkpointManager = FindAnyObjectByType<CheckpointManager>();

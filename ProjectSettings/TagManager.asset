@@ -6,6 +6,8 @@ TagManager:
   tags:
   - RightOfWay
   - IdleWaypoint
+  - soundEffect
+  - soundBackgroundMusic
   layers:
   - Default
   - TransparentFX

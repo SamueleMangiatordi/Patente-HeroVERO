@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3696782511286732877}
   - component: {fileID: 3211313556273524367}
+  - component: {fileID: 8690125862671226652}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -44,3 +45,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8700b41a796f48e4893600bf042d5d85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  backgroundMusic: {fileID: 0}
+  buttonClickAudioSource: {fileID: 0}
+  endLevelAudioSource: {fileID: 0}
+  checkpointReachedSound: {fileID: 0}
+  endLevelPanel: {fileID: 0}
+--- !u!114 &8690125862671226652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2400436002729397212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5980261af4280d4aa8dcef5e48b9976, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkpointsParent: {fileID: 0}
+  checkpoints: []
+  checkpointReachedSound: {fileID: 0}
