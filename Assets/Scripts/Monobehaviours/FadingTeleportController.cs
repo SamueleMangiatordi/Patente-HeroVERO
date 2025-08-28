@@ -8,7 +8,7 @@ public class FadingTeleportController : MonoBehaviour
     [SerializeField] private GameObject mainCarPrefab;
 
     [Tooltip("Il componente VRCameraFader che gestisce la dissolvenza della telecamera.")]
-    public CameraFader cameraFader;
+    public PanelFader cameraFader;
 
     [Tooltip("La durata in secondi della dissolvenza (fade-out e fade-in).")]
     public float fadeDuration = 2f;

@@ -8,6 +8,7 @@ TagManager:
   - IdleWaypoint
   - soundEffect
   - soundBackgroundMusic
+  - objectiveCompleted
   layers:
   - Default
   - TransparentFX

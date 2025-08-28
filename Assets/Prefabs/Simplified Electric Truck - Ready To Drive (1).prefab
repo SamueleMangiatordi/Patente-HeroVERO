@@ -3244,7 +3244,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3170923220551728007
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3661,8 +3661,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2527139974356385983}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.067645006, y: -0.61008763, z: 0.0523922, w: 0.7877007}
-  m_LocalPosition: {x: -0.6000002, y: -4.840587, z: 12.605754}
+  m_LocalRotation: {x: 0.08487916, y: 0.12559155, z: -0.010785361, w: 0.9883856}
+  m_LocalPosition: {x: -1.6999972, y: -4.840587, z: 14.905761}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4377,8 +4377,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3114683217114679889}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0773445, y: -0.70286405, z: 0.0773445, w: 0.70286405}
-  m_LocalPosition: {x: 8.106595, y: -2.2845876, z: 14.305756}
+  m_LocalRotation: {x: 0.077344485, y: -0.70286405, z: 0.07734448, w: 0.702864}
+  m_LocalPosition: {x: 8.106599, y: -2.2845874, z: 14.305756}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4900,8 +4900,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4006749555956499607}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.030402262, y: -0.7064511, z: 0.030402107, w: 0.7064547}
-  m_LocalPosition: {x: 4.8628564, y: -3.3949509, z: 14.305725}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.449997, y: -4.0405874, z: 14.475753}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4938,7 +4938,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.1
   far clip plane: 1000
   field of view: 75
   orthographic: 0
@@ -6168,8 +6168,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5249962899542556076}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: -0.7071068}
-  m_LocalPosition: {x: -0.17000003, y: -4.0405874, z: 13.855754}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.449997, y: -4.0405874, z: 14.475753}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6264,7 +6264,7 @@ MonoBehaviour:
   TiltAxis:
     Value: 0
     Center: 0
-    Range: {x: -70, y: 70}
+    Range: {x: -20, y: 20}
     Wrap: 0
     Recentering:
       Enabled: 0
@@ -7510,8 +7510,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6382442854231002392}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.030402262, y: -0.7064511, z: 0.030402107, w: 0.7064547}
-  m_LocalPosition: {x: 4.8628554, y: -3.3949509, z: 14.305729}
+  m_LocalRotation: {x: 0.04304136, y: -0.000033717482, z: 0.0000014540664, w: 0.9990734}
+  m_LocalPosition: {x: 0.00032091144, y: -3.3945026, z: 9.443068}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7898,7 +7898,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: TriggerableUserGuide, Assembly-CSharp
+        m_TargetAssemblyTypeName: TutorialInteractionController, Assembly-CSharp
         m_MethodName: 
         m_Mode: 0
         m_Arguments:
@@ -7910,7 +7910,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: TriggerableUserGuide, Assembly-CSharp
+        m_TargetAssemblyTypeName: TutorialInteractionController, Assembly-CSharp
         m_MethodName: 
         m_Mode: 0
         m_Arguments:
@@ -7928,7 +7928,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: TriggerableUserGuide, Assembly-CSharp
+        m_TargetAssemblyTypeName: TutorialInteractionController, Assembly-CSharp
         m_MethodName: 
         m_Mode: 0
         m_Arguments:
@@ -7953,7 +7953,7 @@ MonoBehaviour:
   rearLeftWheelMesh: {fileID: 7624210662034287023}
   rearRightWheelMesh: {fileID: 890672340326929842}
   steeringWheel: {fileID: 5993890232977242680}
-  currentSpeedTMP_UI: {fileID: 1647761233471808785}
+  currentSpeedTMP_UI: {fileID: 0}
   currentSpeedTMP_Dashboard: {fileID: 3527642390566885775}
   accelerationSlider: {fileID: 6694293602166398718}
   isStarted: 1
@@ -7993,7 +7993,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: TriggerableUserGuide, Assembly-CSharp
+        m_TargetAssemblyTypeName: TutorialInteractionController, Assembly-CSharp
         m_MethodName: 
         m_Mode: 0
         m_Arguments:
@@ -8069,7 +8069,7 @@ MonoBehaviour:
   ezerealCarController: {fileID: 8633189858576035883}
   tireAudio: {fileID: 7971861181785640415}
   engineAudio: {fileID: 7570309474187973395}
-  maxVolume: 0.25
+  maxVolume: 1
   alreadyPlaying: 0
 --- !u!114 &6996840201334875006
 MonoBehaviour:
@@ -10655,7 +10655,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8090497815158325181}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.7071068, z: -0, w: -0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
@@ -10669,7 +10669,7 @@ Transform:
   - {fileID: 5559428674575237986}
   - {fileID: 2836090803863484796}
   m_Father: {fileID: 7312358037446001903}
-  m_LocalEulerAnglesHint: {x: 0, y: 270, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &942197027727222076
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10883,8 +10883,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8196829626676958490}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.05535343, y: -0.70493686, z: 0.055353425, w: 0.7049369}
-  m_LocalPosition: {x: 4.768585, y: -3.337058, z: 14.305756}
+  m_LocalRotation: {x: 0.055353414, y: -0.7049369, z: 0.05535342, w: 0.70493686}
+  m_LocalPosition: {x: 4.7685857, y: -3.337058, z: 14.305756}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -38,18 +38,19 @@ namespace Ezereal
 
         void OnSwitchCamera()
         {
-            // Calculate the next camera view
-            currentCameraView = (CameraViews)(((int)currentCameraView + 1) % cameras.Length);
 
-            // If a reset monitor is currently in progress, stop it before switching cameras
-            if (_resetMonitorCoroutine != null)
-            {
-                StopCoroutine(_resetMonitorCoroutine);
-                _resetMonitorCoroutine = null; // Clear the reference
-            }
+            //// Calculate the next camera view
+            //currentCameraView = (CameraViews)(((int)currentCameraView + 1) % cameras.Length);
 
-            // Set the new camera view, instantly resetting its default rotation
-            SetCameraView(currentCameraView, true); // Pass true to force an immediate reset
+            //// If a reset monitor is currently in progress, stop it before switching cameras
+            //if (_resetMonitorCoroutine != null)
+            //{
+            //    StopCoroutine(_resetMonitorCoroutine);
+            //    _resetMonitorCoroutine = null; // Clear the reference
+            //}
+
+            //// Set the new camera view, instantly resetting its default rotation
+            //SetCameraView(currentCameraView, true); // Pass true to force an immediate reset
         }
 
         /// <summary>

@@ -5,6 +5,9 @@ public class CheckpointManager : MonoBehaviour
 {
     public static CheckpointManager Instance { get; private set; }
 
+    [SerializeField] private GameObject automaticDisablePanel;
+    [SerializeField] private string triggerTag = "objectiveCompleted";
+
     [Tooltip("Used as shortcut to assign checkpoints. Parent object containing all checkpoint transforms as children.")]
     [SerializeField] private Transform checkpointsParent = null;
 
@@ -46,10 +49,17 @@ public class CheckpointManager : MonoBehaviour
         {
             checkpoints[i].gameObject.SetActive(i == index);
         }
-        if(index == 1 || index == 0)
+
+        int oldCheckpointIndex = index - 1;
+
+        if (oldCheckpointIndex < 1)
             return; // Do not play sound for the first checkpoint activation at the start of the
 
         checkpointReachedSound.Play();
+        if (automaticDisablePanel != null && checkpoints[oldCheckpointIndex].CompareTag(triggerTag))
+        {
+            automaticDisablePanel.SetActive(true);
+        }
     }
 
     public void GoToNextCheckpoint(Transform checkpointReached)

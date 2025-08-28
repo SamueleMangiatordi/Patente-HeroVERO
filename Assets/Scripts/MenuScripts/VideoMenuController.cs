@@ -1,3 +1,4 @@
+using Ezereal;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -17,13 +18,15 @@ public class VideoMenuController : MonoBehaviour
     [SerializeField] private Button resumeButton;
     [SerializeField] private AudioSource backgroundMusic;
 
+    [SerializeField] private EzerealCameraController cameraController;
+
     [Header("Auto Play Settings")]
     [Tooltip("If true, the video will play automatically on start.")]
     [SerializeField] private bool autoPlayVideo = false; // If true, the video will play automatically on start
 
 
     [Header("Camera Fader Settings")]
-    [SerializeField] private CameraFader cameraFader; // Reference to the CameraFader script
+    [SerializeField] private PanelFader cameraFader; // Reference to the CameraFader script
     [SerializeField] private float fadeToBlackDuration = 1f; // Duration of the fade effect
     [SerializeField] private float fadeFromBlackDuration = 1f; // Duration of the fade effect
 
@@ -41,7 +44,8 @@ public class VideoMenuController : MonoBehaviour
     void Start()
     {
         backgroundMusic = GameObject.Find("audio e video").transform.Find("MusicaSottofondoLivello").GetComponent<AudioSource>();
-        cameraFader = cameraFader ?? FindAnyObjectByType<CameraFader>();
+        cameraFader = cameraFader ?? GameObject.Find("Canvas").transform.Find("PanelCameraFader").GetComponent<PanelFader>();
+        cameraController = cameraController ?? FindAnyObjectByType<EzerealCameraController>();
 
         if (objectToAppearAfterVideo != null)
         {
@@ -116,6 +120,7 @@ public class VideoMenuController : MonoBehaviour
         Debug.Log("OnVideoEnd");
 
         onVideoEnd?.Invoke(); // Trigger the UnityEvent if assigned
+        cameraController?.ResetCurrentCameraRotation();
 
         // Show the next game object
         if (objectToAppearAfterVideo != null)
@@ -124,6 +129,7 @@ public class VideoMenuController : MonoBehaviour
         }
 
         cameraFader?.StartCoroutine(cameraFader.FadeFromBlack(fadeFromBlackDuration)); // Fade from black over 1 second
+    
     }
 
     public void SkipVideo()

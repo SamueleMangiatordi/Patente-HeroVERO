@@ -202,12 +202,14 @@ public abstract class InteractionControllerBase : MonoBehaviour
     /// Helper method to restore car state and resume the game after a wait and show the user guide provided (default one if no one is provided).
     /// This is the default behavior when any input is received during a wait.
     /// </summary>
-    protected void ResumeGameAfterWait(UserGuideType userGuideType = UserGuideType.None)
+    protected void ResumeGameAfterWait(UserGuideType userGuideType = UserGuideType.None, bool useStoredCarState = true, bool showUserGuide = true)
     {
         UserGuideType guideType = userGuideType == UserGuideType.None ? startInteractionGuide : userGuideType; // Default to startInteractionGuide if none provided
-        userGuideController.SetUserGuide(guideType); // Set to the initial guide for the interaction
+        if(showUserGuide)
+            userGuideController.SetUserGuide(guideType); // Set to the initial guide for the interaction
+        
         GameManager.Instance.ResumeGame();
-        if (storedCarState != null && resumeCarSpeed == 0)
+        if (storedCarState != null && resumeCarSpeed == 0 && useStoredCarState)
         {
 
             storedCarState.ApplyToCarController(carController);

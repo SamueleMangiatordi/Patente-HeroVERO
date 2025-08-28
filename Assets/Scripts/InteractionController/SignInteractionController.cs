@@ -18,9 +18,11 @@ public class SignInteractionController : InteractionControllerBase // Inherit fr
 
     [SerializeField] private float maxVelocityOnSignStop = 0f; // Maximum speed to check right of way
     [SerializeField] private float timeToWaitForSignStop = 2f; // Time to wait for the car to stop at the sign
-    [SerializeField] private AudioSource stopConfirmAudioSource = null;
+    [SerializeField] private AudioSource stopConfirmAudioSource;
     // No specific Awake or Update override needed unless you add unique logic here.
     // The base Awake and Update will handle common initialization and waitingForAnyInput.
+
+    private Coroutine stopCoroutine = null;
 
 #if UNITY_EDITOR
     protected override void Reset()
@@ -72,14 +74,14 @@ public class SignInteractionController : InteractionControllerBase // Inherit fr
         //}
 
         // Example: Provide a custom action for 'car hitted'
-        base.RestartInteraction(carHittedUserGuide, OnResumeAction);
+        base.RestartInteraction(carHittedUserGuide, () => { OnResumeAction(false, false, false); });
     }
 
     public void CheckRightOfWay()
     {
         if (RightOfWay) return;
 
-        base.RestartInteraction(rightOfWayErrorUserGuide, OnResumeAction);
+        base.RestartInteraction(rightOfWayErrorUserGuide, () => { OnResumeAction(); });
     }
 
     public void OnStopSignStay()
@@ -89,21 +91,30 @@ public class SignInteractionController : InteractionControllerBase // Inherit fr
             return;
         }
 
-        StartCoroutine(OnStopSignRightOfWay());
+        if (stopCoroutine == null)
+        {
+            stopCoroutine = StartCoroutine(OnStopSignRightOfWay());
+        }
     }
 
     /// <summary>
     /// Action to perform when the player commits an error and a user guide tells them to press any key to resume.
     /// When any key is pressed, it will perform this method.
     /// </summary>
-    private void OnResumeAction()
+    private void OnResumeAction(bool useStoredCarState = true, bool showSignDetail = true, bool showUserGuide = true)
     {
         Debug.Log("Custom action for SignInteractionController: Car Hitted, input received.");
         // Perform specific logic for when the player hits a sign and then presses a key to resume.
         // For example, maybe you want to disable the sign entirely after one hit, or reset a score.
         // Then, call the default resume logic:
-        base.ResumeGameAfterWait();
-        base.StartWaitingForAnyInput(OnSignDetailsEnd); // Restart waiting for any input to dismiss the sign details
+        base.ResumeGameAfterWait(UserGuideType.None, useStoredCarState, showUserGuide);
+
+        if (!showSignDetail) { 
+            base.StopWaitingForAnyInput();
+        }
+        
+            base.StartWaitingForAnyInput(OnSignDetailsEnd); // Restart waiting for any input to dismiss the sign details
+        
     }
 
 
@@ -124,8 +135,12 @@ public class SignInteractionController : InteractionControllerBase // Inherit fr
     {
         // Wait for the car to stop at the sign
         yield return new WaitForSeconds(timeToWaitForSignStop);
+        if(!isInteractionEnabled)
+            yield break;
+
         RightOfWay = true;
         stopConfirmAudioSource = stopConfirmAudioSource ?? GameObject.Find("audio e video").transform.Find("ClickButtonSounds").GetComponent<AudioSource>();
         stopConfirmAudioSource.Play();
+        stopCoroutine = null;
     }
 }

@@ -4,7 +4,7 @@ public class SimplePause : MonoBehaviour
 {
     private GameManager gameManager;
 
-    private void Start()
+    private void Awake()
     {
         gameManager = FindAnyObjectByType<GameManager>();
     }

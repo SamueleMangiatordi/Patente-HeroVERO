@@ -146,6 +146,8 @@ GameObject:
   - component: {fileID: 5209470063099282391}
   - component: {fileID: 8047710578942179101}
   - component: {fileID: 1124559795726939678}
+  - component: {fileID: 4210965671588626523}
+  - component: {fileID: 433295993587403442}
   m_Layer: 0
   m_Name: two-lane-L-junction-left
   m_TagString: Untagged
@@ -235,7 +237,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef7b03a9c182ac54f8fde84fd4ee55b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _resetPosOffset: {x: 0, y: 0, z: 5}
+  resetDistance: 5
   onOffroadEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!65 &4210965671588626523
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8408161483928622792}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 14.01787, y: 0.05, z: 14.01787}
+  m_Center: {x: -1.4017764, y: -0.025, z: 7.0089407}
+--- !u!54 &433295993587403442
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8408161483928622792}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

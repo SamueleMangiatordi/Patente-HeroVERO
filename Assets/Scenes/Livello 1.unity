@@ -5418,26 +5418,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2093644988738563313, guid: b3a82b13987baa54ebbb9697ad26ad6a,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2192314182246827315, guid: b3a82b13987baa54ebbb9697ad26ad6a,
         type: 3}
       propertyPath: _instructionPanel
       value: 
       objectReference: {fileID: 331669005}
-    - target: {fileID: 2299065685634062872, guid: b3a82b13987baa54ebbb9697ad26ad6a,
-        type: 3}
-      propertyPath: field of view
-      value: 75
-      objectReference: {fileID: 0}
-    - target: {fileID: 2299065685634062872, guid: b3a82b13987baa54ebbb9697ad26ad6a,
-        type: 3}
-      propertyPath: near clip plane
-      value: 0.3
-      objectReference: {fileID: 0}
     - target: {fileID: 2730207098816112391, guid: b3a82b13987baa54ebbb9697ad26ad6a,
         type: 3}
       propertyPath: _instructionPanel
@@ -5448,46 +5433,6 @@ PrefabInstance:
       propertyPath: complementaryUIElements.Array.data[0].uiElement
       value: 
       objectReference: {fileID: 254414174}
-    - target: {fileID: 2785109115443603330, guid: b3a82b13987baa54ebbb9697ad26ad6a,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 4.8628554
-      objectReference: {fileID: 0}
-    - target: {fileID: 2785109115443603330, guid: b3a82b13987baa54ebbb9697ad26ad6a,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -3.3949509
-      objectReference: {fileID: 0}
-    - target: {fileID: 2785109115443603330, guid: b3a82b13987baa54ebbb9697ad26ad6a,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 14.305732
-      objectReference: {fileID: 0}
-    - target: {fileID: 2785109115443603330, guid: b3a82b13987baa54ebbb9697ad26ad6a,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7064547
-      objectReference: {fileID: 0}
-    - target: {fileID: 2785109115443603330, guid: b3a82b13987baa54ebbb9697ad26ad6a,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.03040226
-      objectReference: {fileID: 0}
-    - target: {fileID: 2785109115443603330, guid: b3a82b13987baa54ebbb9697ad26ad6a,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.7064511
-      objectReference: {fileID: 0}
-    - target: {fileID: 2785109115443603330, guid: b3a82b13987baa54ebbb9697ad26ad6a,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.030402105
-      objectReference: {fileID: 0}
-    - target: {fileID: 3430142193792684374, guid: b3a82b13987baa54ebbb9697ad26ad6a,
-        type: 3}
-      propertyPath: maxVolume
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3449529710320777902, guid: b3a82b13987baa54ebbb9697ad26ad6a,
         type: 3}
       propertyPath: _instructionPanel
@@ -5508,50 +5453,35 @@ PrefabInstance:
       propertyPath: onTurnSignal.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: HandleInteraction
       objectReference: {fileID: 0}
-    - target: {fileID: 4252124203229880378, guid: b3a82b13987baa54ebbb9697ad26ad6a,
-        type: 3}
-      propertyPath: onTurnSignal.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: TutorialInteractionController, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 4571190958127204931, guid: b3a82b13987baa54ebbb9697ad26ad6a,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6382011616178552990, guid: b3a82b13987baa54ebbb9697ad26ad6a,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6649671786472492811, guid: b3a82b13987baa54ebbb9697ad26ad6a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 4.7685857
       objectReference: {fileID: 0}
     - target: {fileID: 6649671786472492811, guid: b3a82b13987baa54ebbb9697ad26ad6a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 19.07434
+      value: 14.305756
       objectReference: {fileID: 0}
     - target: {fileID: 6649671786472492811, guid: b3a82b13987baa54ebbb9697ad26ad6a,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.00000008598557
+      value: 0.70493704
       objectReference: {fileID: 0}
     - target: {fileID: 6649671786472492811, guid: b3a82b13987baa54ebbb9697ad26ad6a,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.0000000067517996
+      value: 0.055353414
       objectReference: {fileID: 0}
     - target: {fileID: 6649671786472492811, guid: b3a82b13987baa54ebbb9697ad26ad6a,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.9969313
+      value: -0.7049368
       objectReference: {fileID: 0}
     - target: {fileID: 6649671786472492811, guid: b3a82b13987baa54ebbb9697ad26ad6a,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.07828151
+      value: 0.055353392
       objectReference: {fileID: 0}
     - target: {fileID: 7312358037446001903, guid: b3a82b13987baa54ebbb9697ad26ad6a,
         type: 3}
@@ -5571,7 +5501,7 @@ PrefabInstance:
     - target: {fileID: 7312358037446001903, guid: b3a82b13987baa54ebbb9697ad26ad6a,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 7312358037446001903, guid: b3a82b13987baa54ebbb9697ad26ad6a,
         type: 3}
@@ -5581,7 +5511,7 @@ PrefabInstance:
     - target: {fileID: 7312358037446001903, guid: b3a82b13987baa54ebbb9697ad26ad6a,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 7312358037446001903, guid: b3a82b13987baa54ebbb9697ad26ad6a,
         type: 3}
@@ -5596,7 +5526,7 @@ PrefabInstance:
     - target: {fileID: 7312358037446001903, guid: b3a82b13987baa54ebbb9697ad26ad6a,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 7312358037446001903, guid: b3a82b13987baa54ebbb9697ad26ad6a,
         type: 3}
@@ -5607,11 +5537,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Simplified Electric Truck - Ready To Drive (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 8609236664056988353, guid: b3a82b13987baa54ebbb9697ad26ad6a,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8633189858576035883, guid: b3a82b13987baa54ebbb9697ad26ad6a,
         type: 3}
@@ -5648,55 +5573,40 @@ PrefabInstance:
       propertyPath: onThrottle.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: HandleInteraction
       objectReference: {fileID: 0}
-    - target: {fileID: 8633189858576035883, guid: b3a82b13987baa54ebbb9697ad26ad6a,
-        type: 3}
-      propertyPath: onSteer.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: TutorialInteractionController, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 8633189858576035883, guid: b3a82b13987baa54ebbb9697ad26ad6a,
-        type: 3}
-      propertyPath: onThrottle.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: TutorialInteractionController, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 8633189858576035883, guid: b3a82b13987baa54ebbb9697ad26ad6a,
-        type: 3}
-      propertyPath: onThrottle.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: TutorialInteractionController, Assembly-CSharp
-      objectReference: {fileID: 0}
     - target: {fileID: 9099767946256588886, guid: b3a82b13987baa54ebbb9697ad26ad6a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 1.2681516
       objectReference: {fileID: 0}
     - target: {fileID: 9099767946256588886, guid: b3a82b13987baa54ebbb9697ad26ad6a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.2845874
+      value: -2.2845876
       objectReference: {fileID: 0}
     - target: {fileID: 9099767946256588886, guid: b3a82b13987baa54ebbb9697ad26ad6a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 22.412354
+      value: 6.2989626
       objectReference: {fileID: 0}
     - target: {fileID: 9099767946256588886, guid: b3a82b13987baa54ebbb9697ad26ad6a,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.000000003412243
+      value: -0.9909357
       objectReference: {fileID: 0}
     - target: {fileID: 9099767946256588886, guid: b3a82b13987baa54ebbb9697ad26ad6a,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 3.973219e-10
+      value: -0.10904441
       objectReference: {fileID: 0}
     - target: {fileID: 9099767946256588886, guid: b3a82b13987baa54ebbb9697ad26ad6a,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.99399984
+      value: 0.07798836
       objectReference: {fileID: 0}
     - target: {fileID: 9099767946256588886, guid: b3a82b13987baa54ebbb9697ad26ad6a,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.10938167
+      value: -0.008581984
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8791,13 +8701,18 @@ PrefabInstance:
       objectReference: {fileID: 1065980050}
     - target: {fileID: 4427728216918365536, guid: b1d442026baa1754592a8b18c5ba5bfe,
         type: 3}
+      propertyPath: cameraController
+      value: 
+      objectReference: {fileID: 6996840201197733961}
+    - target: {fileID: 4427728216918365536, guid: b1d442026baa1754592a8b18c5ba5bfe,
+        type: 3}
       propertyPath: fadeToBlackDuration
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4427728216918365536, guid: b1d442026baa1754592a8b18c5ba5bfe,
         type: 3}
       propertyPath: onVideoEnd.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4427728216918365536, guid: b1d442026baa1754592a8b18c5ba5bfe,
         type: 3}
@@ -23805,6 +23720,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CarPanels
+      objectReference: {fileID: 0}
+    - target: {fileID: 8046848112972749163, guid: f2e0891a61f0fa74aa0b948fe210f1e0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8142675808101805042, guid: f2e0891a61f0fa74aa0b948fe210f1e0,
         type: 3}
