@@ -69,6 +69,12 @@ public class GameManager : MonoBehaviour
 
     public void EndLevel()
     {
+        if(endLevelPanel == null)
+        {
+            Debug.LogWarning("End Level Panel is not assigned in the GameManager.");
+            return;
+        }
+
         PauseGame();
         endLevelPanel.SetActive(true);
     }
