@@ -51,7 +51,7 @@ MonoBehaviour:
   aiCarController: {fileID: 1483835861577561291}
   aiCarRigidbody: {fileID: 4668794905076428566}
   slowSpeedThreshold: 0.2
-  reducedSpeed: 15
+  reducedSpeed: 1
 --- !u!114 &2011833413275824338
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77,7 +77,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aiCarController: {fileID: 1483835861577561291}
-  raycastDistance: 2
+  raycastDistance: 5
   smartSteeringRaycastCheckDelay: 2
   leftRaycastOffset: {x: 0, y: 0.65, z: 1}
   rightRaycastOffset: {x: 0, y: 0.65, z: 1}
@@ -475,6 +475,10 @@ MonoBehaviour:
   onTriggerExit:
     m_PersistentCalls:
       m_Calls: []
+  onTriggerStay:
+    m_PersistentCalls:
+      m_Calls: []
+  showDebugMessages: 0
 --- !u!54 &4668794905076428566 stripped
 Rigidbody:
   m_CorrespondingSourceObject: {fileID: 1246153206815714900, guid: 67f7e9c2d00e44d1a8bae5a09d2bc4ab,

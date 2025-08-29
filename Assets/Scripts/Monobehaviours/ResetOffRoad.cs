@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -10,6 +11,8 @@ public class ResetOffRoad : MonoBehaviour
     private SimplifiedCarController _carController;
     private CheckpointManager _checkpointManager;
 
+    [SerializeField] private GameObject _wrongRoadPanel;
+    [SerializeField] private GameObject _personHitPanel;
     private void Start()
     {
         _carController = FindAnyObjectByType<SimplifiedCarController>();
@@ -37,5 +40,21 @@ public class ResetOffRoad : MonoBehaviour
 
         onOffroadEvent?.Invoke();
     }
-    
+
+    public void ShowWrongRoadPanel()
+    {
+        if (_wrongRoadPanel != null)
+        {
+            _wrongRoadPanel.SetActive(true);
+        }
+    }
+
+    public void ShowPersonHitPanel()
+    {
+        if(_personHitPanel != null)
+        {
+            _personHitPanel.SetActive(true);
+        }
+    }
+
 }

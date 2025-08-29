@@ -18,5 +18,6 @@ public enum UserGuideType
     FirstQuestionWrongAnswer,
     FirstQuestionCorrectAnswer,
     FirstQuestion,
+    PersonHitted
     //!!ALWAYS PUT NEW TYPE AT THE AND OF THE LIST!! Otherwise the index will change and break existing references
 }
