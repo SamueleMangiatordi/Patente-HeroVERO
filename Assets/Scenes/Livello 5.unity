@@ -3170,6 +3170,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: AI Waypoint (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 3904237326573683344, guid: 9c10a5c4809ea44f6993f482b7e009b9,
+        type: 3}
+      propertyPath: m_TagString
+      value: IdleWaypoint
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5015,6 +5020,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: AI Waypoint (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 3904237326573683344, guid: 9c10a5c4809ea44f6993f482b7e009b9,
+        type: 3}
+      propertyPath: m_TagString
+      value: IdleWaypoint
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6079,6 +6089,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: AI Waypoint (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 3904237326573683344, guid: 9c10a5c4809ea44f6993f482b7e009b9,
+        type: 3}
+      propertyPath: m_TagString
+      value: IdleWaypoint
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6313,6 +6328,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AI Waypoint (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3904237326573683344, guid: 9c10a5c4809ea44f6993f482b7e009b9,
+        type: 3}
+      propertyPath: m_TagString
+      value: IdleWaypoint
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8839,6 +8859,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AI Waypoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 3904237326573683344, guid: 9c10a5c4809ea44f6993f482b7e009b9,
+        type: 3}
+      propertyPath: m_TagString
+      value: IdleWaypoint
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11789,6 +11814,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2289064573968276738, guid: a011acb71210e5a4ba38497c39adbcd7,
+        type: 3}
+      propertyPath: m_Resource
+      value: 
+      objectReference: {fileID: 8300000, guid: 8ce14858148c08a459f93602337335eb, type: 3}
+    - target: {fileID: 2289064573968276738, guid: a011acb71210e5a4ba38497c39adbcd7,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 8ce14858148c08a459f93602337335eb, type: 3}
     - target: {fileID: 2498280981343784910, guid: a011acb71210e5a4ba38497c39adbcd7,
         type: 3}
       propertyPath: m_Name
@@ -12648,6 +12683,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AI Waypoint (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3904237326573683344, guid: 9c10a5c4809ea44f6993f482b7e009b9,
+        type: 3}
+      propertyPath: m_TagString
+      value: IdleWaypoint
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13900,6 +13940,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AI Waypoint (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3904237326573683344, guid: 9c10a5c4809ea44f6993f482b7e009b9,
+        type: 3}
+      propertyPath: m_TagString
+      value: IdleWaypoint
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -15333,6 +15378,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AI Waypoint (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3904237326573683344, guid: 9c10a5c4809ea44f6993f482b7e009b9,
+        type: 3}
+      propertyPath: m_TagString
+      value: IdleWaypoint
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -17107,6 +17157,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AI Waypoint (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3904237326573683344, guid: 9c10a5c4809ea44f6993f482b7e009b9,
+        type: 3}
+      propertyPath: m_TagString
+      value: IdleWaypoint
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -19892,6 +19947,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AI Waypoint (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3904237326573683344, guid: 9c10a5c4809ea44f6993f482b7e009b9,
+        type: 3}
+      propertyPath: m_TagString
+      value: IdleWaypoint
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -23689,6 +23749,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: AI Waypoint
       objectReference: {fileID: 0}
+    - target: {fileID: 3904237326573683344, guid: 9c10a5c4809ea44f6993f482b7e009b9,
+        type: 3}
+      propertyPath: m_TagString
+      value: IdleWaypoint
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -24781,6 +24846,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AI Waypoint (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3904237326573683344, guid: 9c10a5c4809ea44f6993f482b7e009b9,
+        type: 3}
+      propertyPath: m_TagString
+      value: IdleWaypoint
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -27703,6 +27773,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: AI Waypoint (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3904237326573683344, guid: 9c10a5c4809ea44f6993f482b7e009b9,
+        type: 3}
+      propertyPath: m_TagString
+      value: IdleWaypoint
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -27776,6 +27851,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AI Waypoint (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3904237326573683344, guid: 9c10a5c4809ea44f6993f482b7e009b9,
+        type: 3}
+      propertyPath: m_TagString
+      value: IdleWaypoint
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -28081,6 +28161,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: AI Waypoint (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3904237326573683344, guid: 9c10a5c4809ea44f6993f482b7e009b9,
+        type: 3}
+      propertyPath: m_TagString
+      value: IdleWaypoint
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -28228,6 +28313,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AI Waypoint (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3904237326573683344, guid: 9c10a5c4809ea44f6993f482b7e009b9,
+        type: 3}
+      propertyPath: m_TagString
+      value: IdleWaypoint
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -28739,6 +28829,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AI Waypoint (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3904237326573683344, guid: 9c10a5c4809ea44f6993f482b7e009b9,
+        type: 3}
+      propertyPath: m_TagString
+      value: IdleWaypoint
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -35377,6 +35472,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: AI Waypoint (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3904237326573683344, guid: 9c10a5c4809ea44f6993f482b7e009b9,
+        type: 3}
+      propertyPath: m_TagString
+      value: IdleWaypoint
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -36381,6 +36481,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AI Waypoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 3904237326573683344, guid: 9c10a5c4809ea44f6993f482b7e009b9,
+        type: 3}
+      propertyPath: m_TagString
+      value: IdleWaypoint
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -44688,6 +44793,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: AI Waypoint
       objectReference: {fileID: 0}
+    - target: {fileID: 3904237326573683344, guid: 9c10a5c4809ea44f6993f482b7e009b9,
+        type: 3}
+      propertyPath: m_TagString
+      value: IdleWaypoint
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -45864,6 +45974,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: AI Waypoint (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 3904237326573683344, guid: 9c10a5c4809ea44f6993f482b7e009b9,
+        type: 3}
+      propertyPath: m_TagString
+      value: IdleWaypoint
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -46032,6 +46147,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: AI Waypoint
       objectReference: {fileID: 0}
+    - target: {fileID: 3904237326573683344, guid: 9c10a5c4809ea44f6993f482b7e009b9,
+        type: 3}
+      propertyPath: m_TagString
+      value: IdleWaypoint
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -46199,6 +46319,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AI Waypoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 3904237326573683344, guid: 9c10a5c4809ea44f6993f482b7e009b9,
+        type: 3}
+      propertyPath: m_TagString
+      value: IdleWaypoint
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -46799,6 +46924,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AI Waypoint (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3904237326573683344, guid: 9c10a5c4809ea44f6993f482b7e009b9,
+        type: 3}
+      propertyPath: m_TagString
+      value: IdleWaypoint
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -49525,6 +49655,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: AI Waypoint (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 3904237326573683344, guid: 9c10a5c4809ea44f6993f482b7e009b9,
+        type: 3}
+      propertyPath: m_TagString
+      value: IdleWaypoint
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -51534,6 +51669,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: AI Waypoint (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 3904237326573683344, guid: 9c10a5c4809ea44f6993f482b7e009b9,
+        type: 3}
+      propertyPath: m_TagString
+      value: IdleWaypoint
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -51607,6 +51747,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AI Waypoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 3904237326573683344, guid: 9c10a5c4809ea44f6993f482b7e009b9,
+        type: 3}
+      propertyPath: m_TagString
+      value: IdleWaypoint
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -53564,6 +53709,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: AI Waypoint (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 3904237326573683344, guid: 9c10a5c4809ea44f6993f482b7e009b9,
+        type: 3}
+      propertyPath: m_TagString
+      value: IdleWaypoint
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -53782,6 +53932,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AI Waypoint (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3904237326573683344, guid: 9c10a5c4809ea44f6993f482b7e009b9,
+        type: 3}
+      propertyPath: m_TagString
+      value: IdleWaypoint
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -55103,6 +55258,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: AI Waypoint (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 3904237326573683344, guid: 9c10a5c4809ea44f6993f482b7e009b9,
+        type: 3}
+      propertyPath: m_TagString
+      value: IdleWaypoint
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -56035,6 +56195,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: AI Waypoint
       objectReference: {fileID: 0}
+    - target: {fileID: 3904237326573683344, guid: 9c10a5c4809ea44f6993f482b7e009b9,
+        type: 3}
+      propertyPath: m_TagString
+      value: IdleWaypoint
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -56908,6 +57073,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: AI Waypoint (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3904237326573683344, guid: 9c10a5c4809ea44f6993f482b7e009b9,
+        type: 3}
+      propertyPath: m_TagString
+      value: IdleWaypoint
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -57307,6 +57477,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AI Waypoint (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3904237326573683344, guid: 9c10a5c4809ea44f6993f482b7e009b9,
+        type: 3}
+      propertyPath: m_TagString
+      value: IdleWaypoint
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -59535,6 +59710,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: AI Waypoint
       objectReference: {fileID: 0}
+    - target: {fileID: 3904237326573683344, guid: 9c10a5c4809ea44f6993f482b7e009b9,
+        type: 3}
+      propertyPath: m_TagString
+      value: IdleWaypoint
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -60354,6 +60534,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: AI Waypoint (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 3904237326573683344, guid: 9c10a5c4809ea44f6993f482b7e009b9,
+        type: 3}
+      propertyPath: m_TagString
+      value: IdleWaypoint
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -60678,6 +60863,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AI Waypoint (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3904237326573683344, guid: 9c10a5c4809ea44f6993f482b7e009b9,
+        type: 3}
+      propertyPath: m_TagString
+      value: IdleWaypoint
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -62138,6 +62328,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AI Waypoint (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3904237326573683344, guid: 9c10a5c4809ea44f6993f482b7e009b9,
+        type: 3}
+      propertyPath: m_TagString
+      value: IdleWaypoint
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
