@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 55e64e617a8bfff4ba846574e2651eb9, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -5576,7 +5576,7 @@ PrefabInstance:
     - target: {fileID: 9099767946256588886, guid: b3a82b13987baa54ebbb9697ad26ad6a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.2681516
+      value: 8.106599
       objectReference: {fileID: 0}
     - target: {fileID: 9099767946256588886, guid: b3a82b13987baa54ebbb9697ad26ad6a,
         type: 3}
@@ -5586,27 +5586,27 @@ PrefabInstance:
     - target: {fileID: 9099767946256588886, guid: b3a82b13987baa54ebbb9697ad26ad6a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 6.2989626
+      value: 14.305756
       objectReference: {fileID: 0}
     - target: {fileID: 9099767946256588886, guid: b3a82b13987baa54ebbb9697ad26ad6a,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.9909357
+      value: 0.70286393
       objectReference: {fileID: 0}
     - target: {fileID: 9099767946256588886, guid: b3a82b13987baa54ebbb9697ad26ad6a,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.10904441
+      value: 0.07734442
       objectReference: {fileID: 0}
     - target: {fileID: 9099767946256588886, guid: b3a82b13987baa54ebbb9697ad26ad6a,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.07798836
+      value: -0.7028641
       objectReference: {fileID: 0}
     - target: {fileID: 9099767946256588886, guid: b3a82b13987baa54ebbb9697ad26ad6a,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.008581984
+      value: 0.07734445
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8669,6 +8669,11 @@ PrefabInstance:
       propertyPath: cameraFader
       value: 
       objectReference: {fileID: 116747859}
+    - target: {fileID: 4427728216918365536, guid: b1d442026baa1754592a8b18c5ba5bfe,
+        type: 3}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 637684705}
     - target: {fileID: 4427728216918365536, guid: b1d442026baa1754592a8b18c5ba5bfe,
         type: 3}
       propertyPath: pauseButton
@@ -23716,6 +23721,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1903504548}
     m_Modifications:
+    - target: {fileID: 1849678274999387802, guid: f2e0891a61f0fa74aa0b948fe210f1e0,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.6039216
+      objectReference: {fileID: 0}
+    - target: {fileID: 1849678274999387802, guid: f2e0891a61f0fa74aa0b948fe210f1e0,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.5882353
+      objectReference: {fileID: 0}
+    - target: {fileID: 1849678274999387802, guid: f2e0891a61f0fa74aa0b948fe210f1e0,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.83921576
+      objectReference: {fileID: 0}
     - target: {fileID: 6958509505911174194, guid: f2e0891a61f0fa74aa0b948fe210f1e0,
         type: 3}
       propertyPath: m_Name
@@ -23724,7 +23744,7 @@ PrefabInstance:
     - target: {fileID: 8046848112972749163, guid: f2e0891a61f0fa74aa0b948fe210f1e0,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8142675808101805042, guid: f2e0891a61f0fa74aa0b948fe210f1e0,
         type: 3}
@@ -23994,13 +24014,13 @@ GameObject:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 38671536}
+  - {fileID: 222222213}
   - {fileID: 204122066}
   - {fileID: 1680166335}
   - {fileID: 6093176495950875203}
   - {fileID: 781910581}
   - {fileID: 1903504548}
-  - {fileID: 38671536}
-  - {fileID: 222222213}
   - {fileID: 410061146}
   - {fileID: 579918713985692120}
   - {fileID: 199166255}
