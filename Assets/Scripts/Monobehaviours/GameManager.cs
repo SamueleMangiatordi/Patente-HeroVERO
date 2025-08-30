@@ -122,4 +122,10 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void ClearPause()
+    {
+        _pauseCount = 1;
+        ResumeGame();
+    }
+
 }

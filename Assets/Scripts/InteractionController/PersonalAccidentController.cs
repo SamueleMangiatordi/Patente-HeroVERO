@@ -41,6 +41,8 @@ public class PersonalAccidentController : MonoBehaviour
         carFireParticle.Play();
         _carController.BypassingInputs = true; // Disabilita gli input del giocatore
         _carAdapter.SimulateThrottleInput(0f); // Set throttle to 0 to stop the car
+
+        AiCarSpawner.IgnoreAllAiPlayerCollision(1000000);
     }
 
     public void StartTranistion()

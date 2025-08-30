@@ -46,33 +46,10 @@ public class SignInteractionController : InteractionControllerBase // Inherit fr
     // --- NEW: Method for when the car hits something specific to the sign ---
     // This would be called by a collision detection script on the sign itself,
     // or by another script that detects "hitting the sign".
-    public void OnCarHit()
+    public override void OnCarHit()
     {
-
-        CheckpointManager checkpointManager = FindAnyObjectByType<CheckpointManager>();
-        Transform lastCheckpoint = checkpointManager.GetLastReachedCheckpoint();
-
-        //carController.TeleportCar(lastCheckpoint, 0f, true);
-
-        resetPos = lastCheckpoint;
-        Debug.Log("Reset pos name = " + resetPos.name);
-
-
-        //resetPos = carHitResetPos != null ? carHitResetPos : _resetPos;
-
-        //Debug.Log($"Car hit sign '{name}'. Restarting interaction with 'Car Hitted' guide.");
-
-        //if (resetPos != null)
-        //{
-        //    mainCarObject.transform.position = resetPos.position;
-        //    mainCarObject.transform.rotation = resetPos.rotation;
-
-        //}
-        //else
-        //{
-        //    Debug.LogWarning("⚠ Nessun resetPos impostato!");
-        //}
-
+        base.OnCarHit();
+        
         // Example: Provide a custom action for 'car hitted'
         base.RestartInteraction(carHittedUserGuide, () => { OnResumeAction(false, false, false); });
     }

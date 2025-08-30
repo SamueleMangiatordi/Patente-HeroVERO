@@ -245,6 +245,16 @@ public abstract class InteractionControllerBase : MonoBehaviour
         Debug.Log($"Interaction '{name}' is now waiting for any input.");
     }
 
+    public virtual void OnCarHit()
+    {
+        CheckpointManager checkpointManager = FindAnyObjectByType<CheckpointManager>();
+        Transform lastCheckpoint = checkpointManager.GetLastReachedCheckpoint();
+
+        //carController.TeleportCar(lastCheckpoint, 0f, true);
+
+        resetPos = lastCheckpoint;
+        Debug.Log("Reset pos name = " + resetPos.name);
+    }
     /// <summary>
     /// Stops waiting for any input.
     /// </summary>
