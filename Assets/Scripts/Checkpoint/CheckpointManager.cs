@@ -39,7 +39,10 @@ public class CheckpointManager : MonoBehaviour
     {
         checkpointReachedSound = checkpointReachedSound ?? GameObject.Find("audio e video").transform.Find("CheckpointReachedSound").GetComponent<AudioSource>();
 
-
+        foreach(Transform checkpoint in checkpoints)
+        {
+            checkpoint.GetComponent<MeshRenderer>().enabled = false;
+        }
         ActivateCheckpoint(currentCheckpointIndex);
     }
 

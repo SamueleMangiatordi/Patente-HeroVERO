@@ -161,6 +161,8 @@ public abstract class InteractionControllerBase : MonoBehaviour
     /// <param name="resumeGame">If true, resumes the game.</param>
     public virtual void EndInteraction()
     {
+        if(!isInteractionEnabled) return; // Prevent multiple calls
+
         _isWaitingForAnyInput = false;
         isInteractionEnabled = false;
         Debug.Log($"Interaction '{name}' ended.");
@@ -172,6 +174,7 @@ public abstract class InteractionControllerBase : MonoBehaviour
         // Disable colliders - specific implementation might be overridden
         if (exitCollider != null) exitCollider.enabled = false;
         if (enterCollider != null) enterCollider.enabled = false;
+        this.gameObject.SetActive(false);
     }
 
 
