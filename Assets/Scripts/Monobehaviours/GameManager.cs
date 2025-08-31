@@ -130,4 +130,9 @@ public class GameManager : MonoBehaviour
         ResumeGame();
     }
 
+    public void QuitApplication()
+    {
+        Application.Quit();
+    }
+
 }
