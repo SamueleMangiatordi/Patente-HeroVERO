@@ -23,6 +23,7 @@ public class SignInteractionController : InteractionControllerBase // Inherit fr
     // The base Awake and Update will handle common initialization and waitingForAnyInput.
 
     private Coroutine stopCoroutine = null;
+    private Coroutine rightOfWayCoroutine = null;
 
 #if UNITY_EDITOR
     protected override void Reset()
@@ -32,8 +33,9 @@ public class SignInteractionController : InteractionControllerBase // Inherit fr
     }
 #endif
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         RightOfWay = rightOfWay;
     }
 
@@ -43,20 +45,41 @@ public class SignInteractionController : InteractionControllerBase // Inherit fr
         //StartWaitingForAnyInput(OnSignDetailsEnd);
     }
 
+    public override void EndInteraction()
+    {
+        base.EndInteraction();
+        if (stopCoroutine != null)
+            StopCoroutine(stopCoroutine);
+
+        if(rightOfWayCoroutine != null)
+            StopCoroutine(rightOfWayCoroutine);
+
+        stopCoroutine = null;
+        rightOfWayCoroutine = null;
+    }
+
     // --- NEW: Method for when the car hits something specific to the sign ---
     // This would be called by a collision detection script on the sign itself,
     // or by another script that detects "hitting the sign".
     public override void OnCarHit()
     {
         base.OnCarHit();
-        
+
         // Example: Provide a custom action for 'car hitted'
-        base.RestartInteraction(carHittedUserGuide, () => { OnResumeAction(false, false, false); });
+        base.RestartInteraction(UserGuideType.CarHitted, () => { OnResumeAction(false, false, false, carHittedUserGuide); });
     }
 
     public void CheckRightOfWay()
     {
-        if (RightOfWay) return;
+        if (RightOfWay)
+        {
+
+            if (stopCoroutine != null)
+            {
+                rightOfWayCoroutine = StartCoroutine(WaitToDisableRightOfWay(4f)); // Disable right of way after 5 seconds
+            }
+            return;
+        }
 
         base.RestartInteraction(rightOfWayErrorUserGuide, () => { OnResumeAction(); });
     }
@@ -78,20 +101,21 @@ public class SignInteractionController : InteractionControllerBase // Inherit fr
     /// Action to perform when the player commits an error and a user guide tells them to press any key to resume.
     /// When any key is pressed, it will perform this method.
     /// </summary>
-    private void OnResumeAction(bool useStoredCarState = true, bool showSignDetail = true, bool showUserGuide = true)
+    private void OnResumeAction(bool useStoredCarState = true, bool showSignDetail = true, bool showUserGuide = true, UserGuideType userGuideToShow = UserGuideType.None)
     {
         Debug.Log("Custom action for SignInteractionController: Car Hitted, input received.");
         // Perform specific logic for when the player hits a sign and then presses a key to resume.
         // For example, maybe you want to disable the sign entirely after one hit, or reset a score.
         // Then, call the default resume logic:
-        base.ResumeGameAfterWait(UserGuideType.None, useStoredCarState, showUserGuide);
+        base.ResumeGameAfterWait(userGuideToShow, useStoredCarState, showUserGuide);
 
-        if (!showSignDetail) { 
+        if (!showSignDetail)
+        {
             base.StopWaitingForAnyInput();
         }
-        
-            base.StartWaitingForAnyInput(OnSignDetailsEnd); // Restart waiting for any input to dismiss the sign details
-        
+
+        base.StartWaitingForAnyInput(OnSignDetailsEnd); // Restart waiting for any input to dismiss the sign details
+
     }
 
 
@@ -106,18 +130,25 @@ public class SignInteractionController : InteractionControllerBase // Inherit fr
         CarAdapter carAdapter = carController.GetComponent<CarAdapter>();
         carAdapter.SimulateThrottleInput(0); // Ensure throttle is set to 0
         StopWaitingForAnyInput();
+        stopCoroutine = null;
     }
 
     private IEnumerator OnStopSignRightOfWay()
     {
         // Wait for the car to stop at the sign
         yield return new WaitForSeconds(timeToWaitForSignStop);
-        if(!isInteractionEnabled)
+        if (!isInteractionEnabled)
             yield break;
 
         RightOfWay = true;
         stopConfirmAudioSource = stopConfirmAudioSource ?? GameObject.Find("audio e video").transform.Find("ClickButtonSounds").GetComponent<AudioSource>();
         stopConfirmAudioSource.Play();
+    }
+
+    private IEnumerator WaitToDisableRightOfWay(float delaySeconds)
+    {
+        yield return new WaitForSeconds(delaySeconds);
+        RightOfWay = false;
         stopCoroutine = null;
     }
 }

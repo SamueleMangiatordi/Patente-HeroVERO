@@ -92,9 +92,9 @@ public abstract class UserGuide : MonoBehaviour
             Debug.LogWarning($"UserGuide: Instruction Panel is not assigned for guide {userGuideType}. Cannot show/hide.", this);
         }
 
-        // Enable floating only if the guide is active and there are elements set to float
-        floatingEnabled = show && (complementaryUIElements != null && complementaryUIElements.Any(el => el != null && el.shouldFloat));
-        ShowAllComplementaryUI(show); // Show or hide all complementary UI elements based on the show parameter
+    //    // Enable floating only if the guide is active and there are elements set to float
+    //    floatingEnabled = show && (complementaryUIElements != null && complementaryUIElements.Any(el => el != null && el.shouldFloat));
+    //    ShowAllComplementaryUI(show); // Show or hide all complementary UI elements based on the show parameter
     }
 
     public void ShowComplementaryUI(bool show, int index)

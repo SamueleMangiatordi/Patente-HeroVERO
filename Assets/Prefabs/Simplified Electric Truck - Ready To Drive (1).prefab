@@ -12100,7 +12100,7 @@ GameObject:
   - component: {fileID: 407304915194528632}
   - component: {fileID: 2173477720629406763}
   m_Layer: 3
-  m_Name: Canvas
+  m_Name: CarDashboardCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

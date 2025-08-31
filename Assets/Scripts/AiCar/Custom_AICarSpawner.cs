@@ -49,7 +49,9 @@ public class AiCarSpawner : MonoBehaviour
                     carTag = firstCarData.carTag,
                     onCollisionEvent = firstCarData.onCollisionEvent,
                     spawnTransform = spawnPoint.spawnTransform,
-                    startingWaypointTransform = spawnPoint.startingWaypointTransform
+                    startingWaypointTransform = spawnPoint.startingWaypointTransform,
+                    topSpeed = firstCarData.topSpeed,
+                    fullTorqueAllWheels = firstCarData.fullTorqueAllWheels
                 };
                 aiCarDataList.Add(temp);
                 
@@ -183,6 +185,12 @@ public class AiCarSpawner : MonoBehaviour
         aICarSpawnData.aiCar = aiCar; // Assign the instantiated car to the AICarData for reference
         aICarSpawnData.carAIControl = carAiControl; // Assign the CarAIControl component to the AICarData for reference
 
+        CarController carController = aiCar.GetComponent<CarController>();
+        if (aICarSpawnData.topSpeed != 0)
+            carController.m_Topspeed = aICarSpawnData.topSpeed;
+        if (aICarSpawnData.fullTorqueAllWheels != 0)
+            carController.m_FullTorqueOverAllWheels = aICarSpawnData.fullTorqueAllWheels;
+
         aiCar.GetComponent<CarFreeze>().OnToggleCarFreeze(false);
 
     }
@@ -227,6 +235,9 @@ public class AICarData
     public Transform startingWaypointTransform;
     [Tooltip("The parent object that contains all the relative AI Waypoints of this car")]
     public GameObject WaypointsParent;
+
+    public float fullTorqueAllWheels = 0f;
+    public float topSpeed = 0f;
 
     public UnityEvent onCollisionEvent;
 

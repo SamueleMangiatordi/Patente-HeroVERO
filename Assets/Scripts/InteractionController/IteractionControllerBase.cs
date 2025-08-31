@@ -42,6 +42,8 @@ public abstract class InteractionControllerBase : MonoBehaviour
     [Tooltip("UserGuide to show when car goes out of bounds.")]
     [SerializeField] protected UserGuideType outOfBoundsUserGuide;
 
+    [SerializeField] protected Button pauseButton; // Reference to the pause button to disable it when waiting for input
+
     // --- Common Internal References ---
     protected SimplifiedCarController carController;
     protected CarStateParameters storedCarState; // Stores car's state before interaction
@@ -56,6 +58,7 @@ public abstract class InteractionControllerBase : MonoBehaviour
     private float _waitingInputTimer = 0f; // Timer to track waiting time for input
 
     private Transform _resetPos = null;
+    private GameObject canvas;
 
 #if UNITY_EDITOR
     // Reset method for editor convenience (called when script is attached or Reset is clicked)
@@ -101,13 +104,40 @@ public abstract class InteractionControllerBase : MonoBehaviour
         if (cameraController == null) { Debug.LogError($"InteractionControllerBase: EzerealCameraController not found on 'mainCarObject' or its children for {name}.", this); enabled = false; return; }
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         GameObject temp = new GameObject(name + "_ResetPos");
         temp.transform.position = resetPos.position;
         temp.transform.rotation = resetPos.rotation;
+        
 
         _resetPos = temp.transform;
+
+        canvas = GameObject.Find("MainCanvas");
+        if (canvas == null)
+        {
+            Debug.LogError("Canvas not found in the scene. Please ensure there is a Canvas GameObject named 'Canvas'.", this);
+            return;
+        }
+        // Find all Button components in children and self, including inactive ones.
+        Button[] buttons = canvas.GetComponentsInChildren<Button>(true);
+        bool foundPauseButton = false;
+
+        foreach (Button button in buttons)
+        {
+            if (button.gameObject.name == "PauseButton")
+            {
+                pauseButton = button;
+                foundPauseButton = true;
+                break; // Exit the loop once the button is found
+            }
+        }
+
+        if (!foundPauseButton)
+        {
+            Debug.LogError("PauseButton not found as a child of Canvas (or its children). Please ensure there is a Button named 'PauseButton' under the Canvas.", this);
+            return;
+        }
     }
 
     protected virtual void Update()
@@ -174,7 +204,12 @@ public abstract class InteractionControllerBase : MonoBehaviour
         // Disable colliders - specific implementation might be overridden
         if (exitCollider != null) exitCollider.enabled = false;
         if (enterCollider != null) enterCollider.enabled = false;
-        this.gameObject.SetActive(false);
+
+        for(int i = 0; i<transform.childCount; i++)
+        {
+            Transform child = transform.GetChild(i);
+            child.gameObject.SetActive(false);
+        }
     }
 
 
@@ -239,6 +274,7 @@ public abstract class InteractionControllerBase : MonoBehaviour
     protected void StartWaitingForAnyInput(Action customAction = null)
     {
         _isWaitingForAnyInput = true;
+        pauseButton.interactable = false;
         // Assign the custom action, or set the default action if null
         _onAnyInputReceivedAction = customAction ?? (() => ResumeGameAfterWait()); // Cast needed for method group
         Debug.Log($"Interaction '{name}' is now waiting for any input.");
@@ -259,6 +295,7 @@ public abstract class InteractionControllerBase : MonoBehaviour
     protected void StopWaitingForAnyInput()
     {
         _isWaitingForAnyInput = false;
+        pauseButton.interactable = true;
         _onAnyInputReceivedAction = null; // Clear the action
         Debug.Log($"Interaction '{name}' stopped waiting for input.");
     }

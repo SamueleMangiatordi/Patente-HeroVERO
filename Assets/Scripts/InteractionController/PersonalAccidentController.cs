@@ -3,6 +3,7 @@ using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PersonalAccidentController : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class PersonalAccidentController : MonoBehaviour
     [SerializeField] private GameObject accidentPanel;
 
     [SerializeField] private TriangleChoiceController _tringleChoiceController;
-
+    [SerializeField] private Button pauseButton;
     [SerializeField] private GameObject[] objectToDisableOnEnter;
 
     private SimplifiedCarController _carController;
@@ -36,6 +37,7 @@ public class PersonalAccidentController : MonoBehaviour
     {
         _carController = mainCarPrefab.GetComponentInChildren<SimplifiedCarController>();
         _carAdapter = mainCarPrefab.GetComponentInChildren<CarAdapter>();
+        pauseButton = GameObject.Find("PauseButton").GetComponent<Button>();
     }
 
     public void StartFire()
@@ -72,6 +74,7 @@ public class PersonalAccidentController : MonoBehaviour
                 _isWaitingInpit = false; // Stop waiting for input
 
                 accidentPanel.SetActive(false);
+                pauseButton.interactable = true;
                 _tringleChoiceController.Enter();
                 return;
             }
@@ -86,6 +89,7 @@ public class PersonalAccidentController : MonoBehaviour
 
         accidentPanel.SetActive(true);
         _isWaitingInpit = true;
+        pauseButton.interactable = false;
         _isAccidentEnabled = true;
         _carController.BypassingInputs = true; // Disabilita gli input del giocatore
 

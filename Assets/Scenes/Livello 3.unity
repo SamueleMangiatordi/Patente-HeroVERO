@@ -21782,7 +21782,7 @@ GameObject:
   - component: {fileID: 791732028}
   - component: {fileID: 791732027}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: MainCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22155,7 +22155,7 @@ PrefabInstance:
     - target: {fileID: 965955031448346716, guid: aa3aa302614b5ef43b6363676a43bee0,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.37
+      value: -2.37
       objectReference: {fileID: 0}
     - target: {fileID: 965955031448346716, guid: aa3aa302614b5ef43b6363676a43bee0,
         type: 3}
@@ -22295,12 +22295,12 @@ PrefabInstance:
     - target: {fileID: 6739287907998024402, guid: aa3aa302614b5ef43b6363676a43bee0,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.24
+      value: 0.52
       objectReference: {fileID: 0}
     - target: {fileID: 6739287907998024402, guid: aa3aa302614b5ef43b6363676a43bee0,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.85
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7262403853023959778, guid: aa3aa302614b5ef43b6363676a43bee0,
         type: 3}
@@ -22360,7 +22360,7 @@ PrefabInstance:
     - target: {fileID: 9024641220911114623, guid: aa3aa302614b5ef43b6363676a43bee0,
         type: 3}
       propertyPath: m_Size.z
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9188362853925126829, guid: aa3aa302614b5ef43b6363676a43bee0,
         type: 3}
