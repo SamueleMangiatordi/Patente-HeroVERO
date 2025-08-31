@@ -27,7 +27,6 @@ public class TriangleChoiceController : MonoBehaviour
     [SerializeField] private GameObject correctAnswerPanel;
     [SerializeField] private GameObject wrongAnswerPanel;
 
-
     private LerpMovement _mainTriangleLerp;
     private Vector3 _mainTriangleDefaultPos;
 
@@ -52,8 +51,9 @@ public class TriangleChoiceController : MonoBehaviour
         _mainTriangleDefaultPos = mainTriangle.transform.position;  
     }
 
-    private void Start()
+    void Start()
     {
+
         foreach (var (triangleMesh, defaultPos) in _trianglesMeshes)
         {
             ClickableObject clickable = triangleMesh.GetComponent<ClickableObject>();
@@ -71,7 +71,6 @@ public class TriangleChoiceController : MonoBehaviour
         EzerealCameraController.Instance.SetCameraView(cameraView, false);
         _isIdleAnimationActive = true;
         distanceChoicePanel.SetActive(true);
-
         foreach (var panel in panelsToDisableOnEnter)
         {
             panel.SetActive(false);
@@ -82,10 +81,9 @@ public class TriangleChoiceController : MonoBehaviour
         {
             triangle.SetActive(true);
         }
-
     }
 
-    private void Update()
+    void Update()
     {
         if (!_isIdleAnimationActive)
             return;
@@ -146,7 +144,7 @@ public class TriangleChoiceController : MonoBehaviour
         _mainTriangleLerp.onEndMovement += () =>
         {
             _currentSelectedTriangle.SetActive(false);
-
+            
             confirmChoicePanel.SetActive(true);
             distanceChoicePanel.SetActive(false);
         };

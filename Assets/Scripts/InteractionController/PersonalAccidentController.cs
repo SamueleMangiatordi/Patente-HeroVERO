@@ -3,6 +3,7 @@ using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class PersonalAccidentController : MonoBehaviour
@@ -20,6 +21,8 @@ public class PersonalAccidentController : MonoBehaviour
     [SerializeField] private GameObject[] objectToDisableOnEnter;
 
     private SimplifiedCarController _carController;
+    private EzerealCameraController _cameraController;
+    private PlayerInput _playerInput;
     private CarAdapter _carAdapter;
 
     private bool _isAccidentEnabled = false;
@@ -37,6 +40,8 @@ public class PersonalAccidentController : MonoBehaviour
     {
         _carController = mainCarPrefab.GetComponentInChildren<SimplifiedCarController>();
         _carAdapter = mainCarPrefab.GetComponentInChildren<CarAdapter>();
+        _playerInput = mainCarPrefab.GetComponentInChildren<PlayerInput>();
+        _cameraController = mainCarPrefab.GetComponentInChildren<EzerealCameraController>();
         pauseButton = GameObject.Find("PauseButton").GetComponent<Button>();
     }
 
@@ -44,6 +49,9 @@ public class PersonalAccidentController : MonoBehaviour
     {
         carFireParticle.Play();
         _carController.BypassingInputs = true; // Disabilita gli input del giocatore
+        
+        _playerInput.enabled = false; // Disabilita il componente PlayerInput per bloccare tutti gli input
+        _cameraController.ResetCurrentCameraRotation();
         _carAdapter.SimulateThrottleInput(0f); // Set throttle to 0 to stop the car
 
         AiCarSpawner.IgnoreAllAiPlayerCollision(1000000);
