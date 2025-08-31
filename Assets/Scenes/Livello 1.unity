@@ -5453,6 +5453,11 @@ PrefabInstance:
       propertyPath: onTurnSignal.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: HandleInteraction
       objectReference: {fileID: 0}
+    - target: {fileID: 6382011616178552990, guid: b3a82b13987baa54ebbb9697ad26ad6a,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6649671786472492811, guid: b3a82b13987baa54ebbb9697ad26ad6a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -21869,6 +21874,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 656225027}
     m_Modifications:
+    - target: {fileID: -8493667242944036796, guid: 9e7280d5e34184239966f48cfe7539ab,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8493667242944036796, guid: 9e7280d5e34184239966f48cfe7539ab,
+        type: 3}
+      propertyPath: areLightsOn
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8571708220608677450, guid: 9e7280d5e34184239966f48cfe7539ab,
         type: 3}
       propertyPath: m_LocalScale.x
