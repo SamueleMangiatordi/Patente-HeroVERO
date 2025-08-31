@@ -2701,7 +2701,7 @@ PrefabInstance:
     - target: {fileID: 3607100497414559449, guid: e6978b2a7ea48cb4887ccd2b0cf84339,
         type: 3}
       propertyPath: mainMessage
-      value: Hai commesso un errore. Ripeti!
+      value: Ripeti!
       objectReference: {fileID: 0}
     - target: {fileID: 3607100497414559449, guid: e6978b2a7ea48cb4887ccd2b0cf84339,
         type: 3}
