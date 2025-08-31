@@ -95,7 +95,7 @@ public class VideoMenuController : MonoBehaviour
 
     private void PlayVideo()
     {
-        cameraFader.StartCoroutine(cameraFader.FadeToBlack(fadeToBlackDuration)); // Fade to black over 1 second
+        cameraFader.FadeToBlack(fadeToBlackDuration); // Fade to black over 1 second
         gameManager.PauseGame();
 
         videoRawImage.gameObject.SetActive(true);
@@ -108,20 +108,18 @@ public class VideoMenuController : MonoBehaviour
         // Start playing the video
         videoPlayer.Play();
 
-        cameraFader?.StartCoroutine(cameraFader.FadeFromBlack(fadeFromBlackDuration)); // Fade from black over 1 second
+        cameraFader.FadeFromBlack(fadeFromBlackDuration); // Fade from black over 1 second
     }
 
     private void OnVideoEnd(VideoPlayer vp)
     {
-        cameraFader.StartCoroutine(cameraFader.FadeToBlack(fadeToBlackDuration)); // Fade to black over 1 second
+        cameraFader.FadeToBlack(fadeToBlackDuration); // Fade to black over 1 second
         gameManager.ResumeGame();
         // When the video ends, hide the video
         videoRawImage.gameObject.SetActive(false);
         isPlaying = false;
 
         backgroundMusic.volume = startBgMusic;
-
-        Debug.Log("OnVideoEnd");
 
         onVideoEnd?.Invoke(); // Trigger the UnityEvent if assigned
         cameraController?.ResetCurrentCameraRotation();
@@ -132,7 +130,7 @@ public class VideoMenuController : MonoBehaviour
             objectToAppearAfterVideo.SetActive(true);
         }
 
-        cameraFader?.StartCoroutine(cameraFader.FadeFromBlack(fadeFromBlackDuration)); // Fade from black over 1 second
+        cameraFader.FadeFromBlack(fadeFromBlackDuration); // Fade from black over 1 second
     
     }
 

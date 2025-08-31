@@ -121,19 +121,16 @@ public class CheckpointManager : MonoBehaviour
         // If no checkpoints have been reached yet, 'lastReachedIndex' will be -1.
         if (lastReachedIndex < 0)
         {
-            Debug.Log("First checkpoint not reached yet, returning the first checkpoint as fallback.");
             return checkpoints[0]; // Return null to indicate no checkpoint has been reached yet
         }
 
         // Ensure the index is within the bounds of the array
         if (lastReachedIndex < checkpoints.Length)
         {
-            Debug.Log("Returning last reached checkpoint at index: " + lastReachedIndex);
             return checkpoints[lastReachedIndex];
         }
 
         // If the index is out of bounds (e.g., race finished), return the last checkpoint in the list
-        Debug.LogWarning("Current checkpoint index is out of bounds. Returning the final checkpoint.");
         return checkpoints[checkpoints.Length - 1];
 
 

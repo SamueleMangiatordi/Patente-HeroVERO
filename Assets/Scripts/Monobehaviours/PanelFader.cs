@@ -11,6 +11,8 @@ public class PanelFader : MonoBehaviour
     public Action onEndFadeToBlack;
     public Action onEndFadeFromBlack;
 
+    private Coroutine currentFadeCoroutine = null;
+
     private void Awake()
     {
         if (fadeCanvasGroup != null)
@@ -20,6 +22,27 @@ public class PanelFader : MonoBehaviour
             // Assicura che l'overlay non blocchi i raycast
             fadeCanvasGroup.blocksRaycasts = false;
         }
+    }
+
+    public void FadeToBlack(float duration, Action onEnd = null)
+    {
+        onEndFadeToBlack = onEnd;
+
+        if(currentFadeCoroutine != null)
+        {
+            StopCoroutine(currentFadeCoroutine);
+        }
+        currentFadeCoroutine = StartCoroutine(FadeToBlack(duration));
+    }
+
+    public void FadeFromBlack(float duration, Action onEnd = null)
+    {
+        onEndFadeFromBlack = onEnd;
+        if (currentFadeCoroutine != null)
+        {
+            StopCoroutine(currentFadeCoroutine);
+        }
+        currentFadeCoroutine = StartCoroutine(FadeFromBlack(duration));
     }
 
     // Coroutine helper per la dissolvenza a nero

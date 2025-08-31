@@ -218,13 +218,12 @@ public abstract class InteractionControllerBase : MonoBehaviour
             storedCarState.ApplyToCarController(carController);
             AiCarSpawner.IgnoreAllAiPlayerCollision(aiCarIgnoreCollisionTime); // Ignore AI collisions for a short time after resuming
 
-            Debug.Log("Car state restored for RestartInteraction.");
+            Debug.Log("using stored car state in Restart Interaction");
         }
         else
         {
-            Debug.Log("Reset pos name = " + resetPos.name);
             carController.TeleportCar(resetPos, resumeCarSpeed, true);
-            Debug.LogWarning("No stored car state found for RestartInteraction. Using resetPos and configured resumeCarSpeed as fallback.");
+            Debug.LogWarning("using reset pos in Restart Interaction");
         }
         StartCoroutine(GameManager.Instance.WaitToPause(resumeTimeDelay)); // Wait a bit before pausing again if needed
 
@@ -253,7 +252,6 @@ public abstract class InteractionControllerBase : MonoBehaviour
         //carController.TeleportCar(lastCheckpoint, 0f, true);
 
         resetPos = lastCheckpoint;
-        Debug.Log("Reset pos name = " + resetPos.name);
     }
     /// <summary>
     /// Stops waiting for any input.

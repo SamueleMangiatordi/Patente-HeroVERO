@@ -17,15 +17,18 @@ public class FirstQuestionInteractionController : InteractionControllerBase
 
     public void OnWrongAnswer()
     {
-        base.RestartInteraction(UserGuideType.FirstQuestionWrongAnswer, () => { OnResumeAction(true,true, false); }  );
         GameManager.Instance.ResumeGame();
+        base.RestartInteraction(UserGuideType.FirstQuestionWrongAnswer, () =>
+        {
+            OnResumeAction(true, true, false);
+        });
 
     }
 
     public void OnCorrectAnswer()
     {
         userGuideController.EnableUserGuides(false);
-
+        enterCollider.enabled = false;
         GameManager.Instance.ResumeGame();
 
         StopWaitingForAnyInput(); // Ensure we stop waiting for any input
@@ -46,7 +49,11 @@ public class FirstQuestionInteractionController : InteractionControllerBase
         {
             base.StopWaitingForAnyInput();
         }
-
+        //if (!showUserGuide)
+        //{
+        //    userGuideController.EnableUserGuides(false); // Disable user guides
+        //    StartCoroutine(GameManager.Instance.WaitToResume(0.2f));
+        //}
         base.StartWaitingForAnyInput(AvoidLoop);
     }
 
@@ -61,6 +68,7 @@ public class FirstQuestionInteractionController : InteractionControllerBase
         GameManager.Instance.ClearPause();
         carController.SetCarSpeed(resumeCarSpeed, true); // Stop the car when sign details are dismissed
         StopWaitingForAnyInput();
+        enterCollider.enabled = true;
     }
 
 

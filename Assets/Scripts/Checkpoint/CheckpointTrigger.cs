@@ -17,12 +17,10 @@ public class CheckpointTrigger : MonoBehaviour
         {
             GetComponent<Collider>().enabled = false;
             checkpointManager.GoToNextCheckpoint(this.transform);
-            Debug.Log("✅ Checkpoint attraversato : " + this.name);
 
             if (signInteractionController != null)
             {
                 signInteractionController.resetPos = this.transform;
-                Debug.Log("✅ Checkpoint attraversato - resetPos aggiornato");
             }
 
         }

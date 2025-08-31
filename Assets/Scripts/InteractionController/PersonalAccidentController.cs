@@ -16,6 +16,8 @@ public class PersonalAccidentController : MonoBehaviour
 
     [SerializeField] private TriangleChoiceController _tringleChoiceController;
 
+    [SerializeField] private GameObject[] objectToDisableOnEnter;
+
     private SimplifiedCarController _carController;
     private CarAdapter _carAdapter;
 
@@ -48,8 +50,11 @@ public class PersonalAccidentController : MonoBehaviour
     public void StartTranistion()
     {
         StartCoroutine(StartTransition());
-
         
+        foreach (GameObject obj in objectToDisableOnEnter)
+        {
+            obj.SetActive(false);
+        }
     }
 
     protected virtual void Update()

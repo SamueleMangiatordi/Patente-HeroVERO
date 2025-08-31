@@ -1,6 +1,8 @@
 using Ezereal;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class TriangleChoiceController : MonoBehaviour
 {
@@ -20,6 +22,11 @@ public class TriangleChoiceController : MonoBehaviour
     [Header("UI")]
     [SerializeField] private GameObject distanceChoicePanel;
     [SerializeField] private GameObject confirmChoicePanel;
+    [SerializeField] private GameObject[] panelsToDisableOnEnter;
+
+    [SerializeField] private GameObject correctAnswerPanel;
+    [SerializeField] private GameObject wrongAnswerPanel;
+
 
     private LerpMovement _mainTriangleLerp;
     private Vector3 _mainTriangleDefaultPos;
@@ -63,6 +70,12 @@ public class TriangleChoiceController : MonoBehaviour
     {
         EzerealCameraController.Instance.SetCameraView(cameraView, false);
         _isIdleAnimationActive = true;
+        distanceChoicePanel.SetActive(true);
+
+        foreach (var panel in panelsToDisableOnEnter)
+        {
+            panel.SetActive(false);
+        }
 
         mainTriangle.SetActive(true);
         foreach (var triangle in triangles)
@@ -107,6 +120,7 @@ public class TriangleChoiceController : MonoBehaviour
             triangle.SetActive(false);
         }
         confirmChoicePanel.SetActive(false);
+        StartCoroutine(WaitToEndLevel(3f));
     }
 
     public void MoveTo(Transform target)
@@ -134,6 +148,7 @@ public class TriangleChoiceController : MonoBehaviour
             _currentSelectedTriangle.SetActive(false);
 
             confirmChoicePanel.SetActive(true);
+            distanceChoicePanel.SetActive(false);
         };
         _mainTriangleLerp.GoTo(target, false, LerpVelocity.Slow);
         _currentSelectedTriangle = target.gameObject;
@@ -143,16 +158,30 @@ public class TriangleChoiceController : MonoBehaviour
     {
         if (_currentSelectedTriangle.transform.parent.gameObject != correctTriangleDistance)
         {
-            DismissChoiche();
+            WrongChoice();
             return;
         }
+        CorrectChoice();
+    }
 
+    private void CorrectChoice()
+    {
+        correctAnswerPanel.SetActive(true);
         Exit();
+
+    }
+
+    private void WrongChoice()
+    {
+        wrongAnswerPanel.SetActive(true);
+        DismissChoiche();
+
     }
 
     public void DismissChoiche()
     {
         confirmChoicePanel.SetActive(false);
+        distanceChoicePanel.SetActive(true);
 
         foreach (var (triangleMesh, _) in _trianglesMeshes)
         {
@@ -160,5 +189,11 @@ public class TriangleChoiceController : MonoBehaviour
         }
         _mainTriangleLerp.GoTo(_mainTriangleDefaultPos, LerpVelocity.Slow);
         _isIdleAnimationActive = true;
+    }
+
+    private IEnumerator WaitToEndLevel( float delay)
+    {
+        yield return new WaitForSecondsRealtime(delay);
+        GameManager.Instance.EndLevel();
     }
 }

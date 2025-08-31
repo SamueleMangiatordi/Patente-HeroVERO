@@ -56,6 +56,7 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 0f;
         }
         _pauseCount++;
+        Debug.Log("Game Paused. Pause Count: " + _pauseCount);
     }
 
     public void ResumeGame()
@@ -67,6 +68,7 @@ public class GameManager : MonoBehaviour
             {
                 Time.timeScale = 1f;
             }
+            Debug.Log("Pause Count: " + _pauseCount + " / GAME RESUMED");
         }
     }
 
@@ -93,7 +95,7 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator WaitToResume(float delaySeconds)
     {
-        yield return new WaitForSeconds(delaySeconds);
+        yield return new WaitForSecondsRealtime(delaySeconds);
         ResumeGame();
     }
 

@@ -180,82 +180,82 @@ namespace Ezereal
 
         void OnLowBeamLight()
         {
-            switch (currentBeam)
-            {
-                case LightBeam.off:
-                    LowBeamOn();
-                    break;
-                case LightBeam.low:
-                    AllBeamsOff();
-                    break;
-                case LightBeam.high:
-                    AllBeamsOff();
-                    break;
-            }
+            //switch (currentBeam)
+            //{
+            //    case LightBeam.off:
+            //        LowBeamOn();
+            //        break;
+            //    case LightBeam.low:
+            //        AllBeamsOff();
+            //        break;
+            //    case LightBeam.high:
+            //        AllBeamsOff();
+            //        break;
+            //}
         }
 
         void OnHighBeamLight()
         {
-            switch (currentBeam)
-            {
-                case LightBeam.off:
-                    HighBeamOn();
-                    break;
-                case LightBeam.low:
-                    HighBeamOn();
-                    break;
-                case LightBeam.high:
-                    AllBeamsOff();
-                    break;
-            }
+            //switch (currentBeam)
+            //{
+            //    case LightBeam.off:
+            //        HighBeamOn();
+            //        break;
+            //    case LightBeam.low:
+            //        HighBeamOn();
+            //        break;
+            //    case LightBeam.high:
+            //        AllBeamsOff();
+            //        break;
+            //}
         }
         void OnLeftTurnSignal()
         {
-            if (!_hazardLightsActiveInternal)
-            {
-                StopAllCoroutines();
-                TurnLightsOff();
-                _rightTurnActiveInternal = false;
-                _leftTurnActiveInternal = !_leftTurnActiveInternal;
+            //if (!_hazardLightsActiveInternal)
+            //{
+            //    StopAllCoroutines();
+            //    TurnLightsOff();
+            //    _rightTurnActiveInternal = false;
+            //    _leftTurnActiveInternal = !_leftTurnActiveInternal;
 
-                if (_leftTurnActiveInternal)
-                {
-                    StartCoroutine(TurnSignalController(leftTurnLights, _leftTurnActiveInternal));
-                    onTurnSignal?.Invoke(-1); // Notify subscribers about the turn signal activation
+            //    if (_leftTurnActiveInternal)
+            //    {
+            //        StartCoroutine(TurnSignalController(leftTurnLights, _leftTurnActiveInternal));
+            //        onTurnSignal?.Invoke(-1); // Notify subscribers about the turn signal activation
 
-                }
-            }
+            //    }
+            //}
         }
 
         void OnRightTurnSignal()
         {
-            if (!_hazardLightsActiveInternal)
-            {
-                StopAllCoroutines();
-                TurnLightsOff();
-                _leftTurnActiveInternal = false;
-                _rightTurnActiveInternal = !_rightTurnActiveInternal;
+            //if (!_hazardLightsActiveInternal)
+            //{
+            //    StopAllCoroutines();
+            //    TurnLightsOff();
+            //    _leftTurnActiveInternal = false;
+            //    _rightTurnActiveInternal = !_rightTurnActiveInternal;
 
-                if (_rightTurnActiveInternal)
-                {
-                    StartCoroutine(TurnSignalController(rightTurnLights, _rightTurnActiveInternal));
-                    onTurnSignal?.Invoke(1); // Notify subscribers about the turn signal activation
-                }
-            }
+            //    if (_rightTurnActiveInternal)
+            //    {
+            //        StartCoroutine(TurnSignalController(rightTurnLights, _rightTurnActiveInternal));
+            //        onTurnSignal?.Invoke(1); // Notify subscribers about the turn signal activation
+            //    }
+            //}
         }
 
         void OnHazardLights()
         {
-            StopAllCoroutines();
-            TurnLightsOff();
-            _leftTurnActiveInternal = false;
-            _rightTurnActiveInternal = false;
-            _hazardLightsActiveInternal = !_hazardLightsActiveInternal;
+            //StopAllCoroutines();
+            //TurnLightsOff();
+            //_leftTurnActiveInternal = false;
+            //_rightTurnActiveInternal = false;
+            //_hazardLightsActiveInternal = !_hazardLightsActiveInternal;
 
-            if (_hazardLightsActiveInternal)
-            {
-                StartCoroutine(HazardLightsController());
-            }
+            //if (_hazardLightsActiveInternal)
+            //{
+            //    StartCoroutine(HazardLightsController());
+            //}
         }
 
         IEnumerator TurnSignalController(GameObject[] turnLights, bool isActive)
