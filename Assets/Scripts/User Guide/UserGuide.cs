@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [Serializable]
@@ -21,6 +22,7 @@ public abstract class UserGuide : MonoBehaviour
     [SerializeField] private float floatingHeight = 0.1f;
 
     protected bool floatingEnabled = false; // Changed to protected
+    [SerializeField] protected bool showComplementaryUI = false; // Changed to protected
 
     // Store original local positions to ensure consistent floating around their starting point
     private Vector3[] _originalLocalPositions;
@@ -92,9 +94,12 @@ public abstract class UserGuide : MonoBehaviour
             Debug.LogWarning($"UserGuide: Instruction Panel is not assigned for guide {userGuideType}. Cannot show/hide.", this);
         }
 
-    //    // Enable floating only if the guide is active and there are elements set to float
-    //    floatingEnabled = show && (complementaryUIElements != null && complementaryUIElements.Any(el => el != null && el.shouldFloat));
-    //    ShowAllComplementaryUI(show); // Show or hide all complementary UI elements based on the show parameter
+        if (!showComplementaryUI)
+            return;
+
+        // Enable floating only if the guide is active and there are elements set to float
+        floatingEnabled = show && (complementaryUIElements != null && complementaryUIElements.Any(el => el != null && el.shouldFloat));
+        ShowAllComplementaryUI(show); // Show or hide all complementary UI elements based on the show parameter
     }
 
     public void ShowComplementaryUI(bool show, int index)
@@ -109,6 +114,9 @@ public abstract class UserGuide : MonoBehaviour
         {
             if (complementaryUIElements[index] != null && complementaryUIElements[index].uiElement != null)
             {
+                if (complementaryUIElements[index].visible == false)
+                    return;
+
                 complementaryUIElements[index].uiElement.SetActive(show);
             }
             else
@@ -151,4 +159,5 @@ public class ComplementaryUIElement
 {
     public GameObject uiElement;
     public bool shouldFloat = true; // Default to true
+    public bool visible = false; // Default to false
 }

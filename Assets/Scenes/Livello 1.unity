@@ -1941,7 +1941,17 @@ PrefabInstance:
       objectReference: {fileID: 331669005}
     - target: {fileID: 3607100497414559449, guid: e6978b2a7ea48cb4887ccd2b0cf84339,
         type: 3}
+      propertyPath: showComplementaryUI
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3607100497414559449, guid: e6978b2a7ea48cb4887ccd2b0cf84339,
+        type: 3}
       propertyPath: complementaryUIElements.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3607100497414559449, guid: e6978b2a7ea48cb4887ccd2b0cf84339,
+        type: 3}
+      propertyPath: complementaryUIElements.Array.data[0].visible
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3607100497414559449, guid: e6978b2a7ea48cb4887ccd2b0cf84339,
@@ -2718,6 +2728,16 @@ PrefabInstance:
       propertyPath: _instructionPanel
       value: 
       objectReference: {fileID: 331669005}
+    - target: {fileID: 3607100497414559449, guid: e6978b2a7ea48cb4887ccd2b0cf84339,
+        type: 3}
+      propertyPath: showComplementaryUI
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3607100497414559449, guid: e6978b2a7ea48cb4887ccd2b0cf84339,
+        type: 3}
+      propertyPath: complementaryUIElements.Array.data[0].visible
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3607100497414559449, guid: e6978b2a7ea48cb4887ccd2b0cf84339,
         type: 3}
       propertyPath: complementaryUIElements.Array.data[0].uiElement
@@ -5423,6 +5443,11 @@ PrefabInstance:
       propertyPath: _instructionPanel
       value: 
       objectReference: {fileID: 331669005}
+    - target: {fileID: 2299065685634062872, guid: b3a82b13987baa54ebbb9697ad26ad6a,
+        type: 3}
+      propertyPath: near clip plane
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 2730207098816112391, guid: b3a82b13987baa54ebbb9697ad26ad6a,
         type: 3}
       propertyPath: _instructionPanel
@@ -5433,6 +5458,41 @@ PrefabInstance:
       propertyPath: complementaryUIElements.Array.data[0].uiElement
       value: 
       objectReference: {fileID: 254414174}
+    - target: {fileID: 2785109115443603330, guid: b3a82b13987baa54ebbb9697ad26ad6a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.00032091144
+      objectReference: {fileID: 0}
+    - target: {fileID: 2785109115443603330, guid: b3a82b13987baa54ebbb9697ad26ad6a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3.3945014
+      objectReference: {fileID: 0}
+    - target: {fileID: 2785109115443603330, guid: b3a82b13987baa54ebbb9697ad26ad6a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 9.443066
+      objectReference: {fileID: 0}
+    - target: {fileID: 2785109115443603330, guid: b3a82b13987baa54ebbb9697ad26ad6a,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9990734
+      objectReference: {fileID: 0}
+    - target: {fileID: 2785109115443603330, guid: b3a82b13987baa54ebbb9697ad26ad6a,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.04304136
+      objectReference: {fileID: 0}
+    - target: {fileID: 2785109115443603330, guid: b3a82b13987baa54ebbb9697ad26ad6a,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.00003359104
+      objectReference: {fileID: 0}
+    - target: {fileID: 2785109115443603330, guid: b3a82b13987baa54ebbb9697ad26ad6a,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.0000014474809
+      objectReference: {fileID: 0}
     - target: {fileID: 3449529710320777902, guid: b3a82b13987baa54ebbb9697ad26ad6a,
         type: 3}
       propertyPath: _instructionPanel
@@ -22431,6 +22491,16 @@ PrefabInstance:
       propertyPath: _instructionPanel
       value: 
       objectReference: {fileID: 331669005}
+    - target: {fileID: 3607100497414559449, guid: e6978b2a7ea48cb4887ccd2b0cf84339,
+        type: 3}
+      propertyPath: showComplementaryUI
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3607100497414559449, guid: e6978b2a7ea48cb4887ccd2b0cf84339,
+        type: 3}
+      propertyPath: complementaryUIElements.Array.data[0].visible
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3607100497414559449, guid: e6978b2a7ea48cb4887ccd2b0cf84339,
         type: 3}
       propertyPath: complementaryUIElements.Array.data[0].uiElement
