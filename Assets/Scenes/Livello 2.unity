@@ -36931,7 +36931,7 @@ PrefabInstance:
     - target: {fileID: 7132055916082805119, guid: 7bedfb20bab8345a880202d94ccb1ff6,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 61.7
+      value: 43.5
       objectReference: {fileID: 0}
     - target: {fileID: 7132055916082805119, guid: 7bedfb20bab8345a880202d94ccb1ff6,
         type: 3}
@@ -42638,6 +42638,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1949264770}
     m_Modifications:
+    - target: {fileID: 51788509455350784, guid: e57dd2df5b000144db3c561d25871415,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 404357020140882948, guid: e57dd2df5b000144db3c561d25871415,
         type: 3}
       propertyPath: m_Name
@@ -42737,7 +42742,7 @@ PrefabInstance:
     - target: {fileID: 3294567142237621489, guid: e57dd2df5b000144db3c561d25871415,
         type: 3}
       propertyPath: m_Size.x
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3294567142237621489, guid: e57dd2df5b000144db3c561d25871415,
         type: 3}
@@ -42752,7 +42757,7 @@ PrefabInstance:
     - target: {fileID: 4158816288929502303, guid: e57dd2df5b000144db3c561d25871415,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.8
+      value: -7.22
       objectReference: {fileID: 0}
     - target: {fileID: 4425835261586305647, guid: e57dd2df5b000144db3c561d25871415,
         type: 3}
@@ -42940,10 +42945,15 @@ PrefabInstance:
       propertyPath: m_Size.x
       value: 3.5
       objectReference: {fileID: 0}
+    - target: {fileID: 7414826398428984480, guid: e57dd2df5b000144db3c561d25871415,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7542958409599723618, guid: e57dd2df5b000144db3c561d25871415,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.1
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7542958409599723618, guid: e57dd2df5b000144db3c561d25871415,
         type: 3}
@@ -79043,7 +79053,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 225670915}
   - {fileID: 1307384223}
   - {fileID: 180737398}
   - {fileID: 225859332}
@@ -79051,6 +79060,7 @@ Transform:
   - {fileID: 448506514}
   - {fileID: 2110742400}
   - {fileID: 975738568}
+  - {fileID: 225670915}
   m_Father: {fileID: 1457372825}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &847887857

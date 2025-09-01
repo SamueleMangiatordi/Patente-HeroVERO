@@ -31,6 +31,8 @@ public class PersonalAccidentController : MonoBehaviour
     private float _waitingInputTimer = 0f;
     private float _waitingInputTreshold = 0.5f; // Time in seconds to wait for input before resuming
 
+    private bool transitionStarted = false;
+
     private void Awake()
     {
         carFireParticle.Stop();
@@ -55,6 +57,7 @@ public class PersonalAccidentController : MonoBehaviour
         _carAdapter.SimulateThrottleInput(0f); // Set throttle to 0 to stop the car
 
         AiCarSpawner.IgnoreAllAiPlayerCollision(1000000);
+        StartCoroutine(EnsureTransitionStart());
     }
 
     public void StartTranistion()
@@ -91,6 +94,7 @@ public class PersonalAccidentController : MonoBehaviour
 
     private IEnumerator StartTransition()
     {
+        transitionStarted = true;
         yield return StartCoroutine(FadingTeleportController.Instance.WaitFadingTeleport(teleportPoint));
 
         EzerealCameraController.Instance.SetCameraView(startCameraView, false);
@@ -101,5 +105,20 @@ public class PersonalAccidentController : MonoBehaviour
         _isAccidentEnabled = true;
         _carController.BypassingInputs = true; // Disabilita gli input del giocatore
 
+    }
+
+    private IEnumerator EnsureTransitionStart()
+    {
+        ResetOffRoad[] resetOffRoad = GameObject.FindObjectsByType<ResetOffRoad>(FindObjectsSortMode.None);
+        foreach (var reset in resetOffRoad)
+        {
+            reset.enabled = false;
+        }
+
+        yield return new WaitForSecondsRealtime(3f); // Small delay to ensure all systems are ready
+        if (!transitionStarted)
+        {
+            yield return StartCoroutine(StartTransition());
+        }
     }
 }
